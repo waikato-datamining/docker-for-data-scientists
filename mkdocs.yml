@@ -1,0 +1,7 @@
+site_name: Docker for Data Scientists
+site_url: https://github.com/fracpete/docker-for-data-scientists
+site_description: From one data scientist to another on how to utilize docker to make your life easier
+theme:
+    name: readthedocs
+nav:
+  - 'Home': index.md
