@@ -2,6 +2,10 @@
 
 From one data scientist to another on how to utilize docker to make your life easier.
 
+You can view the auto-generated documentation here:
+
+https://fracpete.github.io/docker-for-data-scientists/
+
 
 ## Installation
 
