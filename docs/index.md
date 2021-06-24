@@ -10,6 +10,9 @@ will be up and running in seconds.
 This is by no means supposed to be an exhaustive introduction to docker (docker 
 can do a lot more!), but merely for getting you started on your journey.
 
+**Disclaimer:** This introduction was written using a Linux host system. If you are using
+Mac OSX or WSL under Windows, your mileage may vary...
+
 
 ![Docker](img/docker-logo.png)
 
