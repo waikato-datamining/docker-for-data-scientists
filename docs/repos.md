@@ -7,7 +7,7 @@ Here is a (non-exhaustive) list of repositories on docker hub:
 
 * [Ubuntu](https://hub.docker.com/_/ubuntu)
 * [CUDA](https://hub.docker.com/r/nvidia/cuda)
-* [PyTorch](https://hub.docker.com/r/pytorch/pytorch)
+* [PyTorch](https://hub.docker.com/r/pytorch/pytorch) (tend to use Anaconda, unfortunately)
 * [Tensorflow](https://hub.docker.com/r/tensorflow/tensorflow)
 
 Of course, NVIDIA likes to keep things close to its heart and offers their own
