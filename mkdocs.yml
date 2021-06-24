@@ -3,5 +3,16 @@ site_url: https://github.com/fracpete/docker-for-data-scientists
 site_description: From one data scientist to another on how to utilize docker to make your life easier
 theme:
     name: readthedocs
+markdown_extensions:
+    - toc:
+        baselevel: 3
 nav:
   - 'Home': index.md
+  - 'Basics': basics.md
+  - 'Repositories': repos.md
+  - 'Dockerfile': dockerfile.md
+  - 'Best practices': best_practices.md
+  - 'Tips & Tricks': tips_and_tricks.md
+  - 'Troubleshooting': troubleshooting.md
+  - 'Automation': automation.md
+  - 'Registry': registry.md
