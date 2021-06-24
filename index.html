@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="From one data scientist to another on how to utilize docker to make your life easier">
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>Home - Docker for Data Scientists</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/fracpete/docker-for-data-scientists/";
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Docker for Data Scientists</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="basics/">Basics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="repos/">Repositories</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="dockerfile/">Dockerfile</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="best_practices/">Best practices</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="tips_and_tricks/">Tips & Tricks</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="automation/">Automation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="registry/">Registry</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Docker for Data Scientists</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>From one data scientist to another on how to utilize docker to make your life easier.</p>
+<p>Any data scientist that ever had to set up an environment for a deep learning
+framework, knows that getting the combination of CUDA, cuDNN, framework and other 
+libraries right is a frustrating exercise. With docker you still have to go through 
+the pain of figuring out the right combination, but... And it is a BIG but! Once you 
+have this blueprint called <em>docker image</em>, you can use it on another machine; you 
+will be up and running in seconds.</p>
+<p>This is by no means supposed to be an exhaustive introduction to docker (docker 
+can do a lot more!), but merely for getting you started on your journey.</p>
+<p><img alt="Docker" src="img/docker-logo.png" /></p>
+<p>To get started with docker, you should look at the following sections:</p>
+<ul>
+<li><a href="basics/">Basics</a> - explains the most common operations that you will need to know </li>
+<li><a href="dockerfile/">Dockerfile</a> - explains the structure of the <code>Dockerfile</code> file which 
+  is used to create docker images</li>
+<li><a href="best_practices/">Best practices</a> - what to keep in mind when creating and using images</li>
+<li><a href="repos/">Repositories</a> - where to find the base images that your own images will use</li>
+</ul>
+<p>If you should encounter problems, then have a look here:</p>
+<ul>
+<li><a href="troubleshooting/">Troubleshooting</a></li>
+</ul>
+<p>Just like with any programming language or complex framework, there are certain
+things that can make your life easier. Therefore do not forget to have a look at:</p>
+<ul>
+<li><a href="tips_and_tricks/">Tips &amp; Tricks</a></li>
+</ul>
+<p>Once you got a handle on things, and you are getting tired on manually building images, 
+you might want to look into automating your builds and maybe also run your own 
+registry/proxy. In that case, have a look at the following sections:</p>
+<ul>
+<li><a href="automation/">Automation</a></li>
+<li><a href="registry/">Registry</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basics/" class="btn btn-neutral float-right" title="Basics">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+        <span style="margin-left: 15px"><a href="basics/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2021-06-24 04:50:52
+-->

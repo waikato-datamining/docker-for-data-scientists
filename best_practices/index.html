@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Best practices - Docker for Data Scientists</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Best practices";
+    var mkdocs_page_input_path = "best_practices.md";
+    var mkdocs_page_url = "/fracpete/docker-for-data-scientists/best_practices/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Docker for Data Scientists</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../basics/">Basics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../repos/">Repositories</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dockerfile/">Dockerfile</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Best practices</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#versioning">Versioning</a></li>
+    
+
+    <li class="toctree-l2"><a href="#docker-group">Docker group</a></li>
+    
+
+    <li class="toctree-l2"><a href="#launch-container-as-regular-user">Launch container as regular user</a></li>
+    
+
+    <li class="toctree-l2"><a href="#no-anaconda">No Anaconda</a></li>
+    
+
+    <li class="toctree-l2"><a href="#clean-up-pip">Clean up pip</a></li>
+    
+
+    <li class="toctree-l2"><a href="#clean-up-apt">Clean up apt</a></li>
+    
+
+    <li class="toctree-l2"><a href="#caching-models">Caching models</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../tips_and_tricks/">Tips & Tricks</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../automation/">Automation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../registry/">Registry</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Docker for Data Scientists</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Best practices</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="versioning">Versioning</h3>
+<p>Since docker determines by the hash of a command whether this particular layer needs
+rebuilding, you should, wherever possible, specify the version of the library that
+you are installing. That way, whenever you upgrade a library, that layer will get
+rebuilt. The added bonus is that you will not accidentally rebuild the image with a
+newer version of a library at a later stage that may now be incompatible with the rest 
+(<em>Yeah, I'm looking at you, numpy</em>!).</p>
+<p>So instead of:</p>
+<pre><code class="language-commandline">RUN python3 -m pip install --no-cache-dir scikit-image &amp;&amp; \
+    ... 
+</code></pre>
+<p>You should do something like this:</p>
+<pre><code class="language-commandline">RUN python3 -m pip install --no-cache-dir scikit-image==0.16.2 &amp;&amp; \
+    ... 
+</code></pre>
+<p>Of course, when you are cloning directly from a github repository, because you require
+a specific bugfix or the library does not offer any releases (or only very infrequent),
+then you should use a specific commit hash in your command:  </p>
+<pre><code class="language-commandline">RUN git clone https://github.com/ACCOUNT/REPO.git &amp;&amp; \
+    cd REPO &amp;&amp; \
+    git reset --hard 11223344556677889900AABBCCDDEEFF11223344 &amp;&amp; \
+    ...
+</code></pre>
+<h3 id="docker-group">Docker group</h3>
+<p>Instead of running the <code>docker</code> command via <code>sudo</code>, you should consider adding your user
+to the <code>docker</code> group instead (in <code>/etc/group</code>). That way, you can run the <code>docker</code> 
+command as a regular user.</p>
+<h3 id="launch-container-as-regular-user">Launch container as regular user</h3>
+<p>Once development of your docker image has finished, you should avoid running docker 
+containers as the <code>root</code> user and instead run it as the current user (which also 
+avoids creating output files in volumes that can only be removed by <code>root</code>).</p>
+<p>Use the <code>-u</code> and <code>-e</code> command to specify the user/group IDs and the user name 
+as follows:</p>
+<pre><code>docker run -u $(id -u):$(id -g) -e USER=$USER ...
+</code></pre>
+<p>However, the environment variables for you command prompt (when you are using your
+container in interactive mode) may not be able to handle this properly. In such a
+case you will get output similar to this: </p>
+<pre><code>groups: cannot find name for group ID XYZ
+I have no name!@c7355d9a1b59:/$ 
+</code></pre>
+<p>You can rectify this by creating a custom <code>bash.bashrc</code>file using the 
+<a href="https://github.com/waikato-datamining/docker-banner-gen">docker-banner-gen</a> library.</p>
+<p>This custom file can then be added to your docker image using the following command:</p>
+<pre><code class="language-commandline">COPY bash.bashrc /etc/bash.bashrc
+</code></pre>
+<h3 id="no-anaconda">No Anaconda</h3>
+<p>Instead of using <a href="https://www.anaconda.com/products/individual">Anaconda</a> for installing
+Python packages, you can just use plain <code>pip</code> to install packages from the <a href="https://pypi.org/">Python Package Index</a>.
+Anaconda in itself is quite a large installation and will increase the overall docker
+image size unnecessarily.</p>
+<h3 id="clean-up-pip">Clean up pip</h3>
+<p>Remove the pip cache to reduce the size of your layer:</p>
+<pre><code>rm -Rf /root/.cache/pip
+</code></pre>
+<p>Alternatively, do not cache downloads:</p>
+<pre><code>pip install --no-cache-dir ...
+</code></pre>
+<h3 id="clean-up-apt">Clean up apt</h3>
+<p>After performing installs via apt or apt-get, clean up the cache to reduce the size of your layer:</p>
+<pre><code>apt-get clean &amp;&amp; \
+rm -rf /var/lib/apt/lists/*
+</code></pre>
+<h3 id="caching-models">Caching models</h3>
+<p>As soon as you stop/remove the container, all modifications will be lost. This also includes
+any pretrained networks that any of the deep learning frameworks downloaded into its cache.
+In order to avoid the constant downloads, you can map the cache directories for the relevant
+framework to a local directory on the host:</p>
+<p><strong>PyTorch</strong></p>
+<ul>
+<li>
+<p>when running the container as <code>root</code></p>
+<p><code>-v /some/where/cache:/root/.torch \</code></p>
+</li>
+<li>
+<p>when running the container as current user</p>
+<p><code>-v /some/where/cache:/.torch \</code></p>
+</li>
+</ul>
+<p><strong>Keras</strong></p>
+<ul>
+<li>
+<p>Map cache directory (/root/.keras) when running container as root:</p>
+<p><code>-v /some/where/cache:/root/.keras</code></p>
+</li>
+<li>
+<p>Or when running as regular user (/tmp/.keras):</p>
+<p><code>-v /some/where/cache:/tmp/.keras</code></p>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tips_and_tricks/" class="btn btn-neutral float-right" title="Tips & Tricks">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../dockerfile/" class="btn btn-neutral" title="Dockerfile"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../dockerfile/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../tips_and_tricks/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

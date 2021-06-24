@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Tips & Tricks - Docker for Data Scientists</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Tips & Tricks";
+    var mkdocs_page_input_path = "tips_and_tricks.md";
+    var mkdocs_page_url = "/fracpete/docker-for-data-scientists/tips_and_tricks/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Docker for Data Scientists</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../basics/">Basics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../repos/">Repositories</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dockerfile/">Dockerfile</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../best_practices/">Best practices</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Tips & Tricks</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#remove-unwanted-files">Remove unwanted files</a></li>
+    
+
+    <li class="toctree-l2"><a href="#alternative-python-version">Alternative Python version</a></li>
+    
+
+    <li class="toctree-l2"><a href="#switch-default-python-version">Switch default Python version</a></li>
+    
+
+    <li class="toctree-l2"><a href="#screen">Screen</a></li>
+    
+
+    <li class="toctree-l2"><a href="#default-runtime">Default runtime</a></li>
+    
+
+    <li class="toctree-l2"><a href="#thorough-clean-up">Thorough clean up</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshooting/">Troubleshooting</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../automation/">Automation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../registry/">Registry</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Docker for Data Scientists</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Tips & Tricks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="remove-unwanted-files">Remove unwanted files</h3>
+<p>Especially during development, it can happen that files get generated when running
+your docker container that can only be removed by the <code>root</code> user again. If you 
+do not have admin permissions (e.g., via <code>sudo</code>) on the machine then you can 
+revert to using docker to remove them again:</p>
+<ul>
+<li>
+<p>change into the directory with unwanted files and/or directories</p>
+</li>
+<li>
+<p>the following docker command will map the current directory to <code>/opt/local</code>:</p>
+<p><code>docker run -v `pwd`:/opt/local -it public.aml-repo.cms.waikato.ac.nz:443/bash:5.1.8</code></p>
+</li>
+<li>
+<p>change into <code>/opt/local</code> and remove all files/dirs (or just the files that need removing):</p>
+<p><code>cd /opt/local
+rm -Rf *</code></p>
+</li>
+</ul>
+<h3 id="alternative-python-version">Alternative Python version</h3>
+<p>In case your base Debian/Ubuntu distribution does not have the right Python version 
+available, you can get additional versions by adding the <a href="https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa">deadsnakes ppa</a>:</p>
+<pre><code class="language-commandline">add-apt-repository -y ppa:deadsnakes/ppa &amp;&amp; \
+apt-get update
+</code></pre>
+<h3 id="switch-default-python-version">Switch default Python version</h3>
+<p>If your base distro has an older version of Python and you do not want to sprinkle that
+specific version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
+on Debian systems to change the default.</p>
+<p>The following commands switch from Python 3.5 to Python 3.6 for the <code>python3</code> executable
+and also use Python 3.6 as the default for the <code>python</code> executable:</p>
+<pre><code class="language-commandline">update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1 &amp;&amp; \
+update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2 &amp;&amp; \
+update-alternatives --set python /usr/bin/python3.6 &amp;&amp; \
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1 &amp;&amp; \
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2 &amp;&amp; \
+update-alternatives --set python3 /usr/bin/python3.6 &amp;&amp; \
+</code></pre>
+<h3 id="screen">Screen</h3>
+<p>The <a href="https://linux.die.net/man/1/screen">screen</a> command-line utility allows you to 
+pick up remote sessions after detaching from them. This is especially helpful when 
+running docker in interactive mode via ssh sessions. If such an ssh session should
+accidentally close (e.g., internet connection lost, laptop closed), then the
+docker command would terminate as well.</p>
+<p>On the remote host, <strong>start</strong> the <code>screen</code> command before your docker command (you can
+run multiple <code>screen</code> instances as well) and skip the screen with the licenses etc using
+<code>Enter</code> or <code>Space</code>. Now you can start up the actual command. If you want to run multiple 
+screen sessions on the same host, then you should name them using the <code>-S sessionname</code> 
+option.</p>
+<p>For <strong>detaching</strong>, use the <code>CTRL+A+D</code> key combination. This will leave your process running
+in the background and you can close the remote connection.</p>
+<p>In order to <strong>reconnect</strong>, simply ssh into the remote host and run <code>screen -r</code>. If there
+is only one screen session running, then it will automatically reconnect. Otherwise, it
+will output a list of available sessions. Supply the name of the session that you want to 
+reattach to the <code>-r</code> option.</p>
+<p>You can <strong>exit</strong> a screen session by either typing <code>exit</code> or using <code>CTRL+D</code> (just like
+with <code>bash</code>).</p>
+<h3 id="default-runtime">Default runtime</h3>
+<p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you simply define
+the <em>default runtime</em> to use with your docker commands (<a href="https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html">source</a>):</p>
+<ul>
+<li>edit the <code>/etc/docker/daemon.json</code> file</li>
+<li>insert key <code>default-runtime</code> with value <code>nvidia</code> so that it looks something like this:</li>
+</ul>
+<pre><code class="language-json">{
+    &quot;default-runtime&quot;: &quot;nvidia&quot;,
+    &quot;runtimes&quot;: {
+        &quot;nvidia&quot;: {
+            &quot;path&quot;: &quot;nvidia-container-runtime&quot;,
+            &quot;runtimeArgs&quot;: []
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>save the file</li>
+</ul>
+<h3 id="thorough-clean-up">Thorough clean up</h3>
+<p>You can stop/remove all containers and images with this one-liner:</p>
+<pre><code class="language-commandline">docker stop $(docker ps -a -q) &amp;&amp; docker rm $(docker ps -a -q) &amp;&amp; docker system prune -a
+</code></pre>
+<p>If you need to remove dangling volumes, use this:</p>
+<pre><code class="language-commandline">docker volume prune
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../troubleshooting/" class="btn btn-neutral float-right" title="Troubleshooting">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../best_practices/" class="btn btn-neutral" title="Best practices"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../best_practices/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../troubleshooting/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
