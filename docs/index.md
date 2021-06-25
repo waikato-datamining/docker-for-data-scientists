@@ -1,10 +1,12 @@
-From one data scientist to another on how to utilize docker to make your life easier.
+From one data scientist to another on how to utilize [docker](https://www.docker.com/) 
+to make your life easier.
 
 Any data scientist that ever had to set up an environment for a deep learning
-framework, knows that getting the combination of CUDA, cuDNN, framework and other 
+framework, knows that getting the combination of [CUDA](https://developer.nvidia.com/cuda), 
+[cuDNN](https://developer.nvidia.com/cudnn), deep learning framework and other 
 libraries right is a frustrating exercise. With docker you still have to go through 
-the pain of figuring out the right combination, but... And it is a BIG but! Once you 
-have this blueprint called *docker image*, you can use it on another machine; you 
+the pain of figuring out the right combination, but... And it is a **BIG** but! Once you 
+have this blueprint called *docker image*, you can use it other machines as well; you 
 will be up and running in seconds.
 
 This is by no means supposed to be an exhaustive introduction to docker (docker 
