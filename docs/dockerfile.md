@@ -87,7 +87,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 The docker documentation on the [ENV](https://docs.docker.com/engine/reference/builder/#env)
 command lists alternative ways of specifying such an environment variable.
 
-In the [Interactive timezone prompt section](troubleshooting.md#Interactive timezone prompt)
+In the [Interactive timezone prompt section](troubleshooting.md#interactive-timezone-prompt)
 section, you read why you might want to use this variable.
 
 
@@ -118,8 +118,8 @@ avoid generating temporary files altogether.
 
 Check out the following [Best practices](best_practices.md) sections:
 
-* [Clean up pip](best_practices.md#Clean up pip)
-* [Clean up apt](best_practices.md#Clean up apt)
+* [Clean up pip](best_practices.md#clean-up-pip)
+* [Clean up apt](best_practices.md#clean-up-apt)
 
 
 # COPY
@@ -306,7 +306,7 @@ it from outside the container. One approach is to change the owner using `chown`
 that can become tedious. Instead, see the following [Best practices](best_practices.md) 
 section on how to best address this:
 
-* [Launch container as regular user](best_practices.md#Launch container as regular user)
+* [Launch container as regular user](best_practices.md#launch-container-as-regular-user)
 
 
 **Congratulations, you have assembled and built your first docker image!** 
