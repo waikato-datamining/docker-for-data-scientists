@@ -194,7 +194,7 @@ WORKDIR /opt/test
 
 # Building the image
 
-With our [Dockerfile](files/pytorch-cifar10/Dockerfile) now finally complete, we
+With our [Dockerfile](files/pytorch-cifar10/Dockerfile.txt) now finally complete, we
 can now finally kick off a build. After changing into the directory containing
 the `Dockerfile`, you can use the `build` sub-command to perform the build.
 Rather than using a hash, we can give it a name via the `-t` option:
