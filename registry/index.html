@@ -93,6 +93,12 @@
     <a class="current" href="./">Registry</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#nexus">Nexus</a></li>
+    
+
+    <li class="toctree-l2"><a href="#example">Example</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -129,8 +135,9 @@
             <div class="section">
               
                 <p>If you have to manage internal images as well, that should not be available from the outside
-(e.g., via docker hub), then you should consider running your own in-house registry.
-If your setup requires access control or you just want to have a web interface, then I 
+(e.g., via docker hub), then you should consider running your own in-house registry.</p>
+<h3 id="nexus">Nexus</h3>
+<p>If your setup requires access control or you just want to have a web interface, then I 
 can recommend Sonatype's Nexus: </p>
 <p><a href="https://www.sonatype.com/products/repository-oss">https://www.sonatype.com/products/repository-oss</a></p>
 <p><strong>NB:</strong> The open-source version is absolutely sufficient for this purpose 
@@ -140,6 +147,27 @@ as a <strong>proxy</strong> for docker hub. That way, you can pull base images f
 rather than having to pull them from a distant server. This makes rebuilding images
 very fast, especially if you just removed all images from your machine or moved to a 
 new machine.</p>
+<h3 id="example">Example</h3>
+<p>Let's say, your registry <code>myregistry.example.com</code> is available via https (port 443),
+then you can change the <code>FROM</code> directive in your <code>Dockerfile</code> from:</p>
+<pre><code>ARG PYTORCH=&quot;1.6.0&quot;
+ARG CUDA=&quot;10.1&quot;
+ARG CUDNN=&quot;7&quot;
+
+FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+</code></pre>
+<p>To this:</p>
+<pre><code>ARG PYTORCH=&quot;1.6.0&quot;
+ARG CUDA=&quot;10.1&quot;
+ARG CUDNN=&quot;7&quot;
+
+ARG DOCKER_REGISTRY=myregistry.example.com:443/
+FROM ${DOCKER_REGISTRY}pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+</code></pre>
+<p>Docker will then pull the base image through your registry (i.e., your proxy) instead
+of directly from docker hub.</p>
+<p>Also, that way you can still influence the <code>DOCKER_REGISTRY</code> value via the <code>--build-arg</code>
+command-line option.</p>
               
             </div>
           </div>

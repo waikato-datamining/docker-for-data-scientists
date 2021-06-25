@@ -58,6 +58,24 @@
     <a class="current" href="./">Basics</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#pulling">Pulling</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running">Running</a></li>
+    
+
+    <li class="toctree-l2"><a href="#gpu-support">GPU support</a></li>
+    
+
+    <li class="toctree-l2"><a href="#volumes">Volumes</a></li>
+    
+
+    <li class="toctree-l2"><a href="#clean-up">Clean up</a></li>
+    
+
+    <li class="toctree-l2"><a href="#login-credentials">Login &amp; Credentials</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -128,17 +146,172 @@
           <div role="main">
             <div class="section">
               
-                <ul>
-<li>login</li>
-<li>credentials (managers)</li>
-<li>pulling</li>
-<li>running (named/unnamed)</li>
-<li>stopping</li>
-<li>cleaning up</li>
-<li>interactive vs non-interactive</li>
-<li>gpu support</li>
-<li>volumes</li>
+                <p>In this section we will touch on a very small subset of functionality provided by the <code>docker</code>
+command-line tool. With this subset you will be able to use already existing images,
+spinning up containers and being able to run code from the host machine within 
+containers.</p>
+<h3 id="pulling">Pulling</h3>
+<p>Before you can use an image, you either need to build it locally or <em>pull</em> it from a 
+registry. This is, obviously, done by the <code>pull</code> sub-command. The docker hub allows
+you to quickly copy the pull command for a specific image (see highlighted area in
+image below).</p>
+<p><img alt="Docker" src="../img/docker_hub_pytorch.png" /></p>
+<p>The URL that you can use with docker conists of these parts:</p>
+<pre><code>[registry-url/]namespace/image[:tag]
+</code></pre>
+<p>If the <code>registry-url</code> is omitted, it defaults to <code>docker.io/</code>. 
+If <code>:tag</code> is omitted, it defaults to <code>:latest</code>.</p>
+<p>The command copied from the above page looks like this:</p>
+<pre><code class="language-commandline">docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+</code></pre>
+<p>The namespace is <code>pytorch</code>, the image is <code>pytorch</code> and the tag is <code>1.6.0-cuda10.1-cudnn7-devel</code>.</p>
+<p>When executing this command, all layers that have not been cached locally will be
+downloaded. It will look similar to this screen, with each layer having its own
+unique hash:</p>
+<pre><code class="language-commandline">metal:[101]~&gt;docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+1.6.0-cuda10.1-cudnn7-devel: Pulling from pytorch/pytorch
+7ddbc47eeb70: Pull complete 
+c1bbdc448b72: Pull complete 
+8c3b70e39044: Pull complete 
+45d437916d57: Pull complete 
+d8f1569ddae6: Pull complete 
+85386706b020: Pull complete 
+ee9b457b77d0: Extracting [==================================================&gt;]     184B/184B
+be4f3343ecd3: Pulling fs layer 
+30b4effda4fd: Waiting 
+b398e882f414: Waiting 
+4fe309685765: Waiting 
+8b87a3cb3232: Waiting 
+6cac8a6cf141: Waiting 
+</code></pre>
+<p>And the finished pull like this:</p>
+<pre><code class="language-commandline">metal:[103]~&gt;docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+1.6.0-cuda10.1-cudnn7-devel: Pulling from pytorch/pytorch
+7ddbc47eeb70: Pull complete 
+c1bbdc448b72: Pull complete 
+8c3b70e39044: Pull complete 
+45d437916d57: Pull complete 
+d8f1569ddae6: Pull complete 
+85386706b020: Pull complete 
+ee9b457b77d0: Pull complete 
+be4f3343ecd3: Pull complete 
+30b4effda4fd: Pull complete 
+b398e882f414: Pull complete 
+4fe309685765: Pull complete 
+8b87a3cb3232: Pull complete 
+6cac8a6cf141: Pull complete 
+Digest: sha256:ccebb46f954b1d32a4700aaeae0e24bd68653f92c6f276a608bf592b660b63d7
+Status: Downloaded newer image for pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+docker.io/pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+</code></pre>
+<h3 id="running">Running</h3>
+<p>Once an image has been downloaded, you can spin up a container. Think of a container
+as a concrete instantiation of a blueprint (i.e., the image), which can receive
+modifications that will stay until its removed. The sub-command for spinning up, 
+is <code>run</code>.</p>
+<p>When running an image (and spinning up a container), this can be done either
+in interactive mode or not. The former can be used at development time or for 
+manually running experiments and the latter for a production setting, where you 
+simply supply a command to executed within the container, like building model.</p>
+<p>For interactive use, you will need the <code>-it</code> flags, which stand for <code>interactive</code>
+and <code>tty</code> (<strong>T</strong>ele<strong>TY</strong>pewriter or console).</p>
+<p>Starting the just downloaded pytorch image in interactive mode, can be done with 
+this command:</p>
+<pre><code class="language-commandline">docker run -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+</code></pre>
+<p>This will give you a prompt similar to this: </p>
+<pre><code>root@1a3ae8deb7b3:/workspace#
+</code></pre>
+<p>Which you can exit like any other shell via <code>exit</code> or <code>CTRL+D</code>.</p>
+<p>When starting up an image without specifying a name for the container (<code>--name</code>),
+docker will give it an automatic generated name rather than just a hash, which 
+can be quite humorous:</p>
+<pre><code>pedantic_herschel
+</code></pre>
+<p>If you want to list containers, you need to use the action <code>ls</code> of the <code>container</code> 
+sub-command. If all containers, not just currently running ones, should be listed, 
+then you need to add the <code>-a</code> option. So, for listing all containers on your system, 
+run this:</p>
+<pre><code class="language-commandline">docker container ls -a
+</code></pre>
+<p>Other useful actions for the <code>container</code> sub-command are:</p>
+<ul>
+<li><code>start</code> - start an existing container</li>
+<li><code>stop</code> - stop a running container</li>
+<li><code>rm</code> - remove a stopped container</li>
 </ul>
+<h3 id="gpu-support">GPU support</h3>
+<p>The image that we downloaded comes with CUDA support, in order to make use of
+an NVIDIA GPU that we have on our host system. But the graphics card does not
+automatically get made available to the containers, we need to explicitly state
+that we want the container to have access to it.</p>
+<p>For docker versions prior to 19.03 (e.g., still used by some NVIDIA IoT devices), 
+you need to supply the following parameter:</p>
+<pre><code>--runtime=nvidia
+</code></pre>
+<p>Otherwise, use this:</p>
+<pre><code>--gpus=all
+</code></pre>
+<p>Or supply the specific ID of the GPU, if you are on a multi-GPU system 
+(<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration">source</a>):</p>
+<pre><code>--gpus=1
+</code></pre>
+<h3 id="volumes">Volumes</h3>
+<p>By default, a docker container does not have access to any directories on the host
+system and you will have to explicitly give access via <em>volumes</em>. Docker distinguishes
+between <em>named</em> volumes (partitions created and managed by the docker daemon) and
+simply mapped directories. Usually, it is sufficient to just map local directories
+into your container. That way, you have full control over your data and models on 
+the host system. </p>
+<p>The simplest way to map a directory (or even a single file) is to use the 
+<code>-v</code> or <code>--volume</code> option. The alternative is the <code>--mount</code> option, which gives 
+you greater control (but seems like overkill most of the time for a data scientist). 
+For more information, check out the docker documentation on 
+<a href="https://docs.docker.com/storage/volumes/">volumes</a>.</p>
+<p>One thing to be aware of is that you can hide directories within the container
+by mapping an external directory onto an existing one, e.g., <code>/usr</code> or <code>/opt</code>.
+This can have unexpected side effects, like missing libraries, executables, data, etc.
+It is worthwhile to checkout the insides of a container first, before mapping
+volumes willy-nilly.</p>
+<p>The command below maps the <code>/some/where</code> directory of the host to the directory
+<code>/opt/local</code> within the container:</p>
+<pre><code class="language-commandline">docker run \
+    -v /some/where:/opt/local \ 
+    -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+</code></pre>
+<p>Directories need to be absolute paths. If you want to map the current directory
+into the container, then you could use this:</p>
+<pre><code class="language-commandline">docker run \
+    -v `pwd`:/opt/local \ 
+    -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+</code></pre>
+<p>Of course, the <code>-v</code> option can be supplied multiple times.</p>
+<h3 id="clean-up">Clean up</h3>
+<p>You will soon notice that you are accumulating a large number of containers
+and images on your system, taking up significant space. Here are some commands
+that you can use to clean up your system:</p>
+<ul>
+<li>
+<p>stop all containers</p>
+<p><code>docker stop $(docker ps -a -q)</code>
+* remove all containers</p>
+<p><code>docker rm $(docker ps -a -q)</code></p>
+</li>
+<li>
+<p>purging all unused or dangling images, containers, volumes, and networks:</p>
+<p><code>docker system prune</code></p>
+</li>
+<li>
+<p>you can be even more aggressive when adding the <code>-a</code> flag:</p>
+<p><code>docker system prune -a</code></p>
+</li>
+</ul>
+<h3 id="login-credentials">Login &amp; Credentials</h3>
+<p>When using non-public registries, you will most likely have to perform a login,
+using the <code>login</code> sub-command (and <code>logout</code> for logging out). By default, docker
+will store your password only base64 encoded and not encrypted. It is therefore
+recommended to use an external credentials store. For more information, see
+the docker documentation on the <a href="https://docs.docker.com/engine/reference/commandline/login/">login command</a>.</p>
               
             </div>
           </div>

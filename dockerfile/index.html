@@ -68,6 +68,39 @@
     <a class="current" href="./">Dockerfile</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#comments">Comments</a></li>
+    
+
+    <li class="toctree-l2"><a href="#from">FROM</a></li>
+    
+
+    <li class="toctree-l2"><a href="#arg">ARG</a></li>
+    
+
+    <li class="toctree-l2"><a href="#env">ENV</a></li>
+    
+
+    <li class="toctree-l2"><a href="#run">RUN</a></li>
+    
+
+    <li class="toctree-l2"><a href="#copy">COPY</a></li>
+    
+
+    <li class="toctree-l2"><a href="#workdir">WORKDIR</a></li>
+    
+
+    <li class="toctree-l2"><a href="#other-useful-commands">Other useful commands</a></li>
+    
+
+    <li class="toctree-l2"><a href="#building-the-image">Building the image</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-the-image">Running the image</a></li>
+    
+
+    <li class="toctree-l2"><a href="#optimizing-an-image">Optimizing an image</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -128,13 +161,241 @@
           <div role="main">
             <div class="section">
               
-                <ul>
-<li>FROM</li>
-<li>ARG</li>
-<li>RUN</li>
-<li>COPY</li>
-<li>ADD</li>
-<li>optimizing dockerfile</li>
+                <p>Using existing docker images unfortunately only gets you so far. Especially, when you 
+need to put models into production, it is very likely that you will need to encapsulate
+more logic within the image itself to integrate it in your existing processes.</p>
+<p>In this section, you will learn the basic building blocks for generating docker images.
+By convention the instructions for a docker image are stored in a text file called 
+<code>Dockerfile</code> (<a href="https://docs.docker.com/engine/reference/builder/#from">full reference</a>).
+This is not set in stone, so you can name it anything you like. But it is usually best
+to stick with the conventions that a community expects (just like with Python and 
+<a href="https://www.python.org/dev/peps/pep-0008/">PEP-8</a>). </p>
+<p>In order to make this section not just a <em>hello world</em> example, we will build an image
+that we can use for training and evaluating a PyTorch model on the CIFAR10 challenge.
+The Python script will also output a Matplotlib chart with the accuracy of the classes.</p>
+<p>Each of the following sections will introduce a docker command that will make up the 
+final docker script for creating the image.</p>
+<h3 id="comments">Comments</h3>
+<p>Before we dive into the actual docker commands, a quick note on comments. Just like with
+any other programming language, it pays to comment your instructions. Especially, if you
+need to work around quirks with some strange command-lines. Comments in docker files, 
+like with bash programming, are line comments and start with <code>#</code>.</p>
+<h3 id="from">FROM</h3>
+<p>Docker images (just like ogres) are like onions, consisting of multiple layers. This makes
+it easy to add more functionality to existing images: reusing rather than recreating.</p>
+<p>The first (non-comment) statement in your Dockerfile needs to be the <a href="https://docs.docker.com/engine/reference/builder/#from">FROM</a> 
+statement, which tells docker the particular base image you want to build on top.</p>
+<p>Reusing the image from our <code>pull</code> command in the <a href="../basics/">Basics</a> section, we get the
+following initial statement:</p>
+<pre><code class="language-commandline">FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
+</code></pre>
+<h3 id="arg">ARG</h3>
+<p>In some cases, your <code>Dockerfile</code> script might need to be parametrized for the build from the outside. 
+For defining such a build parameter (with a default value), you can use the <a href="https://docs.docker.com/engine/reference/builder/#arg">ARG</a> 
+instruction. Using the <code>--build-arg</code> command-line you can override the default value. </p>
+<p>The <code>ARG</code> syntax is simple:</p>
+<pre><code>ARG key=value
+</code></pre>
+<p>You can also use <code>ARG</code> to make your <code>FROM</code> statement easier to read, but be aware of the 
+<a href="https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact">interaction between FROM and ARG</a>.</p>
+<p>Therefore, we can pull out the version numbers from our original <code>FROM</code> statement and 
+put them in variables. Variables can be used in other statements via <code>${...}</code>.</p>
+<p>Here is the <em>readable</em> <code>FROM</code> statement:</p>
+<pre><code>ARG PYTORCH=&quot;1.6.0&quot;
+ARG CUDA=&quot;10.1&quot;
+ARG CUDNN=&quot;7&quot;
+
+FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+</code></pre>
+<h3 id="env">ENV</h3>
+<p>In contrast to <code>ARG</code>, the <a href="https://docs.docker.com/engine/reference/builder/#env">ENV</a> 
+instruction is persistent within the docker image and can be used to set environment 
+variables rather than build variables. If the variable should not be persistent in 
+the final image, as it might interfere with subsequent layers, then you should 
+consider using <code>ARG</code> instead.</p>
+<p>One such environment variable is <code>DEBIAN_FRONTEND</code>, which changes the behavior of
+<code>apt-get</code> (Debian tool to install packages):</p>
+<pre><code>ENV DEBIAN_FRONTEND=noninteractive
+</code></pre>
+<p>The docker documentation on the <a href="https://docs.docker.com/engine/reference/builder/#env">ENV</a>
+command lists alternative ways of specifying such an environment variable.</p>
+<p>In the <a href="../troubleshooting/#Interactive timezone prompt">Interactive timezone prompt section</a>
+section, you read why you might want to use this variable.</p>
+<h3 id="run">RUN</h3>
+<p>Once you have set the stage with base image and variables, you can set about installing
+the required software packages. For Debian/Ubuntu based systems, this usually involves
+invoking the <code>apt-get</code> package manager and for Python <code>pip/pip3</code>. Executing commands
+is achieved with the <a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
+<p>For installing matplotlib, which is not part of our base image, we can use:</p>
+<pre><code>RUN pip --no-cache install matplotlib
+</code></pre>
+<p>You will notice the <code>--no-cache</code> flag, which is not something you would normally see.
+In order to avoid downloading the same library over and over again, pip caches them 
+by default. But this is not necessary for a docker image and just takes up more space. 
+But before you argue that you could just remove unwanted files at the end of your 
+docker image then you do not take into account that docker works in layers: 
+every command is basically a layer. Though a subsequent layer may remove file (and 
+you will not see them in the final image), they are still present in the layer got 
+introduced in.</p>
+<p>Long story short: either always clean up within the same layer or 
+avoid generating temporary files altogether.</p>
+<p>Check out the following <a href="../best_practices/">Best practices</a> sections:</p>
+<ul>
+<li><a href="../best_practices/#Clean up pip">Clean up pip</a></li>
+<li><a href="../best_practices/#Clean up apt">Clean up apt</a></li>
+</ul>
+<h3 id="copy">COPY</h3>
+<p>Quite often, you will end up just needing little scripts within a docker image
+to do the work you (since all the libraries get installed via <code>apt-get</code> or <code>pip</code>).
+For copying files or directories, you can use the <a href="https://docs.docker.com/engine/reference/builder/#copy">COPY</a> 
+command. </p>
+<p>One thing that have not talked about yet is the <strong>docker context</strong>. The context 
+includes all the files and directories that are on the same level as the <code>Dockerfile</code>. 
+The <code>COPY</code> command can only use files and directories that are within this context, 
+but not outside (e.g., going up in the directory structure).</p>
+<p>You also need to be aware that the complete docker context will get sent to the 
+docker daemon during the build process. So best not to have any unnecessary files
+and directories in the same directory. However, if it cannot be avoided for certain
+files/directories to be present you can use the <a href="https://docs.docker.com/engine/reference/builder/#dockerignore-file">.dockerignore file</a>
+to exclude them.</p>
+<p>As mentioned at the start, we want to train a PyTorch model and evaluate it. 
+Download the <a href="../files/pytorch-cifar10/test.py">test.py</a> script and place it next to 
+the <code>Dockerfile</code> that you are currently working on.</p>
+<p>In order to include this Python script, use the following command:</p>
+<pre><code>COPY test.py /opt/test/test.py
+</code></pre>
+<p>The <code>COPY</code> command will automatically create directories if they are not present,
+which is <code>/opt/test</code> in our case. Any existing file will get overwritten as well.</p>
+<p>Not only Python scripts can be copied, you can also create executable bash scripts
+that call your actual Python scripts and place them in <code>/usr/bin</code>. For our <code>test.py</code>
+the bash script would look like this:</p>
+<pre><code>#!/bin/bash
+
+python /opt/test/test.py
+</code></pre>
+<p>If your script supports command-line options, you can pass them through using <code>"$@"</code>:</p>
+<pre><code>#!/bin/bash
+
+python /opt/test/test.py &quot;$@&quot;
+</code></pre>
+<h3 id="workdir">WORKDIR</h3>
+<p>With the <a href="https://docs.docker.com/engine/reference/builder/#workdir">WOKRDIR</a> command,
+you change the current working directory within your docker script. If the directory
+does not exist yet, it will get automatically created. This eliminates the need
+to use <code>mkdir</code> commands. In our case, we can just use the command to make the
+docker container automatically start the prompt in the directory of our Python script
+(<code>/opt/test</code>) when used in interactive mode:</p>
+<pre><code>WORKDIR /opt/test
+</code></pre>
+<h3 id="other-useful-commands">Other useful commands</h3>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/#add">ADD</a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#entrypoint">ENTRYPOINT</a></li>
+</ul>
+<h3 id="building-the-image">Building the image</h3>
+<p>With our <a href="files/pytorch-cifar10/Dockerfile">Dockerfile</a> now finally complete, we
+can now finally kick off a build. After changing into the directory containing
+the <code>Dockerfile</code>, you can use the <code>build</code> sub-command to perform the build.
+Rather than using a hash, we can give it a name via the <code>-t</code> option:</p>
+<pre><code class="language-commandline">docker build -t pytorchtest .
+</code></pre>
+<p>You should</p>
+<pre><code>Sending build context to Docker daemon  260.6kB
+Step 1/8 : ARG PYTORCH=&quot;1.6.0&quot;
+Step 2/8 : ARG CUDA=&quot;10.1&quot;
+Step 3/8 : ARG CUDNN=&quot;7&quot;
+Step 4/8 : FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+ ---&gt; bb833e4d631f
+Step 5/8 : ENV DEBIAN_FRONTEND noninteractive
+ ---&gt; Running in 71812ab36f5a
+Removing intermediate container 71812ab36f5a
+ ---&gt; 77a27d586581
+Step 6/8 : RUN pip --no-cache install matplotlib
+ ---&gt; Running in 10d85cc41a73
+Collecting matplotlib
+  Downloading matplotlib-3.4.2-cp37-cp37m-manylinux1_x86_64.whl (10.3 MB)
+Collecting kiwisolver&gt;=1.0.1
+  Downloading kiwisolver-1.3.1-cp37-cp37m-manylinux1_x86_64.whl (1.1 MB)
+Collecting cycler&gt;=0.10
+  Downloading cycler-0.10.0-py2.py3-none-any.whl (6.5 kB)
+Requirement already satisfied: pillow&gt;=6.2.0 in /opt/conda/lib/python3.7/site-packages (from matplotlib) (7.2.0)
+Requirement already satisfied: numpy&gt;=1.16 in /opt/conda/lib/python3.7/site-packages (from matplotlib) (1.18.5)
+Collecting python-dateutil&gt;=2.7
+  Downloading python_dateutil-2.8.1-py2.py3-none-any.whl (227 kB)
+Collecting pyparsing&gt;=2.2.1
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Requirement already satisfied: six in /opt/conda/lib/python3.7/site-packages (from cycler&gt;=0.10-&gt;matplotlib) (1.14.0)
+Installing collected packages: kiwisolver, cycler, python-dateutil, pyparsing, matplotlib
+Successfully installed cycler-0.10.0 kiwisolver-1.3.1 matplotlib-3.4.2 pyparsing-2.4.7 python-dateutil-2.8.1
+Removing intermediate container 10d85cc41a73
+ ---&gt; 0361d66c3c44
+Step 7/8 : WORKDIR /opt/test
+ ---&gt; Running in 14568b3fead5
+Removing intermediate container 14568b3fead5
+ ---&gt; 7c1a8b7229d0
+Step 8/8 : COPY test.py /opt/test/test.py
+ ---&gt; ed55c4fb8e62
+Successfully built ed55c4fb8e62
+Successfully tagged pytorchtest:latest
+</code></pre>
+<h3 id="running-the-image">Running the image</h3>
+<p>With the image successfully built, you can now use it. For this you need to employ the
+<a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
+<pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
+</code></pre>
+<p>Once the prompt appears, you can execute our <code>test.py</code> script:</p>
+<pre><code>root@5e2245aa020a:/opt/test# python test.py 
+</code></pre>
+<p>While the script is executing, you should see output like this:</p>
+<pre><code>cuda:0
+Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data/cifar-10-python.tar.gz
+100%|██████████████████████████████████████████████████████████████▉| 170369024/170498071 [00:13&lt;00:00, 13670749.69it/s]Extracting ./data/cifar-10-python.tar.gz to ./data
+Files already downloaded and verified
+[1,  2000] loss: 2.173
+[1,  4000] loss: 1.815
+[1,  6000] loss: 1.659
+170500096it [00:30, 13670749.69it/s]                                                                                    [1,  8000] loss: 1.557
+[1, 10000] loss: 1.499
+[1, 12000] loss: 1.449
+[2,  2000] loss: 1.377
+[2,  4000] loss: 1.356
+[2,  6000] loss: 1.329
+[2,  8000] loss: 1.315
+[2, 10000] loss: 1.293
+[2, 12000] loss: 1.264
+Finished Training
+GroundTruth:    cat  ship  ship plane
+Predicted:    cat  ship   car plane
+Accuracy of the network on the 10000 test images: 55 %
+Accuracy of plane : 60 %
+Accuracy of   car : 65 %
+Accuracy of  bird : 29 %
+Accuracy of   cat : 44 %
+Accuracy of  deer : 54 %
+Accuracy of   dog : 41 %
+Accuracy of  frog : 52 %
+Accuracy of horse : 68 %
+Accuracy of  ship : 78 %
+Accuracy of truck : 63 %
+170500096it [01:16, 2240182.93it/s] 
+</code></pre>
+<p>At the end, the script will generate plot and save it as <code>/opt/test/figure.png</code>:</p>
+<p><img alt="Generated figure" src="../files/pytorch-cifar10/figure.png" /></p>
+<p>If you copy the generated figure to <code>/opt/local</code> (our connection with the outside world), 
+you will notice that the owner is <code>root</code> and you will not necessarily be able to remove 
+it from outside the container. One approach is to change the owner using <code>chown</code>, but 
+that can become tedious. Instead, see the following <a href="../best_practices/">Best practices</a> 
+section on how to best address this:</p>
+<ul>
+<li><a href="../best_practices/#Launch container as regular user">Launch container as regular user</a></li>
+</ul>
+<p><strong>Congratulations, you have assembled and built your first docker image!</strong> </p>
+<h3 id="optimizing-an-image">Optimizing an image</h3>
+<p>As a final note, you should consider revisiting your <code>Dockerfile</code> once you have
+verified that everything is working and optimize it. Optimizing entails: </p>
+<ul>
+<li>Combine apt-get commands in a single <code>RUN</code> and remove caches at the end</li>
+<li>Combine pip commands in a single <code>RUN</code> run and make sure that pip cache is removed</li>
 </ul>
               
             </div>
