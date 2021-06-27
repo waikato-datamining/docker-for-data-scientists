@@ -14,7 +14,8 @@ that we can use for training and evaluating a PyTorch model on the CIFAR10 chall
 The Python script will also output a Matplotlib chart with the accuracy of the classes.
 
 Each of the following sections will introduce a docker command that will make up the 
-final docker script for creating the image.
+final docker script for creating the image. Of course, we will also build and use
+the image, as well as push it out to make it publicly available.
 
 
 # Comments
