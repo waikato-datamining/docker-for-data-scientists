@@ -4,7 +4,7 @@ From one data scientist to another on how to utilize docker to make your life ea
 
 You can view the auto-generated documentation here:
 
-https://waikato-datamining.github.io/docker-for-data-scientists/
+https://www.data-mining.co.nz/docker-for-data-scientists/
 
 
 ## Installation
