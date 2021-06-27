@@ -245,7 +245,7 @@ Successfully built ed55c4fb8e62
 Successfully tagged pytorchtest:latest
 ```
 
-# Running the image
+# Running the image (interactive)
 
 With the image successfully built, you can now use it. For this you need to employ the
 [RUN](https://docs.docker.com/engine/reference/builder/#run) command.
@@ -310,6 +310,29 @@ section on how to best address this:
 
 
 **Congratulations, you have assembled and built your first docker image!** 
+
+
+# Running the image (non-interactive)
+
+Of course, you do not have to run the image interactively at all. After your initial
+development of docker image and code, you can then use it in your production system.
+
+For running it in non-interactive mode, simply remove the `-it` flags and
+append the command that you want to run. In our case, this is:
+
+```commandline
+python3 /opt/test/test.py
+```
+
+The full command-line therefore looks like:
+
+```commandline
+docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
+```
+
+Of course, running our test image in non-interactive mode bars us from accessing the 
+generated graph image. You will want to modify your script to [parse command-line
+arguments](https://docs.python.org/3.7/library/argparse.html) for flexibility (rather than hard-coded paths).
 
 
 # Optimizing an image
