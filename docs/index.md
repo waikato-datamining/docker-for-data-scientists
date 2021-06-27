@@ -1,6 +1,8 @@
 From one data scientist to another on how to utilize [docker](https://www.docker.com/) 
 to make your life easier.
 
+![Docker](img/docker-logo.png)
+
 Any data scientist that ever had to set up an environment for a deep learning
 framework, knows that getting the combination of [CUDA](https://developer.nvidia.com/cuda), 
 [cuDNN](https://developer.nvidia.com/cudnn), deep learning framework and other 
@@ -14,9 +16,6 @@ can do a lot more!), but merely for getting you started on your journey.
 
 **Disclaimer:** This introduction was written using a Linux host system. If you are using
 Mac OSX or WSL under Windows, your mileage may vary...
-
-
-![Docker](img/docker-logo.png)
 
 To get started with docker, you should look at the following sections:
 
