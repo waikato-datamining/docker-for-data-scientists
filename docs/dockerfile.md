@@ -342,3 +342,53 @@ verified that everything is working and optimize it. Optimizing entails:
 
 * Combine apt-get commands in a single `RUN` and remove caches at the end
 * Combine pip commands in a single `RUN` run and make sure that pip cache is removed
+
+
+# Pushing the image
+
+Once you are happy with your image and you want to use it on another machine, you will
+need to **push** it out to a registry. Otherwise, you will not be able to use the image
+on another machine without having to re-build it (kind of defeating the purpose of reusable
+images).
+
+For pushing an image, there are typically two sub-commands that come into play:
+
+* [tag](https://docs.docker.com/engine/reference/commandline/tag/)
+* [push](https://docs.docker.com/engine/reference/commandline/push/)
+
+When building images locally, as we did above, the name is fairly irrelevant (`pytorchtest`). 
+However, when pushing an image to a registry (docker hub or [your own](registry.md)), then
+naming (aka as *tagging*) an image requires a bit more thought. Assuming that you have
+a user account on docker hub called `user1234`, then you could name your image like this:
+
+```
+user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+```
+
+That way, you still keep using your local image name `pytorchtest`, but you also
+include the version of PyTorch, CUDA and cuDNN. The `0.0.1` at the end, is the actual
+version of your image.
+
+In order to push the image `pytorchtest` out to docker hub, you first need to give it
+the proper tag:
+
+```commandline
+docker tag \
+    pytorchtest \
+    user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+```
+
+And for pushing it out, use this command:
+
+```
+docker push user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+```
+
+Once the push is complete, you will find this image at the following URL:
+
+```
+https://hub.docker.com/u/user1234
+```
+
+Depending on the number of images you have, you may have to search for the
+`pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1` tag.
