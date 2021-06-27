@@ -157,7 +157,7 @@ revert to using docker to remove them again:</p>
 </li>
 <li>
 <p>the following docker command will map the current directory to <code>/opt/local</code>:</p>
-<p><code>docker run -v `pwd`:/opt/local -it public.aml-repo.cms.waikato.ac.nz:443/bash:5.1.8</code></p>
+<p><code>docker run -v `pwd`:/opt/local -it bash:5.1.8</code></p>
 </li>
 <li>
 <p>change into <code>/opt/local</code> and remove all files/dirs (or just the files that need removing):</p>
@@ -172,8 +172,8 @@ available, you can get additional versions by adding the <a href="https://launch
 apt-get update
 </code></pre>
 <h3 id="switch-default-python-version">Switch default Python version</h3>
-<p>If your base distro has an older version of Python and you do not want to sprinkle that
-specific version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
+<p>If your base distro has an older version of Python and you do not want to sprinkle the
+specific newer version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
 on Debian systems to change the default.</p>
 <p>The following commands switch from Python 3.5 to Python 3.6 for the <code>python3</code> executable
 and also use Python 3.6 as the default for the <code>python</code> executable:</p>
@@ -190,25 +190,25 @@ pick up remote sessions after detaching from them. This is especially helpful wh
 running docker in interactive mode via ssh sessions. If such an ssh session should
 accidentally close (e.g., internet connection lost, laptop closed), then the
 docker command would terminate as well.</p>
-<p>On the remote host, <strong>start</strong> the <code>screen</code> command before your docker command (you can
-run multiple <code>screen</code> instances as well) and skip the screen with the licenses etc using
-<code>Enter</code> or <code>Space</code>. Now you can start up the actual command. If you want to run multiple 
-screen sessions on the same host, then you should name them using the <code>-S sessionname</code> 
-option.</p>
-<p>For <strong>detaching</strong>, use the <code>CTRL+A+D</code> key combination. This will leave your process running
-in the background and you can close the remote connection.</p>
+<p>On the remote host, <strong>start</strong> the <code>screen</code> command before you launch your docker command 
+(you can run multiple <code>screen</code> instances as well) and skip the screen with the licenses 
+etc using <code>Enter</code> or <code>Space</code>. Now you can start up the actual command. If you want to 
+run multiple screen sessions on the same host, then you should name them using the 
+<code>-S sessionname</code> option to easily distinguish them.</p>
+<p>For <strong>detaching</strong> a session, use the <code>CTRL+A+D</code> key combination. This will leave your 
+process running in the background and you can close the remote connection.</p>
 <p>In order to <strong>reconnect</strong>, simply ssh into the remote host and run <code>screen -r</code>. If there
 is only one screen session running, then it will automatically reconnect. Otherwise, it
 will output a list of available sessions. Supply the name of the session that you want to 
 reattach to the <code>-r</code> option.</p>
 <p>You can <strong>exit</strong> a screen session by either typing <code>exit</code> or using <code>CTRL+D</code> (just like
-with <code>bash</code>).</p>
+with a <code>bash</code> shell).</p>
 <h3 id="default-runtime">Default runtime</h3>
-<p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you simply define
+<p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you can simply define
 the <em>default runtime</em> to use with your docker commands (<a href="https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html">source</a>):</p>
 <ul>
-<li>edit the <code>/etc/docker/daemon.json</code> file</li>
-<li>insert key <code>default-runtime</code> with value <code>nvidia</code> so that it looks something like this:</li>
+<li>edit the <code>/etc/docker/daemon.json</code> file as <code>root</code> user</li>
+<li>insert the key <code>default-runtime</code> with value <code>nvidia</code> so that it looks something like this:</li>
 </ul>
 <pre><code class="language-json">{
     &quot;default-runtime&quot;: &quot;nvidia&quot;,
@@ -222,6 +222,7 @@ the <em>default runtime</em> to use with your docker commands (<a href="https://
 </code></pre>
 <ul>
 <li>save the file</li>
+<li>restart the docker daemon (e.g., <code>sudo systemctl restart docker</code>)</li>
 </ul>
 <h3 id="thorough-clean-up">Thorough clean up</h3>
 <p>You can stop/remove all containers and images with this one-liner:</p>

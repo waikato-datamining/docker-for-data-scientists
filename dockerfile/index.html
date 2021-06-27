@@ -173,15 +173,18 @@ more logic within the image itself to integrate it in your existing processes.</
 <p>In this section, you will learn the basic building blocks for generating docker images.
 By convention the instructions for a docker image are stored in a text file called 
 <code>Dockerfile</code> (<a href="https://docs.docker.com/engine/reference/builder/#from">full reference</a>).
-This is not set in stone, so you can name it anything you like. But it is usually best
-to stick with the conventions that a community expects (just like with Python and 
-<a href="https://www.python.org/dev/peps/pep-0008/">PEP-8</a>). </p>
+This is not set in stone, so you can name it anything you like. However, it is usually best
+to stick with the conventions that a community expects (just like with 
+<a href="https://www.python.org/dev/peps/pep-0008/">PEP-8</a> in the Python community). </p>
 <p>In order to make this section not just a <em>hello world</em> example, we will build an image
-that we can use for training and evaluating a PyTorch model on the CIFAR10 challenge.
-The Python script will also output a Matplotlib chart with the accuracy of the classes.</p>
+that we can use for training and evaluating a PyTorch model on the 
+<a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR10 challenge</a>.
+The Python script will also output a Matplotlib bar chart, displaying the accuracies of 
+the classes.</p>
 <p>Each of the following sections will introduce a docker command that will make up the 
-final docker script for creating the image. Of course, we will also build and use
-the image, as well as push it out to make it publicly available.</p>
+final <a href="../files/pytorch-cifar10/Dockerfile.txt">docker script</a> for creating the image. 
+Of course, we will also build and use the image, as well as push it out to make it 
+publicly available.</p>
 <h3 id="comments">Comments</h3>
 <p>Before we dive into the actual docker commands, a quick note on comments. Just like with
 any other programming language, it pays to comment your instructions. Especially, if you
@@ -189,7 +192,8 @@ need to work around quirks with some strange command-lines. Comments in docker f
 like with bash programming, are line comments and start with <code>#</code>.</p>
 <h3 id="from">FROM</h3>
 <p>Docker images (just like ogres) are like onions, consisting of multiple layers. This makes
-it easy to add more functionality to existing images: reusing rather than recreating.</p>
+it easy to add more functionality to existing images: reusing is better than recreating.
+This approach also preserves a lot of space.</p>
 <p>The first (non-comment) statement in your Dockerfile needs to be the <a href="https://docs.docker.com/engine/reference/builder/#from">FROM</a> 
 statement, which tells docker the particular base image you want to build on top.</p>
 <p>Reusing the image from our <code>pull</code> command in the <a href="../basics/">Basics</a> section, we get the
@@ -197,21 +201,21 @@ following initial statement:</p>
 <pre><code class="language-commandline">FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 </code></pre>
 <h3 id="arg">ARG</h3>
-<p>In some cases, your <code>Dockerfile</code> script might need to be parametrized for the build from the outside. 
-For defining such a build parameter (with a default value), you can use the <a href="https://docs.docker.com/engine/reference/builder/#arg">ARG</a> 
-instruction. Using the <code>--build-arg</code> command-line you can override the default value. </p>
+<p>In some cases, your <code>Dockerfile</code> script might need to be parametrized for the build from 
+the outside. For defining such a build parameter (with a default value), you can use the 
+<a href="https://docs.docker.com/engine/reference/builder/#arg">ARG</a> instruction. Using the 
+<code>--build-arg</code> command-line you can override the default value. </p>
 <p>The <code>ARG</code> syntax is simple:</p>
 <pre><code>ARG key=value
 </code></pre>
 <p>You can also use <code>ARG</code> to make your <code>FROM</code> statement easier to read, but be aware of the 
 <a href="https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact">interaction between FROM and ARG</a>.</p>
-<p>Therefore, we can pull out the version numbers from our original <code>FROM</code> statement and 
+<p>Using <code>ARG</code>, we can pull out the version numbers from our original <code>FROM</code> statement and 
 put them in variables. Variables can be used in other statements via <code>${...}</code>.</p>
-<p>Here is the <em>readable</em> <code>FROM</code> statement:</p>
+<p>Here is the <em>human-readable</em> <code>FROM</code> statement:</p>
 <pre><code>ARG PYTORCH=&quot;1.6.0&quot;
 ARG CUDA=&quot;10.1&quot;
 ARG CUDNN=&quot;7&quot;
-
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 </code></pre>
 <h3 id="env">ENV</h3>
@@ -225,7 +229,8 @@ consider using <code>ARG</code> instead.</p>
 <pre><code>ENV DEBIAN_FRONTEND=noninteractive
 </code></pre>
 <p>The docker documentation on the <a href="https://docs.docker.com/engine/reference/builder/#env">ENV</a>
-command lists alternative ways of specifying such an environment variable.</p>
+command lists alternative ways of specifying such an environment variable, for limiting
+the scope.</p>
 <p>In the <a href="../troubleshooting/#interactive-timezone-prompt">Interactive timezone prompt section</a>
 section, you read why you might want to use this variable.</p>
 <h3 id="run">RUN</h3>
@@ -236,14 +241,14 @@ is achieved with the <a href="https://docs.docker.com/engine/reference/builder/#
 <p>For installing matplotlib, which is not part of our base image, we can use:</p>
 <pre><code>RUN pip --no-cache install matplotlib
 </code></pre>
-<p>You will notice the <code>--no-cache</code> flag, which is not something you would normally see.
+<p>You will notice the <code>--no-cache</code> flag, which is not something you would normally use.
 In order to avoid downloading the same library over and over again, pip caches them 
-by default. But this is not necessary for a docker image and just takes up more space. 
+by default. This is not necessary for a docker image and just takes up more space. 
 But before you argue that you could just remove unwanted files at the end of your 
 docker image then you do not take into account that docker works in layers: 
-every command is basically a layer. Though a subsequent layer may remove file (and 
-you will not see them in the final image), they are still present in the layer got 
-introduced in.</p>
+every command is basically a layer. Though a subsequent layer may remove files (and 
+you will not see them in the final image), they are still present in the layer that 
+they got introduced in.</p>
 <p>Long story short: either always clean up within the same layer or 
 avoid generating temporary files altogether.</p>
 <p>Check out the following <a href="../best_practices/">Best practices</a> sections:</p>
@@ -253,10 +258,10 @@ avoid generating temporary files altogether.</p>
 </ul>
 <h3 id="copy">COPY</h3>
 <p>Quite often, you will end up just needing little scripts within a docker image
-to do the work you (since all the libraries get installed via <code>apt-get</code> or <code>pip</code>).
+to do the work for you (since all the libraries get installed via <code>apt-get</code> or <code>pip</code>).
 For copying files or directories, you can use the <a href="https://docs.docker.com/engine/reference/builder/#copy">COPY</a> 
 command. </p>
-<p>One thing that have not talked about yet is the <strong>docker context</strong>. The context 
+<p>One thing that we have not talked about yet is the <strong>docker context</strong>. This context 
 includes all the files and directories that are on the same level as the <code>Dockerfile</code>. 
 The <code>COPY</code> command can only use files and directories that are within this context, 
 but not outside (e.g., going up in the directory structure).</p>
@@ -287,8 +292,8 @@ python /opt/test/test.py &quot;$@&quot;
 </code></pre>
 <h3 id="workdir">WORKDIR</h3>
 <p>With the <a href="https://docs.docker.com/engine/reference/builder/#workdir">WOKRDIR</a> command,
-you change the current working directory within your docker script. If the directory
-does not exist yet, it will get automatically created. This eliminates the need
+you can change the current working directory within your docker script. If the directory
+does not exist yet, it will get created automatically. This eliminates the need
 to use <code>mkdir</code> commands. In our case, we can just use the command to make the
 docker container automatically start the prompt in the directory of our Python script
 (<code>/opt/test</code>) when used in interactive mode:</p>
@@ -301,12 +306,12 @@ docker container automatically start the prompt in the directory of our Python s
 </ul>
 <h3 id="building-the-image">Building the image</h3>
 <p>With our <a href="../files/pytorch-cifar10/Dockerfile.txt">Dockerfile</a> now finally complete, we
-can now finally kick off a build. After changing into the directory containing
+are ready to kick off a build. After changing into the directory containing
 the <code>Dockerfile</code>, you can use the <code>build</code> sub-command to perform the build.
-Rather than using a hash, we can give it a name via the <code>-t</code> option:</p>
+Rather than using a hash, we can give it a name via the <code>-t</code> option (<em>tagging</em> it):</p>
 <pre><code class="language-commandline">docker build -t pytorchtest .
 </code></pre>
-<p>You should</p>
+<p>You should see similar output like the one below:</p>
 <pre><code>Sending build context to Docker daemon  260.6kB
 Step 1/8 : ARG PYTORCH=&quot;1.6.0&quot;
 Step 2/8 : ARG CUDA=&quot;10.1&quot;
@@ -350,7 +355,7 @@ Successfully tagged pytorchtest:latest
 <a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
 <pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
 </code></pre>
-<p>Once the prompt appears, you can execute our <code>test.py</code> script:</p>
+<p>Once the prompt appears, you can execute the <code>test.py</code> script:</p>
 <pre><code>root@5e2245aa020a:/opt/test# python test.py 
 </code></pre>
 <p>While the script is executing, you should see output like this:</p>
@@ -386,20 +391,20 @@ Accuracy of  ship : 78 %
 Accuracy of truck : 63 %
 170500096it [01:16, 2240182.93it/s] 
 </code></pre>
-<p>At the end, the script will generate plot and save it as <code>/opt/test/figure.png</code>:</p>
+<p>At the end, the script will generate a bar chart plot and save it as <code>/opt/local/figure.png</code>:</p>
 <p><img alt="Generated figure" src="../files/pytorch-cifar10/figure.png" /></p>
-<p>If you copy the generated figure to <code>/opt/local</code> (our connection with the outside world), 
-you will notice that the owner is <code>root</code> and you will not necessarily be able to remove 
-it from outside the container. One approach is to change the owner using <code>chown</code>, but 
-that can become tedious. Instead, see the following <a href="../best_practices/">Best practices</a> 
-section on how to best address this:</p>
+<p>If you look at the permissions of the generated image, you will notice that the owner 
+is <code>root</code>. Depending on your permissions on the host system, you might not be able to 
+remove it from outside the container. One approach is to change the owner using <code>chown</code> 
+(from within the container), but that can become tedious. Instead, see the following 
+<a href="../best_practices/">Best practices</a> section on how to best address this:</p>
 <ul>
 <li><a href="../best_practices/#launch-container-as-regular-user">Launch container as regular user</a></li>
 </ul>
-<p><strong>Congratulations, you have assembled and built your first docker image!</strong> </p>
+<p><strong>Congratulations, you have assembled, built and run your first docker image!</strong> </p>
 <h3 id="running-the-image-non-interactive">Running the image (non-interactive)</h3>
-<p>Of course, you do not have to run the image interactively at all. After your initial
-development of docker image and code, you can then use it in your production system.</p>
+<p>Of course, you do not have to run the image interactively at all. After the initial
+development of your docker image and code, you can then use it in your production system.</p>
 <p>For running it in non-interactive mode, simply remove the <code>-it</code> flags and
 append the command that you want to run. In our case, this is:</p>
 <pre><code class="language-commandline">python3 /opt/test/test.py
@@ -407,20 +412,17 @@ append the command that you want to run. In our case, this is:</p>
 <p>The full command-line therefore looks like:</p>
 <pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
 </code></pre>
-<p>Of course, running our test image in non-interactive mode bars us from accessing the 
-generated graph image. You will want to modify your script to <a href="https://docs.python.org/3.7/library/argparse.html">parse command-line
-arguments</a> for flexibility (rather than hard-coded paths).</p>
 <h3 id="optimizing-an-image">Optimizing an image</h3>
 <p>As a final note, you should consider revisiting your <code>Dockerfile</code> once you have
 verified that everything is working and optimize it. Optimizing entails: </p>
 <ul>
-<li>Combine apt-get commands in a single <code>RUN</code> and remove caches at the end</li>
-<li>Combine pip commands in a single <code>RUN</code> run and make sure that pip cache is removed</li>
+<li>Combine <code>apt-get</code> commands in a single <code>RUN</code> and remove caches at the end</li>
+<li>Combine <code>pip</code> commands in a single <code>RUN</code> run and make sure that the pip cache is removed</li>
 </ul>
 <h3 id="pushing-the-image">Pushing the image</h3>
 <p>Once you are happy with your image and you want to use it on another machine, you will
 need to <strong>push</strong> it out to a registry. Otherwise, you will not be able to use the image
-on another machine without having to re-build it (kind of defeating the purpose of reusable
+on another machine without having to re-build it (therefore defeating the purpose of reusable
 images).</p>
 <p>For pushing an image, there are typically two sub-commands that come into play:</p>
 <ul>
@@ -429,7 +431,7 @@ images).</p>
 </ul>
 <p>When building images locally, as we did above, the name is fairly irrelevant (<code>pytorchtest</code>). 
 However, when pushing an image to a registry (docker hub or <a href="../registry/">your own</a>), then
-naming (aka as <em>tagging</em>) an image requires a bit more thought. Assuming that you have
+naming (aka <em>tagging</em>) an image requires a bit more thought. Assuming that you have
 a user account on docker hub called <code>user1234</code>, then you could name your image like this:</p>
 <pre><code>user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
 </code></pre>

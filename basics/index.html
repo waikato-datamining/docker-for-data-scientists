@@ -58,6 +58,9 @@
     <a class="current" href="./">Basics</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#installation">Installation</a></li>
+    
+
     <li class="toctree-l2"><a href="#pulling">Pulling</a></li>
     
 
@@ -150,13 +153,17 @@
 command-line tool. With this subset you will be able to use already existing images,
 spinning up containers and being able to run code from the host machine within 
 containers.</p>
+<h3 id="installation">Installation</h3>
+<p>If you do not have docker installed yet, then please do so. See the 
+<a href="https://docs.docker.com/engine/install/">official documentation</a> for your respective
+operating system flavor.</p>
 <h3 id="pulling">Pulling</h3>
 <p>Before you can use an image, you either need to build it locally or <em>pull</em> it from a 
-registry. This is, obviously, done by the <code>pull</code> sub-command. The docker hub allows
+registry. The latter is, obviously, done by the <code>pull</code> sub-command. The docker hub allows
 you to quickly copy the pull command for a specific image (see highlighted area in
 image below).</p>
 <p><img alt="Docker" src="../img/docker_hub_pytorch.png" /></p>
-<p>The URL that you can use with docker conists of these parts:</p>
+<p>The URL that you can use with docker consists of these parts:</p>
 <pre><code>[registry-url/]namespace/image[:tag]
 </code></pre>
 <p>If the <code>registry-url</code> is omitted, it defaults to <code>docker.io/</code>. 
@@ -184,7 +191,7 @@ b398e882f414: Waiting
 8b87a3cb3232: Waiting 
 6cac8a6cf141: Waiting 
 </code></pre>
-<p>And the finished pull like this:</p>
+<p>The output from the finished pull will look like this:</p>
 <pre><code class="language-commandline">metal:[103]~&gt;docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 1.6.0-cuda10.1-cudnn7-devel: Pulling from pytorch/pytorch
 7ddbc47eeb70: Pull complete 
@@ -209,13 +216,15 @@ docker.io/pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 as a concrete instantiation of a blueprint (i.e., the image), which can receive
 modifications that will stay until its removed. The sub-command for spinning up, 
 is <code>run</code>.</p>
-<p>When running an image (and spinning up a container), this can be done either
+<p>When running an image (i.e., spinning up a container), this can be done either
 in interactive mode or not. The former can be used at development time or for 
 manually running experiments and the latter for a production setting, where you 
 simply supply a command to executed within the container, like building model.</p>
 <p>For interactive use, you will need the <code>-it</code> flags, which stand for <code>interactive</code>
-and <code>tty</code> (<strong>T</strong>ele<strong>TY</strong>pewriter or console).</p>
-<p>Starting the just downloaded pytorch image in interactive mode, can be done with 
+and <code>tty</code> (<strong>T</strong>ele<strong>TY</strong>pewriter or console). For the time being, we will stick
+with interactive mode. The non-interactive mode is explained briefly in
+<a href="../dockerfile/#running-the-image-non-interactive">Dockerfile/Running the image (non-interactive)</a></p>
+<p>Starting the just downloaded pytorch image in interactive mode is achieved with 
 this command:</p>
 <pre><code class="language-commandline">docker run -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 </code></pre>
@@ -242,9 +251,9 @@ run this:</p>
 </ul>
 <h3 id="gpu-support">GPU support</h3>
 <p>The image that we downloaded comes with CUDA support, in order to make use of
-an NVIDIA GPU that we have on our host system. But the graphics card does not
+an NVIDIA GPU that we have on our host system. But, the graphics card does not
 automatically get made available to the containers, we need to explicitly state
-that we want the container to have access to it.</p>
+that we want a container to have access to it.</p>
 <p>For docker versions prior to 19.03 (e.g., still used by some NVIDIA IoT devices), 
 you need to supply the following parameter:</p>
 <pre><code>--runtime=nvidia
@@ -263,7 +272,7 @@ between <em>named</em> volumes (partitions created and managed by the docker dae
 simply mapped directories. Usually, it is sufficient to just map local directories
 into your container. That way, you have full control over your data and models on 
 the host system. </p>
-<p>The simplest way to map a directory (or even a single file) is to use the 
+<p>The easist way to map a directory (or even a single file) is to use the 
 <code>-v</code> or <code>--volume</code> option. The alternative is the <code>--mount</code> option, which gives 
 you greater control (but seems like overkill most of the time for a data scientist). 
 For more information, check out the docker documentation on 
@@ -271,7 +280,7 @@ For more information, check out the docker documentation on
 <p>One thing to be aware of is that you can hide directories within the container
 by mapping an external directory onto an existing one, e.g., <code>/usr</code> or <code>/opt</code>.
 This can have unexpected side effects, like missing libraries, executables, data, etc.
-It is worthwhile to checkout the insides of a container first, before mapping
+It is worthwhile to inspect the internals of a container first, before mapping
 volumes willy-nilly.</p>
 <p>The command below maps the <code>/some/where</code> directory of the host to the directory
 <code>/opt/local</code> within the container:</p>
@@ -279,8 +288,8 @@ volumes willy-nilly.</p>
     -v /some/where:/opt/local \ 
     -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 </code></pre>
-<p>Directories need to be absolute paths. If you want to map the current directory
-into the container, then you could use this:</p>
+<p>Please note that directories need to be absolute paths. If you want to map the current 
+directory into the container, then you can make use of the <code>pwd</code> command like this:</p>
 <pre><code class="language-commandline">docker run \
     -v `pwd`:/opt/local \ 
     -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
@@ -310,7 +319,7 @@ that you can use to clean up your system:</p>
 <p>When using non-public registries, you will most likely have to perform a login,
 using the <code>login</code> sub-command (and <code>logout</code> for logging out). By default, docker
 will store your password only base64 encoded and not encrypted. It is therefore
-recommended to use an external credentials store. For more information, see
+recommended using an external credentials store. For more information, see
 the docker documentation on the <a href="https://docs.docker.com/engine/reference/commandline/login/">login command</a>.</p>
               
             </div>

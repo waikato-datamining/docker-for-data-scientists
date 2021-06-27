@@ -152,16 +152,16 @@
                 <h3 id="versioning">Versioning</h3>
 <p>Since docker determines by the hash of a command whether this particular layer needs
 rebuilding, you should, wherever possible, specify the version of the library that
-you are installing. That way, whenever you upgrade a library, that layer will get
-rebuilt. The added bonus is that you will not accidentally rebuild the image with a
-newer version of a library at a later stage that may now be incompatible with the rest 
-(<em>Yeah, I'm looking at you, numpy</em>!).</p>
+you are installing. That way, whenever you upgrade a library, that layer (and all 
+subsequent ones) will get rebuilt. The added bonus is that you will not accidentally 
+rebuild the image with a newer version of a library at a later stage that may now be 
+incompatible with all the others (<em>Yeah, I'm looking at you, numpy</em>!).</p>
 <p>So instead of:</p>
-<pre><code class="language-commandline">RUN python3 -m pip install --no-cache-dir scikit-image &amp;&amp; \
+<pre><code class="language-commandline">RUN python3 -m pip install --no-cache-dir numpy &amp;&amp; \
     ... 
 </code></pre>
 <p>You should do something like this:</p>
-<pre><code class="language-commandline">RUN python3 -m pip install --no-cache-dir scikit-image==0.16.2 &amp;&amp; \
+<pre><code class="language-commandline">RUN python3 -m pip install --no-cache-dir numpy==1.17.4 &amp;&amp; \
     ... 
 </code></pre>
 <p>Of course, when you are cloning directly from a github repository, because you require
@@ -191,7 +191,9 @@ case you will get output similar to this: </p>
 I have no name!@c7355d9a1b59:/$ 
 </code></pre>
 <p>You can rectify this by creating a custom <code>bash.bashrc</code>file using the 
-<a href="https://github.com/waikato-datamining/docker-banner-gen">docker-banner-gen</a> library.</p>
+<a href="https://github.com/waikato-datamining/docker-banner-gen">docker-banner-gen</a> library
+(which not only outputs a nice banner, but also warns you in case you are running
+the container as <code>root</code>).</p>
 <p>This custom file can then be added to your docker image using the following command:</p>
 <pre><code class="language-commandline">COPY bash.bashrc /etc/bash.bashrc
 </code></pre>
@@ -201,14 +203,15 @@ Python packages, you can just use plain <code>pip</code> to install packages fro
 Anaconda in itself is quite a large installation and will increase the overall docker
 image size unnecessarily.</p>
 <h3 id="clean-up-pip">Clean up pip</h3>
-<p>Remove the pip cache to reduce the size of your layer:</p>
+<p>Remove the pip cache to reduce the size of your layer after you installed all your packages:</p>
 <pre><code>rm -Rf /root/.cache/pip
 </code></pre>
-<p>Alternatively, do not cache downloads:</p>
+<p>Alternatively, do not cache downloads when installing a package:</p>
 <pre><code>pip install --no-cache-dir ...
 </code></pre>
 <h3 id="clean-up-apt">Clean up apt</h3>
-<p>After performing installs via apt or apt-get, clean up the cache to reduce the size of your layer:</p>
+<p>After performing installs via <code>apt</code> or <code>apt-get</code>, clean up the cache to reduce the 
+size of your layer:</p>
 <pre><code>apt-get clean &amp;&amp; \
 rm -rf /var/lib/apt/lists/*
 </code></pre>
@@ -220,22 +223,22 @@ framework to a local directory on the host:</p>
 <p><strong>PyTorch</strong></p>
 <ul>
 <li>
-<p>when running the container as <code>root</code></p>
+<p>when running the container as <code>root</code>:</p>
 <p><code>-v /some/where/cache:/root/.torch \</code></p>
 </li>
 <li>
-<p>when running the container as current user</p>
+<p>when running the container as regular user:</p>
 <p><code>-v /some/where/cache:/.torch \</code></p>
 </li>
 </ul>
 <p><strong>Keras</strong></p>
 <ul>
 <li>
-<p>Map cache directory (/root/.keras) when running container as root:</p>
+<p>Map the cache directory (<code>/root/.keras</code>) when running container as <code>root</code>:</p>
 <p><code>-v /some/where/cache:/root/.keras</code></p>
 </li>
 <li>
-<p>Or when running as regular user (/tmp/.keras):</p>
+<p>Or when running as regular user (<code>/tmp/.keras</code>):</p>
 <p><code>-v /some/where/cache:/tmp/.keras</code></p>
 </li>
 </ul>

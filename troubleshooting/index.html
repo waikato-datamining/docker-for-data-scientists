@@ -141,7 +141,7 @@
             <div class="section">
               
                 <h3 id="cuda-not-available-at-build-time">CUDA not available at build time</h3>
-<p>Some deep learning libraries refuse to get installed if there is not CUDA-capable
+<p>Some deep learning libraries refuse to get installed if there is no CUDA-capable
 device available. Of course, you can fix this by defining a <a href="../tips_and_tricks/#default-runtime">default runtime</a>
 in your docker configuration. However, this is not an option when your build 
 system does not even have a GPU.</p>
@@ -151,9 +151,9 @@ system does not even have a GPU.</p>
 </code></pre>
 <h3 id="cuda-architectures-for-pytorch">CUDA architectures for PyTorch</h3>
 <p>If your container needs to build PyTorch (e.g., if you cannot use a PyTorch base image),
-then you can supply the list of NVIDIA architectures via the <code>TORCH_CUDA_ARCH_LIST</code>
-environment variable. By using <code>ARG</code>, you can define a default valye and still
-override it at build time via the <code>--build-arg</code> option:</p>
+then you can supply the list of <a href="https://docs.nvidia.com/deploy/cuda-compatibility/index.html#support-hardware__table-hardware-support">NVIDIA architectures</a>
+via the <code>TORCH_CUDA_ARCH_LIST</code> environment variable. By using <code>ARG</code>, you can define a 
+default value and still override it at build time via the <code>--build-arg</code> option:</p>
 <pre><code>ARG TORCH_CUDA_ARCH_LIST=&quot;Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing&quot;
 ENV TORCH_CUDA_ARCH_LIST=&quot;${TORCH_CUDA_ARCH_LIST}&quot;
 </code></pre>
@@ -184,7 +184,7 @@ Geographic area:
 <pre><code class="language-commandline">ENV DEBIAN_FRONTEND noninteractive
 </code></pre>
 <h3 id="missing-shared-library">Missing shared library</h3>
-<p>A common error that you will encounter is installations via <code>pip</code> failing to a shared
+<p>A common error that you will encounter is installations via <code>pip</code> failing due to a shared
 library not being present, similar to this:</p>
 <pre><code>error: XYZ.so: cannot open shared object file: No such file or directory
 </code></pre>

@@ -144,23 +144,21 @@ can recommend Sonatype's Nexus: </p>
 (<a href="https://www.sonatype.com/products/repository-oss-vs-pro-features">OSS vs Pro</a>).</p>
 <p>The biggest advantage of having a local Nexus instance is, that you can use it
 as a <strong>proxy</strong> for docker hub. That way, you can pull base images from your local network
-rather than having to pull them from a distant server. This makes rebuilding images
+rather than having to pull them from a distant server. Using a proxy makes rebuilding images
 very fast, especially if you just removed all images from your machine or moved to a 
 new machine.</p>
 <h3 id="example">Example</h3>
-<p>Let's say, your registry <code>myregistry.example.com</code> is available via https (port 443),
+<p>Assuming your registry <code>myregistry.example.com</code> is available via https (port 443),
 then you can change the <code>FROM</code> directive in your <code>Dockerfile</code> from:</p>
 <pre><code>ARG PYTORCH=&quot;1.6.0&quot;
 ARG CUDA=&quot;10.1&quot;
 ARG CUDNN=&quot;7&quot;
-
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 </code></pre>
 <p>To this:</p>
 <pre><code>ARG PYTORCH=&quot;1.6.0&quot;
 ARG CUDA=&quot;10.1&quot;
 ARG CUDNN=&quot;7&quot;
-
 ARG DOCKER_REGISTRY=myregistry.example.com:443/
 FROM ${DOCKER_REGISTRY}pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 </code></pre>
