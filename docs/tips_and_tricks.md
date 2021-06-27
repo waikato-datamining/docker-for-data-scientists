@@ -10,7 +10,7 @@ revert to using docker to remove them again:
 * the following docker command will map the current directory to `/opt/local`:
 
     ```
-    docker run -v `pwd`:/opt/local -it public.aml-repo.cms.waikato.ac.nz:443/bash:5.1.8
+    docker run -v `pwd`:/opt/local -it bash:5.1.8
     ```
   
 * change into `/opt/local` and remove all files/dirs (or just the files that need removing):
@@ -32,8 +32,8 @@ apt-get update
 
 # Switch default Python version
 
-If your base distro has an older version of Python and you do not want to sprinkle that
-specific version throughout your `Dockerfile`, then you can use `update-alternatives`
+If your base distro has an older version of Python and you do not want to sprinkle the
+specific newer version throughout your `Dockerfile`, then you can use `update-alternatives`
 on Debian systems to change the default.
 
 The following commands switch from Python 3.5 to Python 3.6 for the `python3` executable
@@ -57,14 +57,14 @@ running docker in interactive mode via ssh sessions. If such an ssh session shou
 accidentally close (e.g., internet connection lost, laptop closed), then the
 docker command would terminate as well.
 
-On the remote host, **start** the `screen` command before your docker command (you can
-run multiple `screen` instances as well) and skip the screen with the licenses etc using
-`Enter` or `Space`. Now you can start up the actual command. If you want to run multiple 
-screen sessions on the same host, then you should name them using the `-S sessionname` 
-option.
+On the remote host, **start** the `screen` command before you launch your docker command 
+(you can run multiple `screen` instances as well) and skip the screen with the licenses 
+etc using `Enter` or `Space`. Now you can start up the actual command. If you want to 
+run multiple screen sessions on the same host, then you should name them using the 
+`-S sessionname` option to easily distinguish them.
 
-For **detaching**, use the `CTRL+A+D` key combination. This will leave your process running
-in the background and you can close the remote connection.
+For **detaching** a session, use the `CTRL+A+D` key combination. This will leave your 
+process running in the background and you can close the remote connection.
 
 In order to **reconnect**, simply ssh into the remote host and run `screen -r`. If there
 is only one screen session running, then it will automatically reconnect. Otherwise, it
@@ -72,16 +72,16 @@ will output a list of available sessions. Supply the name of the session that yo
 reattach to the `-r` option.
 
 You can **exit** a screen session by either typing `exit` or using `CTRL+D` (just like
-with `bash`).
+with a `bash` shell).
 
 
 # Default runtime
 
-Instead of always having to type `--runtime=nvidia` or `--gpus=all`, you simply define
+Instead of always having to type `--runtime=nvidia` or `--gpus=all`, you can simply define
 the *default runtime* to use with your docker commands ([source](https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html)):
 
-* edit the `/etc/docker/daemon.json` file
-* insert key `default-runtime` with value `nvidia` so that it looks something like this:
+* edit the `/etc/docker/daemon.json` file as `root` user
+* insert the key `default-runtime` with value `nvidia` so that it looks something like this:
   
 ```json
 {
@@ -96,6 +96,7 @@ the *default runtime* to use with your docker commands ([source](https://docs.nv
 ```
 
 * save the file
+* restart the docker daemon (e.g., `sudo systemctl restart docker`)
 
 
 # Thorough clean up

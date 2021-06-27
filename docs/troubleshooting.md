@@ -1,6 +1,6 @@
 # CUDA not available at build time
 
-Some deep learning libraries refuse to get installed if there is not CUDA-capable
+Some deep learning libraries refuse to get installed if there is no CUDA-capable
 device available. Of course, you can fix this by defining a [default runtime](tips_and_tricks.md#default-runtime)
 in your docker configuration. However, this is not an option when your build 
 system does not even have a GPU.
@@ -15,9 +15,9 @@ ENV FORCE_CUDA="1"
 # CUDA architectures for PyTorch
 
 If your container needs to build PyTorch (e.g., if you cannot use a PyTorch base image),
-then you can supply the list of NVIDIA architectures via the `TORCH_CUDA_ARCH_LIST`
-environment variable. By using `ARG`, you can define a default valye and still
-override it at build time via the `--build-arg` option:
+then you can supply the list of [NVIDIA architectures](https://docs.nvidia.com/deploy/cuda-compatibility/index.html#support-hardware__table-hardware-support)
+via the `TORCH_CUDA_ARCH_LIST` environment variable. By using `ARG`, you can define a 
+default value and still override it at build time via the `--build-arg` option:
 
 ```
 ARG TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
@@ -67,7 +67,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Missing shared library
 
-A common error that you will encounter is installations via `pip` failing to a shared
+A common error that you will encounter is installations via `pip` failing due to a shared
 library not being present, similar to this:
 
 ```

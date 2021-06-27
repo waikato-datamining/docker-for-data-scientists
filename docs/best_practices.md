@@ -2,22 +2,22 @@
 
 Since docker determines by the hash of a command whether this particular layer needs
 rebuilding, you should, wherever possible, specify the version of the library that
-you are installing. That way, whenever you upgrade a library, that layer will get
-rebuilt. The added bonus is that you will not accidentally rebuild the image with a
-newer version of a library at a later stage that may now be incompatible with the rest 
-(*Yeah, I'm looking at you, numpy*!).
+you are installing. That way, whenever you upgrade a library, that layer (and all 
+subsequent ones) will get rebuilt. The added bonus is that you will not accidentally 
+rebuild the image with a newer version of a library at a later stage that may now be 
+incompatible with all the others (*Yeah, I'm looking at you, numpy*!).
 
 So instead of:
 
 ```commandline
-RUN python3 -m pip install --no-cache-dir scikit-image && \
+RUN python3 -m pip install --no-cache-dir numpy && \
     ... 
 ```
 
 You should do something like this:
 
 ```commandline
-RUN python3 -m pip install --no-cache-dir scikit-image==0.16.2 && \
+RUN python3 -m pip install --no-cache-dir numpy==1.17.4 && \
     ... 
 ```
 
@@ -63,7 +63,9 @@ I have no name!@c7355d9a1b59:/$
 ```
 
 You can rectify this by creating a custom `bash.bashrc`file using the 
-[docker-banner-gen](https://github.com/waikato-datamining/docker-banner-gen) library.
+[docker-banner-gen](https://github.com/waikato-datamining/docker-banner-gen) library
+(which not only outputs a nice banner, but also warns you in case you are running
+the container as `root`).
 
 This custom file can then be added to your docker image using the following command:
 
@@ -82,13 +84,13 @@ image size unnecessarily.
 
 # Clean up pip
 
-Remove the pip cache to reduce the size of your layer:
+Remove the pip cache to reduce the size of your layer after you installed all your packages:
 
 ```
 rm -Rf /root/.cache/pip
 ```
 
-Alternatively, do not cache downloads:
+Alternatively, do not cache downloads when installing a package:
 
 ```
 pip install --no-cache-dir ...
@@ -97,7 +99,8 @@ pip install --no-cache-dir ...
 
 # Clean up apt
 
-After performing installs via apt or apt-get, clean up the cache to reduce the size of your layer:
+After performing installs via `apt` or `apt-get`, clean up the cache to reduce the 
+size of your layer:
 
 ```
 apt-get clean && \
@@ -113,13 +116,13 @@ framework to a local directory on the host:
 
 **PyTorch**
 
-* when running the container as `root`
+* when running the container as `root`:
 
     ```
     -v /some/where/cache:/root/.torch \
     ```
 
-* when running the container as current user
+* when running the container as regular user:
 
     ```
     -v /some/where/cache:/.torch \
@@ -127,13 +130,13 @@ framework to a local directory on the host:
     
 **Keras**
 
-* Map cache directory (/root/.keras) when running container as root:
+* Map the cache directory (`/root/.keras`) when running container as `root`:
 
     ```
     -v /some/where/cache:/root/.keras
     ```
 
-* Or when running as regular user (/tmp/.keras):
+* Or when running as regular user (`/tmp/.keras`):
 
     ```
     -v /some/where/cache:/tmp/.keras

@@ -1,7 +1,7 @@
 A lot of open-source deep learning projects will supply docker base images already
 on [docker hub](https://hub.docker.com/), which will make your life much easier.
-By using these base images, you will only need to install any additional libraries that
-your project requires.
+By using these base images, you will only need to install additional libraries that
+your own project requires.
 
 Here is a (non-exhaustive) list of repositories on docker hub: 
 

@@ -3,16 +3,23 @@ command-line tool. With this subset you will be able to use already existing ima
 spinning up containers and being able to run code from the host machine within 
 containers.
 
+# Installation
+
+If you do not have docker installed yet, then please do so. See the 
+[official documentation](https://docs.docker.com/engine/install/) for your respective
+operating system flavor.
+
 
 # Pulling
+
 Before you can use an image, you either need to build it locally or *pull* it from a 
-registry. This is, obviously, done by the `pull` sub-command. The docker hub allows
+registry. The latter is, obviously, done by the `pull` sub-command. The docker hub allows
 you to quickly copy the pull command for a specific image (see highlighted area in
 image below).
 
 ![Docker](img/docker_hub_pytorch.png)
 
-The URL that you can use with docker conists of these parts:
+The URL that you can use with docker consists of these parts:
 ```
 [registry-url/]namespace/image[:tag]
 ```
@@ -51,7 +58,7 @@ b398e882f414: Waiting
 6cac8a6cf141: Waiting 
 ```
 
-And the finished pull like this:
+The output from the finished pull will look like this:
 
 ```commandline
 metal:[103]~>docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
@@ -82,15 +89,17 @@ as a concrete instantiation of a blueprint (i.e., the image), which can receive
 modifications that will stay until its removed. The sub-command for spinning up, 
 is `run`.
 
-When running an image (and spinning up a container), this can be done either
+When running an image (i.e., spinning up a container), this can be done either
 in interactive mode or not. The former can be used at development time or for 
 manually running experiments and the latter for a production setting, where you 
 simply supply a command to executed within the container, like building model.
 
 For interactive use, you will need the `-it` flags, which stand for `interactive`
-and `tty` (**T**ele**TY**pewriter or console).
+and `tty` (**T**ele**TY**pewriter or console). For the time being, we will stick
+with interactive mode. The non-interactive mode is explained briefly in
+[Dockerfile/Running the image (non-interactive)](dockerfile.md#running-the-image-non-interactive)
 
-Starting the just downloaded pytorch image in interactive mode, can be done with 
+Starting the just downloaded pytorch image in interactive mode is achieved with 
 this command:
 
 ```commandline
@@ -132,9 +141,9 @@ Other useful actions for the `container` sub-command are:
 # GPU support
 
 The image that we downloaded comes with CUDA support, in order to make use of
-an NVIDIA GPU that we have on our host system. But the graphics card does not
+an NVIDIA GPU that we have on our host system. But, the graphics card does not
 automatically get made available to the containers, we need to explicitly state
-that we want the container to have access to it.
+that we want a container to have access to it.
 
 For docker versions prior to 19.03 (e.g., still used by some NVIDIA IoT devices), 
 you need to supply the following parameter:
@@ -166,7 +175,7 @@ simply mapped directories. Usually, it is sufficient to just map local directori
 into your container. That way, you have full control over your data and models on 
 the host system. 
 
-The simplest way to map a directory (or even a single file) is to use the 
+The easist way to map a directory (or even a single file) is to use the 
 `-v` or `--volume` option. The alternative is the `--mount` option, which gives 
 you greater control (but seems like overkill most of the time for a data scientist). 
 For more information, check out the docker documentation on 
@@ -175,7 +184,7 @@ For more information, check out the docker documentation on
 One thing to be aware of is that you can hide directories within the container
 by mapping an external directory onto an existing one, e.g., `/usr` or `/opt`.
 This can have unexpected side effects, like missing libraries, executables, data, etc.
-It is worthwhile to checkout the insides of a container first, before mapping
+It is worthwhile to inspect the internals of a container first, before mapping
 volumes willy-nilly.
 
 The command below maps the `/some/where` directory of the host to the directory
@@ -187,8 +196,8 @@ docker run \
     -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 ```
 
-Directories need to be absolute paths. If you want to map the current directory
-into the container, then you could use this:
+Please note that directories need to be absolute paths. If you want to map the current 
+directory into the container, then you can make use of the `pwd` command like this:
 
 ```commandline
 docker run \
@@ -234,5 +243,5 @@ that you can use to clean up your system:
 When using non-public registries, you will most likely have to perform a login,
 using the `login` sub-command (and `logout` for logging out). By default, docker
 will store your password only base64 encoded and not encrypted. It is therefore
-recommended to use an external credentials store. For more information, see
+recommended using an external credentials store. For more information, see
 the docker documentation on the [login command](https://docs.docker.com/engine/reference/commandline/login/).

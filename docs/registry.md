@@ -13,20 +13,19 @@ can recommend Sonatype's Nexus:
 
 The biggest advantage of having a local Nexus instance is, that you can use it
 as a **proxy** for docker hub. That way, you can pull base images from your local network
-rather than having to pull them from a distant server. This makes rebuilding images
+rather than having to pull them from a distant server. Using a proxy makes rebuilding images
 very fast, especially if you just removed all images from your machine or moved to a 
 new machine.
 
 # Example
 
-Let's say, your registry `myregistry.example.com` is available via https (port 443),
+Assuming your registry `myregistry.example.com` is available via https (port 443),
 then you can change the `FROM` directive in your `Dockerfile` from:
 
 ```
 ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"
-
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 ```
 
@@ -36,7 +35,6 @@ To this:
 ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"
-
 ARG DOCKER_REGISTRY=myregistry.example.com:443/
 FROM ${DOCKER_REGISTRY}pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 ```

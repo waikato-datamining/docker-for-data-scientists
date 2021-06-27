@@ -5,17 +5,20 @@ more logic within the image itself to integrate it in your existing processes.
 In this section, you will learn the basic building blocks for generating docker images.
 By convention the instructions for a docker image are stored in a text file called 
 `Dockerfile` ([full reference](https://docs.docker.com/engine/reference/builder/#from)).
-This is not set in stone, so you can name it anything you like. But it is usually best
-to stick with the conventions that a community expects (just like with Python and 
-[PEP-8](https://www.python.org/dev/peps/pep-0008/)). 
+This is not set in stone, so you can name it anything you like. However, it is usually best
+to stick with the conventions that a community expects (just like with 
+[PEP-8](https://www.python.org/dev/peps/pep-0008/) in the Python community). 
 
 In order to make this section not just a *hello world* example, we will build an image
-that we can use for training and evaluating a PyTorch model on the CIFAR10 challenge.
-The Python script will also output a Matplotlib chart with the accuracy of the classes.
+that we can use for training and evaluating a PyTorch model on the 
+[CIFAR10 challenge](https://www.cs.toronto.edu/~kriz/cifar.html).
+The Python script will also output a Matplotlib bar chart, displaying the accuracies of 
+the classes.
 
 Each of the following sections will introduce a docker command that will make up the 
-final docker script for creating the image. Of course, we will also build and use
-the image, as well as push it out to make it publicly available.
+final [docker script](files/pytorch-cifar10/Dockerfile.txt) for creating the image. 
+Of course, we will also build and use the image, as well as push it out to make it 
+publicly available.
 
 
 # Comments
@@ -29,7 +32,8 @@ like with bash programming, are line comments and start with `#`.
 # FROM
 
 Docker images (just like ogres) are like onions, consisting of multiple layers. This makes
-it easy to add more functionality to existing images: reusing rather than recreating.
+it easy to add more functionality to existing images: reusing is better than recreating.
+This approach also preserves a lot of space.
 
 The first (non-comment) statement in your Dockerfile needs to be the [FROM](https://docs.docker.com/engine/reference/builder/#from) 
 statement, which tells docker the particular base image you want to build on top.
@@ -43,9 +47,10 @@ FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 
 # ARG
 
-In some cases, your `Dockerfile` script might need to be parametrized for the build from the outside. 
-For defining such a build parameter (with a default value), you can use the [ARG](https://docs.docker.com/engine/reference/builder/#arg) 
-instruction. Using the `--build-arg` command-line you can override the default value. 
+In some cases, your `Dockerfile` script might need to be parametrized for the build from 
+the outside. For defining such a build parameter (with a default value), you can use the 
+[ARG](https://docs.docker.com/engine/reference/builder/#arg) instruction. Using the 
+`--build-arg` command-line you can override the default value. 
 
 The `ARG` syntax is simple:
 
@@ -56,16 +61,15 @@ ARG key=value
 You can also use `ARG` to make your `FROM` statement easier to read, but be aware of the 
 [interaction between FROM and ARG](https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact).
 
-Therefore, we can pull out the version numbers from our original `FROM` statement and 
+Using `ARG`, we can pull out the version numbers from our original `FROM` statement and 
 put them in variables. Variables can be used in other statements via `${...}`.
 
-Here is the *readable* `FROM` statement:
+Here is the *human-readable* `FROM` statement:
 
 ```
 ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"
-
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 ```
 
@@ -86,7 +90,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ```
 
 The docker documentation on the [ENV](https://docs.docker.com/engine/reference/builder/#env)
-command lists alternative ways of specifying such an environment variable.
+command lists alternative ways of specifying such an environment variable, for limiting
+the scope.
 
 In the [Interactive timezone prompt section](troubleshooting.md#interactive-timezone-prompt)
 section, you read why you might want to use this variable.
@@ -105,14 +110,14 @@ For installing matplotlib, which is not part of our base image, we can use:
 RUN pip --no-cache install matplotlib
 ```
 
-You will notice the `--no-cache` flag, which is not something you would normally see.
+You will notice the `--no-cache` flag, which is not something you would normally use.
 In order to avoid downloading the same library over and over again, pip caches them 
-by default. But this is not necessary for a docker image and just takes up more space. 
+by default. This is not necessary for a docker image and just takes up more space. 
 But before you argue that you could just remove unwanted files at the end of your 
 docker image then you do not take into account that docker works in layers: 
-every command is basically a layer. Though a subsequent layer may remove file (and 
-you will not see them in the final image), they are still present in the layer got 
-introduced in.
+every command is basically a layer. Though a subsequent layer may remove files (and 
+you will not see them in the final image), they are still present in the layer that 
+they got introduced in.
 
 Long story short: either always clean up within the same layer or 
 avoid generating temporary files altogether.
@@ -126,11 +131,11 @@ Check out the following [Best practices](best_practices.md) sections:
 # COPY
 
 Quite often, you will end up just needing little scripts within a docker image
-to do the work you (since all the libraries get installed via `apt-get` or `pip`).
+to do the work for you (since all the libraries get installed via `apt-get` or `pip`).
 For copying files or directories, you can use the [COPY](https://docs.docker.com/engine/reference/builder/#copy) 
 command. 
 
-One thing that have not talked about yet is the **docker context**. The context 
+One thing that we have not talked about yet is the **docker context**. This context 
 includes all the files and directories that are on the same level as the `Dockerfile`. 
 The `COPY` command can only use files and directories that are within this context, 
 but not outside (e.g., going up in the directory structure).
@@ -176,8 +181,8 @@ python /opt/test/test.py "$@"
 # WORKDIR
 
 With the [WOKRDIR](https://docs.docker.com/engine/reference/builder/#workdir) command,
-you change the current working directory within your docker script. If the directory
-does not exist yet, it will get automatically created. This eliminates the need
+you can change the current working directory within your docker script. If the directory
+does not exist yet, it will get created automatically. This eliminates the need
 to use `mkdir` commands. In our case, we can just use the command to make the
 docker container automatically start the prompt in the directory of our Python script
 (`/opt/test`) when used in interactive mode:
@@ -196,15 +201,15 @@ WORKDIR /opt/test
 # Building the image
 
 With our [Dockerfile](files/pytorch-cifar10/Dockerfile.txt) now finally complete, we
-can now finally kick off a build. After changing into the directory containing
+are ready to kick off a build. After changing into the directory containing
 the `Dockerfile`, you can use the `build` sub-command to perform the build.
-Rather than using a hash, we can give it a name via the `-t` option:
+Rather than using a hash, we can give it a name via the `-t` option (*tagging* it):
 
 ```commandline
 docker build -t pytorchtest .
 ```
 
-You should
+You should see similar output like the one below:
 
 ```
 Sending build context to Docker daemon  260.6kB
@@ -255,7 +260,7 @@ With the image successfully built, you can now use it. For this you need to empl
 docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
 ```
 
-Once the prompt appears, you can execute our `test.py` script:
+Once the prompt appears, you can execute the `test.py` script:
 
 ```
 root@5e2245aa020a:/opt/test# python test.py 
@@ -297,26 +302,26 @@ Accuracy of truck : 63 %
 170500096it [01:16, 2240182.93it/s] 
 ```
 
-At the end, the script will generate plot and save it as `/opt/test/figure.png`:
+At the end, the script will generate a bar chart plot and save it as `/opt/local/figure.png`:
 
 ![Generated figure](files/pytorch-cifar10/figure.png)
 
-If you copy the generated figure to `/opt/local` (our connection with the outside world), 
-you will notice that the owner is `root` and you will not necessarily be able to remove 
-it from outside the container. One approach is to change the owner using `chown`, but 
-that can become tedious. Instead, see the following [Best practices](best_practices.md) 
-section on how to best address this:
+If you look at the permissions of the generated image, you will notice that the owner 
+is `root`. Depending on your permissions on the host system, you might not be able to 
+remove it from outside the container. One approach is to change the owner using `chown` 
+(from within the container), but that can become tedious. Instead, see the following 
+[Best practices](best_practices.md) section on how to best address this:
 
 * [Launch container as regular user](best_practices.md#launch-container-as-regular-user)
 
 
-**Congratulations, you have assembled and built your first docker image!** 
+**Congratulations, you have assembled, built and run your first docker image!** 
 
 
 # Running the image (non-interactive)
 
-Of course, you do not have to run the image interactively at all. After your initial
-development of docker image and code, you can then use it in your production system.
+Of course, you do not have to run the image interactively at all. After the initial
+development of your docker image and code, you can then use it in your production system.
 
 For running it in non-interactive mode, simply remove the `-it` flags and
 append the command that you want to run. In our case, this is:
@@ -331,25 +336,21 @@ The full command-line therefore looks like:
 docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
 ```
 
-Of course, running our test image in non-interactive mode bars us from accessing the 
-generated graph image. You will want to modify your script to [parse command-line
-arguments](https://docs.python.org/3.7/library/argparse.html) for flexibility (rather than hard-coded paths).
-
 
 # Optimizing an image
 
 As a final note, you should consider revisiting your `Dockerfile` once you have
 verified that everything is working and optimize it. Optimizing entails: 
 
-* Combine apt-get commands in a single `RUN` and remove caches at the end
-* Combine pip commands in a single `RUN` run and make sure that pip cache is removed
+* Combine `apt-get` commands in a single `RUN` and remove caches at the end
+* Combine `pip` commands in a single `RUN` run and make sure that the pip cache is removed
 
 
 # Pushing the image
 
 Once you are happy with your image and you want to use it on another machine, you will
 need to **push** it out to a registry. Otherwise, you will not be able to use the image
-on another machine without having to re-build it (kind of defeating the purpose of reusable
+on another machine without having to re-build it (therefore defeating the purpose of reusable
 images).
 
 For pushing an image, there are typically two sub-commands that come into play:
@@ -359,7 +360,7 @@ For pushing an image, there are typically two sub-commands that come into play:
 
 When building images locally, as we did above, the name is fairly irrelevant (`pytorchtest`). 
 However, when pushing an image to a registry (docker hub or [your own](registry.md)), then
-naming (aka as *tagging*) an image requires a bit more thought. Assuming that you have
+naming (aka *tagging*) an image requires a bit more thought. Assuming that you have
 a user account on docker hub called `user1234`, then you could name your image like this:
 
 ```
