@@ -95,10 +95,16 @@
     <li class="toctree-l2"><a href="#building-the-image">Building the image</a></li>
     
 
-    <li class="toctree-l2"><a href="#running-the-image">Running the image</a></li>
+    <li class="toctree-l2"><a href="#running-the-image-interactive">Running the image (interactive)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-the-image-non-interactive">Running the image (non-interactive)</a></li>
     
 
     <li class="toctree-l2"><a href="#optimizing-an-image">Optimizing an image</a></li>
+    
+
+    <li class="toctree-l2"><a href="#pushing-the-image">Pushing the image</a></li>
     
 
     </ul>
@@ -338,7 +344,7 @@ Step 8/8 : COPY test.py /opt/test/test.py
 Successfully built ed55c4fb8e62
 Successfully tagged pytorchtest:latest
 </code></pre>
-<h3 id="running-the-image">Running the image</h3>
+<h3 id="running-the-image-interactive">Running the image (interactive)</h3>
 <p>With the image successfully built, you can now use it. For this you need to employ the
 <a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
 <pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
@@ -390,6 +396,19 @@ section on how to best address this:</p>
 <li><a href="../best_practices/#launch-container-as-regular-user">Launch container as regular user</a></li>
 </ul>
 <p><strong>Congratulations, you have assembled and built your first docker image!</strong> </p>
+<h3 id="running-the-image-non-interactive">Running the image (non-interactive)</h3>
+<p>Of course, you do not have to run the image interactively at all. After your initial
+development of docker image and code, you can then use it in your production system.</p>
+<p>For running it in non-interactive mode, simply remove the <code>-it</code> flags and
+append the command that you want to run. In our case, this is:</p>
+<pre><code class="language-commandline">python3 /opt/test/test.py
+</code></pre>
+<p>The full command-line therefore looks like:</p>
+<pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
+</code></pre>
+<p>Of course, running our test image in non-interactive mode bars us from accessing the 
+generated graph image. You will want to modify your script to <a href="https://docs.python.org/3.7/library/argparse.html">parse command-line
+arguments</a> for flexibility (rather than hard-coded paths).</p>
 <h3 id="optimizing-an-image">Optimizing an image</h3>
 <p>As a final note, you should consider revisiting your <code>Dockerfile</code> once you have
 verified that everything is working and optimize it. Optimizing entails: </p>
@@ -397,6 +416,39 @@ verified that everything is working and optimize it. Optimizing entails: </p>
 <li>Combine apt-get commands in a single <code>RUN</code> and remove caches at the end</li>
 <li>Combine pip commands in a single <code>RUN</code> run and make sure that pip cache is removed</li>
 </ul>
+<h3 id="pushing-the-image">Pushing the image</h3>
+<p>Once you are happy with your image and you want to use it on another machine, you will
+need to <strong>push</strong> it out to a registry. Otherwise, you will not be able to use the image
+on another machine without having to re-build it (kind of defeating the purpose of reusable
+images).</p>
+<p>For pushing an image, there are typically two sub-commands that come into play:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/tag/">tag</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/push/">push</a></li>
+</ul>
+<p>When building images locally, as we did above, the name is fairly irrelevant (<code>pytorchtest</code>). 
+However, when pushing an image to a registry (docker hub or <a href="../registry/">your own</a>), then
+naming (aka as <em>tagging</em>) an image requires a bit more thought. Assuming that you have
+a user account on docker hub called <code>user1234</code>, then you could name your image like this:</p>
+<pre><code>user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+</code></pre>
+<p>That way, you still keep using your local image name <code>pytorchtest</code>, but you also
+include the version of PyTorch, CUDA and cuDNN. The <code>0.0.1</code> at the end, is the actual
+version of your image.</p>
+<p>In order to push the image <code>pytorchtest</code> out to docker hub, you first need to give it
+the proper tag:</p>
+<pre><code class="language-commandline">docker tag \
+    pytorchtest \
+    user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+</code></pre>
+<p>And for pushing it out, use this command:</p>
+<pre><code>docker push user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+</code></pre>
+<p>Once the push is complete, you will find this image at the following URL:</p>
+<pre><code>https://hub.docker.com/u/user1234
+</code></pre>
+<p>Depending on the number of images you have, you may have to search for the
+<code>pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1</code> tag.</p>
               
             </div>
           </div>
