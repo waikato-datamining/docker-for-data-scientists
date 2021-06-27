@@ -41,3 +41,7 @@ registry/proxy. In that case, have a look at the following sections:
 
 * [Automation](automation.md)
 * [Registry](registry.md)
+
+Finally, if you need to orchestrate multiple docker images, you can have a look at:
+
+* [docker compose](https://docs.docker.com/compose/)
