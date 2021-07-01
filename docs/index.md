@@ -17,7 +17,7 @@ can do a lot more!), but merely for getting you started on your journey.
 **Disclaimer:** This introduction was written using a Linux host system. If you are using
 Mac OSX or WSL under Windows, your mileage may vary...
 
-# Topics
+# Sections
 
 To get started with docker, you should look at the following sections:
 
