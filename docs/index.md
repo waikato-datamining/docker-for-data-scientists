@@ -17,6 +17,8 @@ can do a lot more!), but merely for getting you started on your journey.
 **Disclaimer:** This introduction was written using a Linux host system. If you are using
 Mac OSX or WSL under Windows, your mileage may vary...
 
+# Topics
+
 To get started with docker, you should look at the following sections:
 
 * [Basics](basics.md) - explains the most common operations that you will need to know 
@@ -44,3 +46,8 @@ registry/proxy. In that case, have a look at the following sections:
 Finally, if you need to orchestrate multiple docker images, you can have a look at:
 
 * [docker compose](https://docs.docker.com/compose/)
+
+
+# About the content
+
+This page was generated using [mkdocs](https://www.mkdocs.org/). The source code itself is hosted at [github.com/waikato-datamining/docker-for-data-scientists](https://github.com/waikato-datamining/docker-for-data-scientists) and licensed under [CC-BY-SA 4.0](https://github.com/waikato-datamining/docker-for-data-scientists/blob/main/LICENSE).
