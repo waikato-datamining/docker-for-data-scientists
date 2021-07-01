@@ -205,14 +205,16 @@ reattach to the <code>-r</code> option.</p>
 with a <code>bash</code> shell).</p>
 <p>If you need to increase the scrollback buffer, let us say to 100,000 lines, then you can do it</p>
 <ul>
-<li>in the current session as follows:</li>
-</ul>
+<li>
+<p>in the current session as follows:</p>
 <p><code>CTRL A : &lt;Enter&gt;
-  scrollback 100000&lt;Enter&gt;</code></p>
-<ul>
-<li>for all new sessions by adding the following line in your <code>$HOME/.screenrc</code> config file:</li>
-</ul>
+scrollback 100000&lt;Enter&gt;</code></p>
+</li>
+<li>
+<p>for all new sessions by adding the following line in your <code>$HOME/.screenrc</code> config file:</p>
 <p><code>defscrollback 100000</code></p>
+</li>
+</ul>
 <h3 id="default-runtime">Default runtime</h3>
 <p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you can simply define
 the <em>default runtime</em> to use with your docker commands (<a href="https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html">source</a>):</p>
