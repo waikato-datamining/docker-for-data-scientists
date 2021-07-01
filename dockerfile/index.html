@@ -195,7 +195,7 @@ like with bash programming, are line comments and start with <code>#</code>.</p>
 it easy to add more functionality to existing images: reusing is better than recreating.
 This approach also preserves a lot of space.</p>
 <p>The first (non-comment) statement in your Dockerfile needs to be the <a href="https://docs.docker.com/engine/reference/builder/#from">FROM</a> 
-statement, which tells docker the particular base image you want to build on top.</p>
+statement, which tells docker the particular base image on top of which you want to build.</p>
 <p>Reusing the image from our <code>pull</code> command in the <a href="../basics/">Basics</a> section, we get the
 following initial statement:</p>
 <pre><code class="language-commandline">FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
