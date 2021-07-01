@@ -8,7 +8,7 @@ framework, knows that getting the combination of [CUDA](https://developer.nvidia
 [cuDNN](https://developer.nvidia.com/cudnn), deep learning framework and other 
 libraries right is a frustrating exercise. With docker you still have to go through 
 the pain of figuring out the right combination, but... And it is a **BIG** but! Once you 
-have this blueprint called *docker image*, you can use it other machines as well; you 
+have this blueprint called a *docker image*, you can use it on other machines as well; you 
 will be up and running in seconds.
 
 This is by no means supposed to be an exhaustive introduction to docker (docker 
@@ -36,7 +36,7 @@ things that can make your life easier. Therefore do not forget to have a look at
 
 * [Tips & Tricks](tips_and_tricks.md)
 
-Once you got a handle on things, and you are getting tired on manually building images, 
+Once you get a handle on things, and you are getting tired of manually building images, 
 you might want to look into automating your builds and maybe also run your own 
 registry/proxy. In that case, have a look at the following sections:
 
