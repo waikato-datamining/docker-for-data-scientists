@@ -78,16 +78,16 @@ If you need to increase the scrollback buffer, let us say to 100,000 lines, then
 
 * in the current session as follows:
 
-  ```
-  CTRL A : <Enter>
-  scrollback 100000<Enter>
-  ```
+    ```
+    CTRL A : <Enter>
+    scrollback 100000<Enter>
+    ```
 
 * for all new sessions by adding the following line in your `$HOME/.screenrc` config file:
 
-  ```
-  defscrollback 100000
-  ```
+    ```
+    defscrollback 100000
+    ```
 
 
 # Default runtime
