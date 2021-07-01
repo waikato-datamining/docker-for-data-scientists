@@ -36,7 +36,7 @@ it easy to add more functionality to existing images: reusing is better than rec
 This approach also preserves a lot of space.
 
 The first (non-comment) statement in your Dockerfile needs to be the [FROM](https://docs.docker.com/engine/reference/builder/#from) 
-statement, which tells docker the particular base image you want to build on top.
+statement, which tells docker the particular base image on top of which you want to build.
 
 Reusing the image from our `pull` command in the [Basics](basics.md) section, we get the
 following initial statement:

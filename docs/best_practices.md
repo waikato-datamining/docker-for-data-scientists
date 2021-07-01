@@ -84,7 +84,7 @@ image size unnecessarily.
 
 # Clean up pip
 
-Remove the pip cache to reduce the size of your layer after you installed all your packages:
+Remove the pip cache to reduce the size of your layer after you have installed all your packages:
 
 ```
 rm -Rf /root/.cache/pip

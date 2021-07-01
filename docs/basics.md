@@ -7,7 +7,7 @@ containers.
 
 If you do not have docker installed yet, then please do so. See the 
 [official documentation](https://docs.docker.com/engine/install/) for your respective
-operating system flavor.
+operating system flavour.
 
 
 # Pulling
@@ -92,7 +92,7 @@ is `run`.
 When running an image (i.e., spinning up a container), this can be done either
 in interactive mode or not. The former can be used at development time or for 
 manually running experiments and the latter for a production setting, where you 
-simply supply a command to executed within the container, like building model.
+simply supply a command to executed within the container, like building a model.
 
 For interactive use, you will need the `-it` flags, which stand for `interactive`
 and `tty` (**T**ele**TY**pewriter or console). For the time being, we will stick
