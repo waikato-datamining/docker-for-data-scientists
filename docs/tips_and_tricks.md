@@ -113,6 +113,14 @@ the *default runtime* to use with your docker commands ([source](https://docs.nv
 * save the file
 * restart the docker daemon (e.g., `sudo systemctl restart docker`)
 
+# Complete rebuild of image
+
+Especially during development of a docker image, it can happen that library versions have not been added to the `Dockerfile` just yet. Since docker hashes the command-lines, it will not rebuild a layer (and subsequent ones) if the hash does not change. If you do not want to clear your complete system (due to time constraints or capped internet usage), then you can force docker to build the image without using the hashed layers by adding the following flag to your [build](https://docs.docker.com/engine/reference/commandline/build/) command:
+
+```
+--no-cache
+```
+
 
 # Thorough clean up
 
