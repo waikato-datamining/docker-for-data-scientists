@@ -219,7 +219,7 @@ is <code>run</code>.</p>
 <p>When running an image (i.e., spinning up a container), this can be done either
 in interactive mode or not. The former can be used at development time or for 
 manually running experiments and the latter for a production setting, where you 
-simply supply a command to executed within the container, like building a model.</p>
+simply supply a command to be executed within the container, like building a model.</p>
 <p>For interactive use, you will need the <code>-it</code> flags, which stand for <code>interactive</code>
 and <code>tty</code> (<strong>T</strong>ele<strong>TY</strong>pewriter or console). For the time being, we will stick
 with interactive mode. The non-interactive mode is explained briefly in
@@ -272,7 +272,7 @@ between <em>named</em> volumes (partitions created and managed by the docker dae
 simply mapped directories. Usually, it is sufficient to just map local directories
 into your container. That way, you have full control over your data and models on 
 the host system. </p>
-<p>The easist way to map a directory (or even a single file) is to use the 
+<p>The easiest way to map a directory (or even a single file) is to use the 
 <code>-v</code> or <code>--volume</code> option. The alternative is the <code>--mount</code> option, which gives 
 you greater control (but seems like overkill most of the time for a data scientist). 
 For more information, check out the docker documentation on 
@@ -302,8 +302,10 @@ that you can use to clean up your system:</p>
 <ul>
 <li>
 <p>stop all containers</p>
-<p><code>docker stop $(docker ps -a -q)</code>
-* remove all containers</p>
+<p><code>docker stop $(docker ps -a -q)</code></p>
+</li>
+<li>
+<p>remove all containers</p>
 <p><code>docker rm $(docker ps -a -q)</code></p>
 </li>
 <li>
