@@ -92,7 +92,7 @@ is `run`.
 When running an image (i.e., spinning up a container), this can be done either
 in interactive mode or not. The former can be used at development time or for 
 manually running experiments and the latter for a production setting, where you 
-simply supply a command to executed within the container, like building a model.
+simply supply a command to be executed within the container, like building a model.
 
 For interactive use, you will need the `-it` flags, which stand for `interactive`
 and `tty` (**T**ele**TY**pewriter or console). For the time being, we will stick
@@ -175,7 +175,7 @@ simply mapped directories. Usually, it is sufficient to just map local directori
 into your container. That way, you have full control over your data and models on 
 the host system. 
 
-The easist way to map a directory (or even a single file) is to use the 
+The easiest way to map a directory (or even a single file) is to use the 
 `-v` or `--volume` option. The alternative is the `--mount` option, which gives 
 you greater control (but seems like overkill most of the time for a data scientist). 
 For more information, check out the docker documentation on 
@@ -219,6 +219,7 @@ that you can use to clean up your system:
     ```
     docker stop $(docker ps -a -q)
     ```
+
 * remove all containers
 
     ```
