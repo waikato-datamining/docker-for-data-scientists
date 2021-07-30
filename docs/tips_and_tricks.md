@@ -69,7 +69,8 @@ process running in the background and you can close the remote connection.
 In order to **reconnect**, simply ssh into the remote host and run `screen -r`. If there
 is only one screen session running, then it will automatically reconnect. Otherwise, it
 will output a list of available sessions. Supply the name of the session that you want to 
-reattach to the `-r` option.
+reattach to the `-r` option. In case a session got interrupted and not properly detached,
+use the `-d` flag to first detach it.
 
 You can **exit** a screen session by either typing `exit` or using `CTRL+D` (just like
 with a `bash` shell).
