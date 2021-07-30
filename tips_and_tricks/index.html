@@ -203,7 +203,8 @@ process running in the background and you can close the remote connection.</p>
 <p>In order to <strong>reconnect</strong>, simply ssh into the remote host and run <code>screen -r</code>. If there
 is only one screen session running, then it will automatically reconnect. Otherwise, it
 will output a list of available sessions. Supply the name of the session that you want to 
-reattach to the <code>-r</code> option.</p>
+reattach to the <code>-r</code> option. In case a session got interrupted and not properly detached,
+use the <code>-d</code> flag to first detach it.</p>
 <p>You can <strong>exit</strong> a screen session by either typing <code>exit</code> or using <code>CTRL+D</code> (just like
 with a <code>bash</code> shell).</p>
 <p>If you need to increase the scrollback buffer, let us say to 100,000 lines, then you can do it</p>
