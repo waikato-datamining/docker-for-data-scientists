@@ -93,7 +93,15 @@
     <li class="toctree-l2"><a href="#default-runtime">Default runtime</a></li>
     
 
-    <li class="toctree-l2"><a href="#complete-rebuild-of-image">Complete rebuild of image</a></li>
+    <li class="toctree-l2"><a href="#rebuild">Rebuild</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#rebuilding-some-layers">Rebuilding some layers</a></li>
+        
+            <li><a class="toctree-l3" href="#complete-rebuild">Complete rebuild</a></li>
+        
+        </ul>
     
 
     <li class="toctree-l2"><a href="#thorough-clean-up">Thorough clean up</a></li>
@@ -240,7 +248,26 @@ the <em>default runtime</em> to use with your docker commands (<a href="https://
 <li>save the file</li>
 <li>restart the docker daemon (e.g., <code>sudo systemctl restart docker</code>)</li>
 </ul>
-<h3 id="complete-rebuild-of-image">Complete rebuild of image</h3>
+<h3 id="rebuild">Rebuild</h3>
+<h4 id="rebuilding-some-layers">Rebuilding some layers</h4>
+<p>Since docker hashes the layer instructions rather than the content, it will not detect changes to a file 
+(e.g., modifications in a script) since the last build and will keep using the cached version of that layer.</p>
+<p>Assuming the following <code>Dockerfile</code> snippet, where <code>file1</code> changed:</p>
+<pre><code>RUN ...&lt;layer X&gt;...
+COPY file1 ...&lt;layer X+1&gt;...
+COPY file2 ...&lt;layer X+2&gt;...
+</code></pre>
+<p>You can <strong>inject</strong> a dummy <strong>ARG</strong> variable as follows to rebuild the layers from <code>layer X+1</code> onwards:</p>
+<pre><code>RUN ...&lt;layer X&gt;...
+ARG blah=1
+COPY file1 ...&lt;layer X+1&gt;...
+COPY file2 ...&lt;layer X+2&gt;...
+</code></pre>
+<p>Every time you need rebuild from there on, simply change the value that you are assigning to the variable, 
+to change the hash value.</p>
+<p>Of course, once your <code>Dockerfile</code> has been finalized, you can remove all these unnecessary operations and
+build your image properly.</p>
+<h4 id="complete-rebuild">Complete rebuild</h4>
 <p>Especially during development of a docker image, it can happen that library versions have not been added to the <code>Dockerfile</code> just yet. Since docker hashes the command-lines, it will not rebuild a layer (and subsequent ones) if the hash does not change. If you do not want to clear your complete system (due to time constraints or capped internet usage), then you can force docker to build the image without using the hashed layers by adding the following flag to your <a href="https://docs.docker.com/engine/reference/commandline/build/">build</a> command:</p>
 <pre><code>--no-cache
 </code></pre>
