@@ -114,7 +114,38 @@ the *default runtime* to use with your docker commands ([source](https://docs.nv
 * save the file
 * restart the docker daemon (e.g., `sudo systemctl restart docker`)
 
-# Complete rebuild of image
+# Rebuild
+
+## Rebuilding some layers
+
+Since docker hashes the layer instructions rather than the content, it will not detect changes to a file 
+(e.g., modifications in a script) since the last build and will keep using the cached version of that layer.
+
+Assuming the following `Dockerfile` snippet, where `file1` changed:
+
+```
+RUN ...<layer X>...
+COPY file1 ...<layer X+1>...
+COPY file2 ...<layer X+2>...
+```
+
+You can **inject** a dummy **ARG** variable as follows to rebuild the layers from `layer X+1` onwards:
+
+```
+RUN ...<layer X>...
+ARG blah=1
+COPY file1 ...<layer X+1>...
+COPY file2 ...<layer X+2>...
+```
+
+Every time you need rebuild from there on, simply change the value that you are assigning to the variable, 
+to change the hash value.
+
+Of course, once your `Dockerfile` has been finalized, you can remove all these unnecessary operations and
+build your image properly.
+
+
+## Complete rebuild
 
 Especially during development of a docker image, it can happen that library versions have not been added to the `Dockerfile` just yet. Since docker hashes the command-lines, it will not rebuild a layer (and subsequent ones) if the hash does not change. If you do not want to clear your complete system (due to time constraints or capped internet usage), then you can force docker to build the image without using the hashed layers by adding the following flag to your [build](https://docs.docker.com/engine/reference/commandline/build/) command:
 
