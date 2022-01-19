@@ -20,7 +20,9 @@ revert to using docker to remove them again:
     rm -Rf *
     ```
 
-# Alternative Python version
+# Python
+
+## Alternative Python version
 
 In case your base Debian/Ubuntu distribution does not have the right Python version 
 available, you can get additional versions by adding the [deadsnakes ppa](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa):
@@ -30,7 +32,7 @@ add-apt-repository -y ppa:deadsnakes/ppa && \
 apt-get update
 ```
 
-# Switch default Python version
+## Switch default Python version
 
 If your base distro has an older version of Python and you do not want to sprinkle the
 specific newer version throughout your `Dockerfile`, then you can use `update-alternatives`
@@ -46,6 +48,15 @@ update-alternatives --set python /usr/bin/python3.6 && \
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1 && \
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2 && \
 update-alternatives --set python3 /usr/bin/python3.6 && \
+```
+
+## Install packages with pip ignoring errors
+
+An installation with `pip` will fail if a dependency is not available, even if that dependency should not be required.
+The following command-line install each dependency separately, therefore continuing, even if errors are encountered ([source](https://stackoverflow.com/a/54053100)):
+
+```
+cat requirements.txt | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 pip install
 ```
 
 
