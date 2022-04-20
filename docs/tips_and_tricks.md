@@ -27,7 +27,7 @@ revert to using docker to remove them again:
 In case your base Debian/Ubuntu distribution does not have the right Python version 
 available, you can get additional versions by adding the [deadsnakes ppa](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa):
 
-```commandline
+```bash
 add-apt-repository -y ppa:deadsnakes/ppa && \
 apt-get update
 ```
@@ -169,7 +169,7 @@ Especially during development of a docker image, it can happen that library vers
 
 You can stop/remove all containers and images with this one-liner:
 
-```commandline
+```bash
 docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker system prune -a
 ```
 
@@ -178,3 +178,18 @@ If you need to remove dangling volumes, use this:
 ```commandline
 docker volume prune
 ```
+
+# Excluding files/dirs from docker context
+
+By default, docker will use all files and directories within the directory that contains the `Dockerfile` to
+the daemon to use as *context*. From this context, the image gets built. Should you have test data/models
+in the same directory then this could mean sending quite a lot of unnecessary data to the daemon. To avoid this,
+you can take advantage of the `.dockerignore` file, which lists files and directories to ignore. The following
+example ignores the `test` directory and all vim backup files:
+
+```
+test/
+*~
+```
+
+For more information, see the official documentation on the [dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file).
