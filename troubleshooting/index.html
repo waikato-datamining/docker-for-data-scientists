@@ -158,6 +158,13 @@ distribution (e.g., <code>bionic</code> release) and architecture (e.g., <code>a
 you can restrict the search further. Finally, click on <em>Search</em>. </p>
 <p>From the results page, select the appropriate package name and include that in your 
 docker build.</p>
+<h3 id="repository-httpsdeveloperdownloadnvidiacomcomputecuda-is-not-signed">Repository 'https://developer.download.nvidia.com/compute/cuda/...' is not signed</h3>
+<p>If installing NVIDIA packages fails (e.g., within Docker) with the following (or similar) error:</p>
+<pre><code>The repository 'https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 InRelease' is not signed.
+</code></pre>
+<p>This is due to NVIDIA updating/rotating their GPG keys.</p>
+<p>Instructions for fixing this error can be found on their developer blog:</p>
+<p><a href="https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/">https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/</a></p>
               
             </div>
           </div><footer>
