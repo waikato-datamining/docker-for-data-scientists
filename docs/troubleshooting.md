@@ -101,3 +101,11 @@ This is due to NVIDIA updating/rotating their GPG keys.
 Instructions for fixing this error can be found on their developer blog:
 
 [https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/](https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/)
+
+# RuntimeError: cannot cache function '__shear_dense': no locator available for file...
+
+This error occurs when numba has no access to a writable cache directory ([source](https://stackoverflow.com/a/63367171/4698227)). To fix this, make sure that you point the `NUMBA_CACHE_DIR` at a directory with write access, e.g.:
+
+```
+ENV NUMBA_CACHE_DIR /tmp
+```
