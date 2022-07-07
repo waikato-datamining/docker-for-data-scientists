@@ -165,6 +165,10 @@ docker build.</p>
 <p>This is due to NVIDIA updating/rotating their GPG keys.</p>
 <p>Instructions for fixing this error can be found on their developer blog:</p>
 <p><a href="https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/">https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/</a></p>
+<h3 id="runtimeerror-cannot-cache-function-__shear_dense-no-locator-available-for-file">RuntimeError: cannot cache function '__shear_dense': no locator available for file...</h3>
+<p>This error occurs when numba has no access to a writable cache directory (<a href="https://stackoverflow.com/a/63367171/4698227">source</a>). To fix this, make sure that you point the <code>NUMBA_CACHE_DIR</code> at a directory with write access, e.g.:</p>
+<pre><code>ENV NUMBA_CACHE_DIR /tmp
+</code></pre>
               
             </div>
           </div><footer>
