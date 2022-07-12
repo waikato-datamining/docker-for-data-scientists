@@ -159,10 +159,11 @@ Otherwise, use this:
 ```
 
 Or supply the specific ID of the GPU, if you are on a multi-GPU system 
-([source](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration)):
+([source](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration)),
+e.g., for the second GPU:
 
 ```
---gpus=1
+--gpus device=1
 ```
 
 
