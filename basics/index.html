@@ -214,8 +214,9 @@ you need to supply the following parameter:</p>
 <pre><code>--gpus=all
 </code></pre>
 <p>Or supply the specific ID of the GPU, if you are on a multi-GPU system 
-(<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration">source</a>):</p>
-<pre><code>--gpus=1
+(<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html#gpu-enumeration">source</a>),
+e.g., for the second GPU:</p>
+<pre><code>--gpus device=1
 </code></pre>
 <h3 id="volumes">Volumes</h3>
 <p>By default, a docker container does not have access to any directories on the host
