@@ -72,7 +72,12 @@ On the remote host, **start** the `screen` command before you launch your docker
 (you can run multiple `screen` instances as well) and skip the screen with the licenses 
 etc using `Enter` or `Space`. Now you can start up the actual command. If you want to 
 run multiple screen sessions on the same host, then you should name them using the 
-`-S sessionname` option to easily distinguish them.
+`-S sessionname` option to easily distinguish them. 
+
+When running multiple sessions on a single host that use the auto-generated names, 
+it can get difficult to distinguish them. You can use 
+`screen -S <PID>.<sessionName> -X sessionname <newSessionName>` to rename an 
+existing session to use a more suitable name ([source](https://www.shellhacks.com/screen-rename-session/)).
 
 For **detaching** a session, use the `CTRL+A+D` key combination. This will leave your 
 process running in the background and you can close the remote connection.
