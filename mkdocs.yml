@@ -1,6 +1,7 @@
 site_name: Docker for Data Scientists
 site_url: https://www.data-mining.co.nz/docker-for-data-scientists/
 site_description: From one data scientist to another on how to utilize docker to make your life easier
+repo_url: https://github.com/waikato-datamining/docker-for-data-scientists
 theme:
     name: readthedocs
 markdown_extensions:
