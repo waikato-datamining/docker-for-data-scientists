@@ -129,6 +129,7 @@ available, you can get additional versions by adding the <a href="https://launch
 <pre><code class="language-bash">add-apt-repository -y ppa:deadsnakes/ppa &amp;&amp; \
 apt-get update
 </code></pre>
+<p><strong>NB:</strong> You may need to install package <code>software-properties-common</code> before you have <code>add-apt-repository</code> available.</p>
 <h3 id="switch-default-python-version">Switch default Python version<a class="headerlink" href="#switch-default-python-version" title="Permanent link">#</a></h3>
 <p>If your base distro has an older version of Python and you do not want to sprinkle the
 specific newer version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
