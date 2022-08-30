@@ -103,7 +103,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="versioning">Versioning</h3>
+                <h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">#</a></h2>
 <p>Since docker determines by the hash of a command whether this particular layer needs
 rebuilding, you should, wherever possible, specify the version of the library that
 you are installing. That way, whenever you upgrade a library, that layer (and all 
@@ -126,11 +126,11 @@ then you should use a specific commit hash in your command:  </p>
     git reset --hard 11223344556677889900AABBCCDDEEFF11223344 &amp;&amp; \
     ...
 </code></pre>
-<h3 id="docker-group">Docker group</h3>
+<h2 id="docker-group">Docker group<a class="headerlink" href="#docker-group" title="Permanent link">#</a></h2>
 <p>Instead of running the <code>docker</code> command via <code>sudo</code>, you should consider adding your user
 to the <code>docker</code> group instead (in <code>/etc/group</code>). That way, you can run the <code>docker</code> 
 command as a regular user.</p>
-<h3 id="launch-container-as-regular-user">Launch container as regular user</h3>
+<h2 id="launch-container-as-regular-user">Launch container as regular user<a class="headerlink" href="#launch-container-as-regular-user" title="Permanent link">#</a></h2>
 <p>Once development of your docker image has finished, you should avoid running docker 
 containers as the <code>root</code> user and instead run it as the current user (which also 
 avoids creating output files in volumes that can only be removed by <code>root</code>).</p>
@@ -151,25 +151,25 @@ the container as <code>root</code>).</p>
 <p>This custom file can then be added to your docker image using the following command:</p>
 <pre><code class="language-commandline">COPY bash.bashrc /etc/bash.bashrc
 </code></pre>
-<h3 id="no-anaconda">No Anaconda</h3>
+<h2 id="no-anaconda">No Anaconda<a class="headerlink" href="#no-anaconda" title="Permanent link">#</a></h2>
 <p>Instead of using <a href="https://www.anaconda.com/products/individual">Anaconda</a> for installing
 Python packages, you can just use plain <code>pip</code> to install packages from the <a href="https://pypi.org/">Python Package Index</a>.
 Anaconda in itself is quite a large installation and will increase the overall docker
 image size unnecessarily.</p>
-<h3 id="clean-up-pip">Clean up pip</h3>
+<h2 id="clean-up-pip">Clean up pip<a class="headerlink" href="#clean-up-pip" title="Permanent link">#</a></h2>
 <p>Remove the pip cache to reduce the size of your layer after you have installed all your packages:</p>
 <pre><code>rm -Rf /root/.cache/pip
 </code></pre>
 <p>Alternatively, do not cache downloads when installing a package:</p>
 <pre><code>pip install --no-cache-dir ...
 </code></pre>
-<h3 id="clean-up-apt">Clean up apt</h3>
+<h2 id="clean-up-apt">Clean up apt<a class="headerlink" href="#clean-up-apt" title="Permanent link">#</a></h2>
 <p>After performing installs via <code>apt</code> or <code>apt-get</code>, clean up the cache to reduce the 
 size of your layer:</p>
 <pre><code>apt-get clean &amp;&amp; \
 rm -rf /var/lib/apt/lists/*
 </code></pre>
-<h3 id="caching-models">Caching models</h3>
+<h2 id="caching-models">Caching models<a class="headerlink" href="#caching-models" title="Permanent link">#</a></h2>
 <p>As soon as you stop/remove the container, all modifications will be lost. This also includes
 any pretrained networks that any of the deep learning frameworks downloaded into its cache.
 In order to avoid the constant downloads, you can map the cache directories for the relevant

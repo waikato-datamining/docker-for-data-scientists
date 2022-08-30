@@ -103,7 +103,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="cuda-not-available-at-build-time">CUDA not available at build time</h3>
+                <h2 id="cuda-not-available-at-build-time">CUDA not available at build time<a class="headerlink" href="#cuda-not-available-at-build-time" title="Permanent link">#</a></h2>
 <p>Some deep learning libraries refuse to get installed if there is no CUDA-capable
 device available. Of course, you can fix this by defining a <a href="../tips_and_tricks/#default-runtime">default runtime</a>
 in your docker configuration. However, this is not an option when your build 
@@ -112,7 +112,7 @@ system does not even have a GPU.</p>
 <code>FORCE_CUDA</code> environment variable in your docker build as follows: </p>
 <pre><code>ENV FORCE_CUDA=&quot;1&quot;
 </code></pre>
-<h3 id="cuda-architectures-for-pytorch">CUDA architectures for PyTorch</h3>
+<h2 id="cuda-architectures-for-pytorch">CUDA architectures for PyTorch<a class="headerlink" href="#cuda-architectures-for-pytorch" title="Permanent link">#</a></h2>
 <p>If your container needs to build PyTorch (e.g., if you cannot use a PyTorch base image),
 then you can supply the list of <a href="https://docs.nvidia.com/deploy/cuda-compatibility/index.html#support-hardware__table-hardware-support">NVIDIA architectures</a>
 via the <code>TORCH_CUDA_ARCH_LIST</code> environment variable. By using <code>ARG</code>, you can define a 
@@ -120,7 +120,7 @@ default value and still override it at build time via the <code>--build-arg</cod
 <pre><code>ARG TORCH_CUDA_ARCH_LIST=&quot;Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing&quot;
 ENV TORCH_CUDA_ARCH_LIST=&quot;${TORCH_CUDA_ARCH_LIST}&quot;
 </code></pre>
-<h3 id="interactive-timezone-prompt">Interactive timezone prompt</h3>
+<h2 id="interactive-timezone-prompt">Interactive timezone prompt<a class="headerlink" href="#interactive-timezone-prompt" title="Permanent link">#</a></h2>
 <p>In case you get the following prompt for configuring your timezone data (which will
 fail unattended builds):</p>
 <pre><code>Configuring tzdata
@@ -146,7 +146,7 @@ Geographic area:
 <p>Finally, the brute force method is to define it globally via the <code>ENV</code> command:</p>
 <pre><code class="language-commandline">ENV DEBIAN_FRONTEND noninteractive
 </code></pre>
-<h3 id="missing-shared-library">Missing shared library</h3>
+<h2 id="missing-shared-library">Missing shared library<a class="headerlink" href="#missing-shared-library" title="Permanent link">#</a></h2>
 <p>A common error that you will encounter is installations via <code>pip</code> failing due to a shared
 library not being present, similar to this:</p>
 <pre><code>error: XYZ.so: cannot open shared object file: No such file or directory
@@ -160,14 +160,14 @@ distribution (e.g., <code>bionic</code> release) and architecture (e.g., <code>a
 you can restrict the search further. Finally, click on <em>Search</em>. </p>
 <p>From the results page, select the appropriate package name and include that in your 
 docker build.</p>
-<h3 id="repository-httpsdeveloperdownloadnvidiacomcomputecuda-is-not-signed">Repository 'https://developer.download.nvidia.com/compute/cuda/...' is not signed</h3>
+<h2 id="repository-httpsdeveloperdownloadnvidiacomcomputecuda-is-not-signed">Repository 'https://developer.download.nvidia.com/compute/cuda/...' is not signed<a class="headerlink" href="#repository-httpsdeveloperdownloadnvidiacomcomputecuda-is-not-signed" title="Permanent link">#</a></h2>
 <p>If installing NVIDIA packages fails (e.g., within Docker) with the following (or similar) error:</p>
 <pre><code>The repository 'https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 InRelease' is not signed.
 </code></pre>
 <p>This is due to NVIDIA updating/rotating their GPG keys.</p>
 <p>Instructions for fixing this error can be found on their developer blog:</p>
 <p><a href="https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/">https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/</a></p>
-<h3 id="runtimeerror-cannot-cache-function-__shear_dense-no-locator-available-for-file">RuntimeError: cannot cache function '__shear_dense': no locator available for file...</h3>
+<h2 id="runtimeerror-cannot-cache-function-__shear_dense-no-locator-available-for-file">RuntimeError: cannot cache function '__shear_dense': no locator available for file...<a class="headerlink" href="#runtimeerror-cannot-cache-function-__shear_dense-no-locator-available-for-file" title="Permanent link">#</a></h2>
 <p>This error occurs when numba has no access to a writable cache directory (<a href="https://stackoverflow.com/a/63367171/4698227">source</a>). To fix this, make sure that you point the <code>NUMBA_CACHE_DIR</code> at a directory with write access, e.g.:</p>
 <pre><code>ENV NUMBA_CACHE_DIR /tmp
 </code></pre>

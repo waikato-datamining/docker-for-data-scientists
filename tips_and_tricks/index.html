@@ -103,7 +103,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="remove-unwanted-files">Remove unwanted files</h3>
+                <h2 id="remove-unwanted-files">Remove unwanted files<a class="headerlink" href="#remove-unwanted-files" title="Permanent link">#</a></h2>
 <p>Especially during development, it can happen that files get generated when running
 your docker container that can only be removed by the <code>root</code> user again. If you 
 do not have admin permissions (e.g., via <code>sudo</code>) on the machine then you can 
@@ -122,14 +122,14 @@ revert to using docker to remove them again:</p>
 rm -Rf *</code></p>
 </li>
 </ul>
-<h3 id="python">Python</h3>
-<h4 id="alternative-python-version">Alternative Python version</h4>
+<h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">#</a></h2>
+<h3 id="alternative-python-version">Alternative Python version<a class="headerlink" href="#alternative-python-version" title="Permanent link">#</a></h3>
 <p>In case your base Debian/Ubuntu distribution does not have the right Python version 
 available, you can get additional versions by adding the <a href="https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa">deadsnakes ppa</a>:</p>
 <pre><code class="language-bash">add-apt-repository -y ppa:deadsnakes/ppa &amp;&amp; \
 apt-get update
 </code></pre>
-<h4 id="switch-default-python-version">Switch default Python version</h4>
+<h3 id="switch-default-python-version">Switch default Python version<a class="headerlink" href="#switch-default-python-version" title="Permanent link">#</a></h3>
 <p>If your base distro has an older version of Python and you do not want to sprinkle the
 specific newer version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
 on Debian systems to change the default.</p>
@@ -142,12 +142,12 @@ update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1 &amp
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2 &amp;&amp; \
 update-alternatives --set python3 /usr/bin/python3.6 &amp;&amp; \
 </code></pre>
-<h4 id="install-packages-with-pip-ignoring-errors">Install packages with pip ignoring errors</h4>
+<h3 id="install-packages-with-pip-ignoring-errors">Install packages with pip ignoring errors<a class="headerlink" href="#install-packages-with-pip-ignoring-errors" title="Permanent link">#</a></h3>
 <p>An installation with <code>pip</code> will fail if a dependency is not available, even if that dependency should not be required.
 The following command-line install each dependency separately, therefore continuing, even if errors are encountered (<a href="https://stackoverflow.com/a/54053100">source</a>):</p>
 <pre><code>cat requirements.txt | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 pip install
 </code></pre>
-<h3 id="screen">Screen</h3>
+<h2 id="screen">Screen<a class="headerlink" href="#screen" title="Permanent link">#</a></h2>
 <p>The <a href="https://linux.die.net/man/1/screen">screen</a> command-line utility allows you to 
 pick up remote sessions after detaching from them. This is especially helpful when 
 running docker in interactive mode via ssh sessions. If such an ssh session should
@@ -183,7 +183,7 @@ scrollback 100000&lt;Enter&gt;</code></p>
 <p><code>defscrollback 100000</code></p>
 </li>
 </ul>
-<h3 id="default-runtime">Default runtime</h3>
+<h2 id="default-runtime">Default runtime<a class="headerlink" href="#default-runtime" title="Permanent link">#</a></h2>
 <p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you can simply define
 the <em>default runtime</em> to use with your docker commands (<a href="https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html">source</a>):</p>
 <ul>
@@ -204,8 +204,8 @@ the <em>default runtime</em> to use with your docker commands (<a href="https://
 <li>save the file</li>
 <li>restart the docker daemon (e.g., <code>sudo systemctl restart docker</code>)</li>
 </ul>
-<h3 id="rebuild">Rebuild</h3>
-<h4 id="rebuilding-some-layers">Rebuilding some layers</h4>
+<h2 id="rebuild">Rebuild<a class="headerlink" href="#rebuild" title="Permanent link">#</a></h2>
+<h3 id="rebuilding-some-layers">Rebuilding some layers<a class="headerlink" href="#rebuilding-some-layers" title="Permanent link">#</a></h3>
 <p>Since docker hashes the layer instructions rather than the content, it will not detect changes to a file 
 (e.g., modifications in a script) since the last build and will keep using the cached version of that layer.</p>
 <p>Assuming the following <code>Dockerfile</code> snippet, where <code>file1</code> changed:</p>
@@ -223,18 +223,18 @@ COPY file2 ...&lt;layer X+2&gt;...
 to change the hash value.</p>
 <p>Of course, once your <code>Dockerfile</code> has been finalized, you can remove all these unnecessary operations and
 build your image properly.</p>
-<h4 id="complete-rebuild">Complete rebuild</h4>
+<h3 id="complete-rebuild">Complete rebuild<a class="headerlink" href="#complete-rebuild" title="Permanent link">#</a></h3>
 <p>Especially during development of a docker image, it can happen that library versions have not been added to the <code>Dockerfile</code> just yet. Since docker hashes the command-lines, it will not rebuild a layer (and subsequent ones) if the hash does not change. If you do not want to clear your complete system (due to time constraints or capped internet usage), then you can force docker to build the image without using the hashed layers by adding the following flag to your <a href="https://docs.docker.com/engine/reference/commandline/build/">build</a> command:</p>
 <pre><code>--no-cache
 </code></pre>
-<h3 id="thorough-clean-up">Thorough clean up</h3>
+<h2 id="thorough-clean-up">Thorough clean up<a class="headerlink" href="#thorough-clean-up" title="Permanent link">#</a></h2>
 <p>You can stop/remove all containers and images with this one-liner:</p>
 <pre><code class="language-bash">docker stop $(docker ps -a -q) &amp;&amp; docker rm $(docker ps -a -q) &amp;&amp; docker system prune -a
 </code></pre>
 <p>If you need to remove dangling volumes, use this:</p>
 <pre><code class="language-commandline">docker volume prune
 </code></pre>
-<h3 id="excluding-filesdirs-from-docker-context">Excluding files/dirs from docker context</h3>
+<h2 id="excluding-filesdirs-from-docker-context">Excluding files/dirs from docker context<a class="headerlink" href="#excluding-filesdirs-from-docker-context" title="Permanent link">#</a></h2>
 <p>By default, docker will use all files and directories within the directory that contains the <code>Dockerfile</code> to
 the daemon to use as <em>context</em>. From this context, the image gets built. Should you have test data/models
 in the same directory then this could mean sending quite a lot of unnecessary data to the daemon. To avoid this,

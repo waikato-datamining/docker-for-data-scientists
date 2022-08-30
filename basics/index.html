@@ -107,11 +107,11 @@
 command-line tool. With this subset you will be able to use already existing images,
 spinning up containers and being able to run code from the host machine within 
 containers.</p>
-<h3 id="installation">Installation</h3>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h2>
 <p>If you do not have docker installed yet, then please do so. See the 
 <a href="https://docs.docker.com/engine/install/">official documentation</a> for your respective
 operating system flavour.</p>
-<h3 id="pulling">Pulling</h3>
+<h2 id="pulling">Pulling<a class="headerlink" href="#pulling" title="Permanent link">#</a></h2>
 <p>Before you can use an image, you either need to build it locally or <em>pull</em> it from a 
 registry. The latter is, obviously, done by the <code>pull</code> sub-command. The docker hub allows
 you to quickly copy the pull command for a specific image (see highlighted area in
@@ -165,7 +165,7 @@ Digest: sha256:ccebb46f954b1d32a4700aaeae0e24bd68653f92c6f276a608bf592b660b63d7
 Status: Downloaded newer image for pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 docker.io/pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 </code></pre>
-<h3 id="running">Running</h3>
+<h2 id="running">Running<a class="headerlink" href="#running" title="Permanent link">#</a></h2>
 <p>Once an image has been downloaded, you can spin up a container. Think of a container
 as a concrete instantiation of a blueprint (i.e., the image), which can receive
 modifications that will stay until its removed. The sub-command for spinning up, 
@@ -203,7 +203,7 @@ run this:</p>
 <li><code>stop</code> - stop a running container</li>
 <li><code>rm</code> - remove a stopped container</li>
 </ul>
-<h3 id="gpu-support">GPU support</h3>
+<h2 id="gpu-support">GPU support<a class="headerlink" href="#gpu-support" title="Permanent link">#</a></h2>
 <p>The image that we downloaded comes with CUDA support, in order to make use of
 an NVIDIA GPU that we have on our host system. But, the graphics card does not
 automatically get made available to the containers, we need to explicitly state
@@ -220,7 +220,7 @@ you need to supply the following parameter:</p>
 e.g., for the second GPU:</p>
 <pre><code>--gpus device=1
 </code></pre>
-<h3 id="volumes">Volumes</h3>
+<h2 id="volumes">Volumes<a class="headerlink" href="#volumes" title="Permanent link">#</a></h2>
 <p>By default, a docker container does not have access to any directories on the host
 system and you will have to explicitly give access via <em>volumes</em>. Docker distinguishes
 between <em>named</em> volumes (partitions created and managed by the docker daemon) and
@@ -250,7 +250,7 @@ directory into the container, then you can make use of the <code>pwd</code> comm
     -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 </code></pre>
 <p>Of course, the <code>-v</code> option can be supplied multiple times.</p>
-<h3 id="clean-up">Clean up</h3>
+<h2 id="clean-up">Clean up<a class="headerlink" href="#clean-up" title="Permanent link">#</a></h2>
 <p>You will soon notice that you are accumulating a large number of containers
 and images on your system, taking up significant space. Here are some commands
 that you can use to clean up your system:</p>
@@ -272,7 +272,7 @@ that you can use to clean up your system:</p>
 <p><code>docker system prune -a</code></p>
 </li>
 </ul>
-<h3 id="login-credentials">Login &amp; Credentials</h3>
+<h2 id="login-credentials">Login &amp; Credentials<a class="headerlink" href="#login-credentials" title="Permanent link">#</a></h2>
 <p>When using non-public registries, you will most likely have to perform a login,
 using the <code>login</code> sub-command (and <code>logout</code> for logging out). By default, docker
 will store your password only base64 encoded and not encrypted. It is therefore

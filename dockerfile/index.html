@@ -121,12 +121,12 @@ the classes.</p>
 final <a href="../files/pytorch-cifar10/Dockerfile.txt">docker script</a> for creating the image. 
 Of course, we will also build and use the image, as well as push it out to make it 
 publicly available.</p>
-<h3 id="comments">Comments</h3>
+<h2 id="comments">Comments<a class="headerlink" href="#comments" title="Permanent link">#</a></h2>
 <p>Before we dive into the actual docker commands, a quick note on comments. Just like with
 any other programming language, it pays to comment your instructions. Especially, if you
 need to work around quirks with some strange command-lines. Comments in docker files, 
 like with bash programming, are line comments and start with <code>#</code>.</p>
-<h3 id="from">FROM</h3>
+<h2 id="from">FROM<a class="headerlink" href="#from" title="Permanent link">#</a></h2>
 <p>Docker images (just like ogres) are like onions, consisting of multiple layers. This makes
 it easy to add more functionality to existing images: reusing is better than recreating.
 This approach also preserves a lot of space.</p>
@@ -136,7 +136,7 @@ statement, which tells docker the particular base image on top of which you want
 following initial statement:</p>
 <pre><code class="language-commandline">FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 </code></pre>
-<h3 id="arg">ARG</h3>
+<h2 id="arg">ARG<a class="headerlink" href="#arg" title="Permanent link">#</a></h2>
 <p>In some cases, your <code>Dockerfile</code> script might need to be parametrized for the build from 
 the outside. For defining such a build parameter (with a default value), you can use the 
 <a href="https://docs.docker.com/engine/reference/builder/#arg">ARG</a> instruction. Using the 
@@ -154,7 +154,7 @@ ARG CUDA=&quot;10.1&quot;
 ARG CUDNN=&quot;7&quot;
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 </code></pre>
-<h3 id="env">ENV</h3>
+<h2 id="env">ENV<a class="headerlink" href="#env" title="Permanent link">#</a></h2>
 <p>In contrast to <code>ARG</code>, the <a href="https://docs.docker.com/engine/reference/builder/#env">ENV</a> 
 instruction is persistent within the docker image and can be used to set environment 
 variables rather than build variables. If the variable should not be persistent in 
@@ -169,7 +169,7 @@ command lists alternative ways of specifying such an environment variable, for l
 the scope.</p>
 <p>In the <a href="../troubleshooting/#interactive-timezone-prompt">Interactive timezone prompt section</a>
 section, you read why you might want to use this variable.</p>
-<h3 id="run">RUN</h3>
+<h2 id="run">RUN<a class="headerlink" href="#run" title="Permanent link">#</a></h2>
 <p>Once you have set the stage with base image and variables, you can set about installing
 the required software packages. For Debian/Ubuntu based systems, this usually involves
 invoking the <code>apt-get</code> package manager and for Python <code>pip/pip3</code>. Executing commands
@@ -192,7 +192,7 @@ avoid generating temporary files altogether.</p>
 <li><a href="../best_practices/#clean-up-pip">Clean up pip</a></li>
 <li><a href="../best_practices/#clean-up-apt">Clean up apt</a></li>
 </ul>
-<h3 id="copy">COPY</h3>
+<h2 id="copy">COPY<a class="headerlink" href="#copy" title="Permanent link">#</a></h2>
 <p>Quite often, you will end up just needing little scripts within a docker image
 to do the work for you (since all the libraries get installed via <code>apt-get</code> or <code>pip</code>).
 For copying files or directories, you can use the <a href="https://docs.docker.com/engine/reference/builder/#copy">COPY</a> 
@@ -226,7 +226,7 @@ python /opt/test/test.py
 
 python /opt/test/test.py &quot;$@&quot;
 </code></pre>
-<h3 id="workdir">WORKDIR</h3>
+<h2 id="workdir">WORKDIR<a class="headerlink" href="#workdir" title="Permanent link">#</a></h2>
 <p>With the <a href="https://docs.docker.com/engine/reference/builder/#workdir">WOKRDIR</a> command,
 you can change the current working directory within your docker script. If the directory
 does not exist yet, it will get created automatically. This eliminates the need
@@ -235,12 +235,12 @@ docker container automatically start the prompt in the directory of our Python s
 (<code>/opt/test</code>) when used in interactive mode:</p>
 <pre><code>WORKDIR /opt/test
 </code></pre>
-<h3 id="other-useful-commands">Other useful commands</h3>
+<h2 id="other-useful-commands">Other useful commands<a class="headerlink" href="#other-useful-commands" title="Permanent link">#</a></h2>
 <ul>
 <li><a href="https://docs.docker.com/engine/reference/builder/#add">ADD</a></li>
 <li><a href="https://docs.docker.com/engine/reference/builder/#entrypoint">ENTRYPOINT</a></li>
 </ul>
-<h3 id="building-the-image">Building the image</h3>
+<h2 id="building-the-image">Building the image<a class="headerlink" href="#building-the-image" title="Permanent link">#</a></h2>
 <p>With our <a href="../files/pytorch-cifar10/Dockerfile.txt">Dockerfile</a> now finally complete, we
 are ready to kick off a build. After changing into the directory containing
 the <code>Dockerfile</code>, you can use the <code>build</code> sub-command to perform the build.
@@ -286,7 +286,7 @@ Step 8/8 : COPY test.py /opt/test/test.py
 Successfully built ed55c4fb8e62
 Successfully tagged pytorchtest:latest
 </code></pre>
-<h3 id="running-the-image-interactive">Running the image (interactive)</h3>
+<h2 id="running-the-image-interactive">Running the image (interactive)<a class="headerlink" href="#running-the-image-interactive" title="Permanent link">#</a></h2>
 <p>With the image successfully built, you can now use it. For this you need to employ the
 <a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
 <pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
@@ -338,7 +338,7 @@ remove it from outside the container. One approach is to change the owner using 
 <li><a href="../best_practices/#launch-container-as-regular-user">Launch container as regular user</a></li>
 </ul>
 <p><strong>Congratulations, you have assembled, built and run your first docker image!</strong> </p>
-<h3 id="running-the-image-non-interactive">Running the image (non-interactive)</h3>
+<h2 id="running-the-image-non-interactive">Running the image (non-interactive)<a class="headerlink" href="#running-the-image-non-interactive" title="Permanent link">#</a></h2>
 <p>Of course, you do not have to run the image interactively at all. After the initial
 development of your docker image and code, you can then use it in your production system.</p>
 <p>For running it in non-interactive mode, simply remove the <code>-it</code> flags and
@@ -348,14 +348,14 @@ append the command that you want to run. In our case, this is:</p>
 <p>The full command-line therefore looks like:</p>
 <pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
 </code></pre>
-<h3 id="optimizing-an-image">Optimizing an image</h3>
+<h2 id="optimizing-an-image">Optimizing an image<a class="headerlink" href="#optimizing-an-image" title="Permanent link">#</a></h2>
 <p>As a final note, you should consider revisiting your <code>Dockerfile</code> once you have
 verified that everything is working and optimize it. Optimizing entails: </p>
 <ul>
 <li>Combine <code>apt-get</code> commands in a single <code>RUN</code> and remove caches at the end</li>
 <li>Combine <code>pip</code> commands in a single <code>RUN</code> run and make sure that the pip cache is removed</li>
 </ul>
-<h3 id="pushing-the-image">Pushing the image</h3>
+<h2 id="pushing-the-image">Pushing the image<a class="headerlink" href="#pushing-the-image" title="Permanent link">#</a></h2>
 <p>Once you are happy with your image and you want to use it on another machine, you will
 need to <strong>push</strong> it out to a registry. Otherwise, you will not be able to use the image
 on another machine without having to re-build it (therefore defeating the purpose of reusable
