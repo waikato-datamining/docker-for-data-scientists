@@ -133,12 +133,13 @@ apt-get update
 <ul>
 <li>You may need to install package <code>software-properties-common</code> before you have <code>add-apt-repository</code> available.</li>
 <li>Consider installed <code>python3.x-full</code> and <code>libpython3.x</code> to also get the <code>venv</code> and <code>distutils</code> packages installed.</li>
-<li>For installing <code>pip</code>, use this:</li>
+<li>
+<p>For installing <code>pip</code>, use this:</p>
+<p><code>wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py &amp;&amp; \
+python3.7 /tmp/get-pip.py &amp;&amp; \
+rm /tmp/get-pip.py</code></p>
+</li>
 </ul>
-<p><code>bash
-  wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py &amp;&amp; \
-  python3.7 /tmp/get-pip.py &amp;&amp; \
-  rm /tmp/get-pip.py</code></p>
 <h3 id="switch-default-python-version">Switch default Python version<a class="headerlink" href="#switch-default-python-version" title="Permanent link">#</a></h3>
 <p>If your base distro has an older version of Python and you do not want to sprinkle the
 specific newer version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
