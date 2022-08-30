@@ -32,6 +32,9 @@ add-apt-repository -y ppa:deadsnakes/ppa && \
 apt-get update
 ```
 
+**NB:** You may need to install package `software-properties-common` before you have `add-apt-repository` available.
+
+
 ## Switch default Python version
 
 If your base distro has an older version of Python and you do not want to sprinkle the
