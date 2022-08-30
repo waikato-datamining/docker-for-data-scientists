@@ -38,11 +38,11 @@ apt-get update
 * Consider installed `python3.x-full` and `libpython3.x` to also get the `venv` and `distutils` packages installed.
 * For installing `pip`, use this:
 
-  ```bash
-  wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && \
-  python3.7 /tmp/get-pip.py && \
-  rm /tmp/get-pip.py
-  ```
+    ```
+    wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && \
+    python3.7 /tmp/get-pip.py && \
+    rm /tmp/get-pip.py
+    ```
 
 
 ## Switch default Python version
