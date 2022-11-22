@@ -109,3 +109,13 @@ This error occurs when numba has no access to a writable cache directory ([sourc
 ```
 ENV NUMBA_CACHE_DIR /tmp
 ```
+
+
+# ImportError: cannot import name 'build_py_2to3' from 'distutils.command.build_py'
+
+Newer versions of setuptools (>58) removed `build_py_2to3`. You can avoid this
+error by downgrading your setuptools using ([source](https://github.com/machinekit/pymachinetalk/issues/25#issuecomment-1196605697)):
+
+```bash
+pip install --upgrade "setuptools<59"
+```
