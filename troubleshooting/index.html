@@ -94,8 +94,7 @@
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
       <li>Troubleshooting</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/waikato-datamining/docker-for-data-scientists/edit/main/docs/troubleshooting.md"
-          class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/waikato-datamining/docker-for-data-scientists/edit/main/docs/troubleshooting.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -170,6 +169,11 @@ docker build.</p>
 <h2 id="runtimeerror-cannot-cache-function-__shear_dense-no-locator-available-for-file">RuntimeError: cannot cache function '__shear_dense': no locator available for file...<a class="headerlink" href="#runtimeerror-cannot-cache-function-__shear_dense-no-locator-available-for-file" title="Permanent link">#</a></h2>
 <p>This error occurs when numba has no access to a writable cache directory (<a href="https://stackoverflow.com/a/63367171/4698227">source</a>). To fix this, make sure that you point the <code>NUMBA_CACHE_DIR</code> at a directory with write access, e.g.:</p>
 <pre><code>ENV NUMBA_CACHE_DIR /tmp
+</code></pre>
+<h2 id="importerror-cannot-import-name-build_py_2to3-from-distutilscommandbuild_py">ImportError: cannot import name 'build_py_2to3' from 'distutils.command.build_py'<a class="headerlink" href="#importerror-cannot-import-name-build_py_2to3-from-distutilscommandbuild_py" title="Permanent link">#</a></h2>
+<p>Newer versions of setuptools (&gt;58) removed <code>build_py_2to3</code>. You can avoid this
+error by downgrading your setuptools using (<a href="https://github.com/machinekit/pymachinetalk/issues/25#issuecomment-1196605697">source</a>):</p>
+<pre><code class="language-bash">pip install --upgrade &quot;setuptools&lt;59&quot;
 </code></pre>
               
             </div>
