@@ -9,21 +9,18 @@ https://www.data-mining.co.nz/docker-for-data-scientists/
 
 ## Installation
 
-*mkdocs* works with Python 2.7 and 3.x.
+Best approach is to install mkdocs in a virtual environment (`venv` directory):
 
-Best approach is to install mkdocs (>= 0.16.0) in a virtual environment 
-(`venv` directory):
-
-* Python 3.7
+* Python 3
 
   ```
-  virtualenv -p /usr/bin/python3.7 venv
+  virtualenv -p /usr/bin/python3 venv
   ```
 
-* Install the mkdocs package
+* Install mkdocs and dependencies
 
   ```
-  ./venv/bin/pip install mkdocs==1.0.4
+  ./venv/bin/pip install mkdocs==1.4.2 jinja2==3.1.2 "Markdown<3.4.0" mkdocs-material==8.5.10
   ```
 
 
@@ -64,9 +61,6 @@ them as you like, it will automatically rebuild and refresh the browser.
 
 ## Deploying
 
-You can deploy the current state to Github pages with the following command:
+Any push will trigger a rebuild of the site on github via github actions:
 
-```
-./venv/bin/mkdocs gh-deploy --clean
-```
-
+[.github/workflows/main.yml](.github/workflows/main.yml)
