@@ -10,7 +10,7 @@ revert to using docker to remove them again:
 * the following docker command will map the current directory to `/opt/local`:
 
     ```
-    docker run -v `pwd`:/opt/local -it bash:5.1.8
+    docker run --rm -v `pwd`:/opt/local -it bash:5.1.8
     ```
   
 * change into `/opt/local` and remove all files/dirs (or just the files that need removing):
