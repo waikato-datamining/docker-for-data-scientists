@@ -614,12 +614,12 @@ revert to using docker to remove them again:</p>
 <p>change into the directory with unwanted files and/or directories</p>
 </li>
 <li>
-<p>the following docker command will map the current directory to <code>/opt/local</code>:</p>
-<p><code>docker run --rm -v `pwd`:/opt/local -it bash:5.1.8</code></p>
+<p>the following docker command will map the current directory to <code>/workspace</code>:</p>
+<p><code>docker run --rm -v `pwd`:/workspace -it bash:5.1.8</code></p>
 </li>
 <li>
-<p>change into <code>/opt/local</code> and remove all files/dirs (or just the files that need removing):</p>
-<p><code>cd /opt/local
+<p>change into <code>/workspace</code> and remove all files/dirs (or just the files that need removing):</p>
+<p><code>cd /workspace
 rm -Rf *</code></p>
 </li>
 </ul>
