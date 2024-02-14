@@ -211,3 +211,25 @@ test/
 ```
 
 For more information, see the official documentation on the [dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file).
+
+
+# Testing the GPU
+
+Images from the [gpu-test](https://github.com/waikato-datamining/gpu-test) repository
+can be used to quickly test whether Docker containers can access the GPU properly.
+
+The following command, based on CUDA 12.2.2, should simply run `nvidia-smi` within
+the container and output some information on the available GPUs (RAM, load, etc):
+
+```
+docker run --rm \
+  --gpus=all \
+  -it waikatodatamining/gpu-test:cuda12.2.2
+```
+
+If the GPU is not passed through correctly (e.g., due to mismatching drivers, etc), 
+an error message will get output instead. Here is an example of such an error:
+
+```
+docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]].
+```
