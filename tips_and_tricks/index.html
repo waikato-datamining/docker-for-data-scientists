@@ -409,6 +409,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#testing-the-gpu" class="md-nav__link">
+    Testing the GPU
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -578,6 +585,13 @@
         <li class="md-nav__item">
   <a href="#excluding-filesdirs-from-docker-context" class="md-nav__link">
     Excluding files/dirs from docker context
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-gpu" class="md-nav__link">
+    Testing the GPU
   </a>
   
 </li>
@@ -756,6 +770,19 @@ example ignores the <code>test</code> directory and all vim backup files:</p>
 *~
 </code></pre>
 <p>For more information, see the official documentation on the <a href="https://docs.docker.com/engine/reference/builder/#dockerignore-file">dockerignore file</a>.</p>
+<h2 id="testing-the-gpu">Testing the GPU<a class="headerlink" href="#testing-the-gpu" title="Permanent link">#</a></h2>
+<p>Images from the <a href="https://github.com/waikato-datamining/gpu-test">gpu-test</a> repository
+can be used to quickly test whether Docker containers can access the GPU properly.</p>
+<p>The following command, based on CUDA 12.2.2, should simply run <code>nvidia-smi</code> within
+the container and output some information on the available GPUs (RAM, load, etc):</p>
+<pre><code>docker run --rm \
+  --gpus=all \
+  -it waikatodatamining/gpu-test:cuda12.2.2
+</code></pre>
+<p>If the GPU is not passed through correctly (e.g., due to mismatching drivers, etc), 
+an error message will get output instead. Here is an example of such an error:</p>
+<pre><code>docker: Error response from daemon: could not select device driver &quot;&quot; with capabilities: [[gpu]].
+</code></pre>
 
 
 
