@@ -233,3 +233,22 @@ an error message will get output instead. Here is an example of such an error:
 ```
 docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]].
 ```
+
+
+# Environment variables
+
+You can provide environment variables via a [.env file](https://hexdocs.pm/dotenvy/0.2.0/dotenv-file-format.html)
+to your Docker container without having to provide them as parameters. That approach
+avoids having variables like access tokens appear in your command history, leaking
+sensitive information.
+
+A `.env` file is basically a file with one `key=value` pair per line, with the
+`key` being the name of the environment variable and `value` the associated
+value of the variable.
+
+If you have such a `.env` in the directory that you are starting the container from,
+you can make them available with the following option of the `docker run` command:
+
+```
+--env-file=`pwd`/.env
+```
