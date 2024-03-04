@@ -416,6 +416,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    Environment variables
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -592,6 +599,13 @@
         <li class="md-nav__item">
   <a href="#testing-the-gpu" class="md-nav__link">
     Testing the GPU
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    Environment variables
   </a>
   
 </li>
@@ -782,6 +796,18 @@ the container and output some information on the available GPUs (RAM, load, etc)
 <p>If the GPU is not passed through correctly (e.g., due to mismatching drivers, etc), 
 an error message will get output instead. Here is an example of such an error:</p>
 <pre><code>docker: Error response from daemon: could not select device driver &quot;&quot; with capabilities: [[gpu]].
+</code></pre>
+<h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
+<p>You can provide environment variables via a <a href="https://hexdocs.pm/dotenvy/0.2.0/dotenv-file-format.html">.env file</a>
+to your Docker container without having to provide them as parameters. That approach
+avoids having variables like access tokens appear in your command history, leaking
+sensitive information.</p>
+<p>A <code>.env</code> file is basically a file with one <code>key=value</code> pair per line, with the
+<code>key</code> being the name of the environment variable and <code>value</code> the associated
+value of the variable.</p>
+<p>If you have such a <code>.env</code> in the directory that you are starting the container from,
+you can make them available with the following option of the <code>docker run</code> command:</p>
+<pre><code>--env-file=`pwd`/.env
 </code></pre>
 
 
