@@ -9,16 +9,16 @@ revert to using docker to remove them again:
 
 * the following docker command will map the current directory to `/workspace`:
 
-    ```
-    docker run --rm -v `pwd`:/workspace -it bash:5.1.8
-    ```
+```
+docker run --rm -v `pwd`:/workspace -it bash:5.1.8
+```
   
 * change into `/workspace` and remove all files/dirs (or just the files that need removing):
 
-    ```
-    cd /workspace
-    rm -Rf *
-    ```
+```
+cd /workspace
+rm -Rf *
+```
 
 # Python
 
@@ -38,11 +38,11 @@ apt-get update
 * Consider installed `python3.x-full` and `libpython3.x` to also get the `venv` and `distutils` packages installed.
 * For installing `pip`, use this:
 
-    ```
-    wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && \
-    python3.7 /tmp/get-pip.py && \
-    rm /tmp/get-pip.py
-    ```
+```
+wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && \
+python3.7 /tmp/get-pip.py && \
+rm /tmp/get-pip.py
+```
 
 
 ## Switch default Python version
@@ -108,16 +108,16 @@ If you need to increase the scrollback buffer, let us say to 100,000 lines, then
 
 * in the current session as follows:
 
-    ```
-    CTRL A : <Enter>
-    scrollback 100000<Enter>
-    ```
+```
+CTRL A : <Enter>
+scrollback 100000<Enter>
+```
 
 * for all new sessions by adding the following line in your `$HOME/.screenrc` config file:
 
-    ```
-    defscrollback 100000
-    ```
+```
+defscrollback 100000
+```
 
 
 # Default runtime
