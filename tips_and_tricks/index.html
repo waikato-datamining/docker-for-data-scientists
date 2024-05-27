@@ -643,14 +643,16 @@ revert to using docker to remove them again:</p>
 </li>
 <li>
 <p>the following docker command will map the current directory to <code>/workspace</code>:</p>
-<p><code>docker run --rm -v `pwd`:/workspace -it bash:5.1.8</code></p>
-</li>
-<li>
-<p>change into <code>/workspace</code> and remove all files/dirs (or just the files that need removing):</p>
-<p><code>cd /workspace
-rm -Rf *</code></p>
 </li>
 </ul>
+<pre><code>docker run --rm -v `pwd`:/workspace -it bash:5.1.8
+</code></pre>
+<ul>
+<li>change into <code>/workspace</code> and remove all files/dirs (or just the files that need removing):</li>
+</ul>
+<pre><code>cd /workspace
+rm -Rf *
+</code></pre>
 <h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">#</a></h2>
 <h3 id="alternative-python-version">Alternative Python version<a class="headerlink" href="#alternative-python-version" title="Permanent link">#</a></h3>
 <p>In case your base Debian/Ubuntu distribution does not have the right Python version 
@@ -662,13 +664,12 @@ apt-get update
 <ul>
 <li>You may need to install package <code>software-properties-common</code> before you have <code>add-apt-repository</code> available.</li>
 <li>Consider installed <code>python3.x-full</code> and <code>libpython3.x</code> to also get the <code>venv</code> and <code>distutils</code> packages installed.</li>
-<li>
-<p>For installing <code>pip</code>, use this:</p>
-<p><code>wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py &amp;&amp; \
-python3.7 /tmp/get-pip.py &amp;&amp; \
-rm /tmp/get-pip.py</code></p>
-</li>
+<li>For installing <code>pip</code>, use this:</li>
 </ul>
+<pre><code>wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py &amp;&amp; \
+python3.7 /tmp/get-pip.py &amp;&amp; \
+rm /tmp/get-pip.py
+</code></pre>
 <h3 id="switch-default-python-version">Switch default Python version<a class="headerlink" href="#switch-default-python-version" title="Permanent link">#</a></h3>
 <p>If your base distro has an older version of Python and you do not want to sprinkle the
 specific newer version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
@@ -713,16 +714,16 @@ use the <code>-d</code> flag to first detach it.</p>
 with a <code>bash</code> shell).</p>
 <p>If you need to increase the scrollback buffer, let us say to 100,000 lines, then you can do it</p>
 <ul>
-<li>
-<p>in the current session as follows:</p>
-<p><code>CTRL A : &lt;Enter&gt;
-scrollback 100000&lt;Enter&gt;</code></p>
-</li>
-<li>
-<p>for all new sessions by adding the following line in your <code>$HOME/.screenrc</code> config file:</p>
-<p><code>defscrollback 100000</code></p>
-</li>
+<li>in the current session as follows:</li>
 </ul>
+<pre><code>CTRL A : &lt;Enter&gt;
+scrollback 100000&lt;Enter&gt;
+</code></pre>
+<ul>
+<li>for all new sessions by adding the following line in your <code>$HOME/.screenrc</code> config file:</li>
+</ul>
+<pre><code>defscrollback 100000
+</code></pre>
 <h2 id="default-runtime">Default runtime<a class="headerlink" href="#default-runtime" title="Permanent link">#</a></h2>
 <p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you can simply define
 the <em>default runtime</em> to use with your docker commands (<a href="https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html">source</a>):</p>
