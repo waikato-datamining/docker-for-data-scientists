@@ -252,3 +252,24 @@ you can make them available with the following option of the `docker run` comman
 ```
 --env-file=`pwd`/.env
 ```
+
+
+# Interactive installation of tzdata
+
+It can happen that your docker build stops when installing packages, prompting
+you enter the geographic area for your timezone. This can be caused by installing
+the `tzdata` package. To avoid this, prefix your `apt install` or `apt-get install` 
+command with `DEBIAN_FRONTEND=noninteractive`, e.g.:
+
+```bash
+RUN    apt-get -y update \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install wget bash \
+    && rm -rf /var/lib/apt/lists/*
+```
+
+Globally setting the environment variable as per below is 
+[discouraged](https://github.com/docker/docker/issues/4032#issuecomment-34597177):
+
+```bash
+ENV DEBIAN_FRONTEND=noninteractive
+```
