@@ -423,6 +423,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#interactive-installation-of-tzdata" class="md-nav__link">
+    Interactive installation of tzdata
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -606,6 +613,13 @@
         <li class="md-nav__item">
   <a href="#environment-variables" class="md-nav__link">
     Environment variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interactive-installation-of-tzdata" class="md-nav__link">
+    Interactive installation of tzdata
   </a>
   
 </li>
@@ -809,6 +823,19 @@ value of the variable.</p>
 <p>If you have such a <code>.env</code> in the directory that you are starting the container from,
 you can make them available with the following option of the <code>docker run</code> command:</p>
 <pre><code>--env-file=`pwd`/.env
+</code></pre>
+<h2 id="interactive-installation-of-tzdata">Interactive installation of tzdata<a class="headerlink" href="#interactive-installation-of-tzdata" title="Permanent link">#</a></h2>
+<p>It can happen that your docker build stops when installing packages, prompting
+you enter the geographic area for your timezone. This can be caused by installing
+the <code>tzdata</code> package. To avoid this, prefix your <code>apt install</code> or <code>apt-get install</code> 
+command with <code>DEBIAN_FRONTEND=noninteractive</code>, e.g.:</p>
+<pre><code class="language-bash">RUN    apt-get -y update \
+    &amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get -y install wget bash \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+</code></pre>
+<p>Globally setting the environment variable as per below is 
+<a href="https://github.com/docker/docker/issues/4032#issuecomment-34597177">discouraged</a>:</p>
+<pre><code class="language-bash">ENV DEBIAN_FRONTEND=noninteractive
 </code></pre>
 
 
