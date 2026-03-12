@@ -273,3 +273,10 @@ Globally setting the environment variable as per below is
 ```bash
 ENV DEBIAN_FRONTEND=noninteractive
 ```
+
+# PyTorch version compatibilities
+
+If you need to align versions for `torch`, `torchaudio`, etc, then you can
+use the following table which has the corresponding versions listed:
+
+https://github.com/pytorch/pytorch/wiki/PyTorch-Versions
