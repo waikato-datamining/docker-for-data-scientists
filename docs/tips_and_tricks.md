@@ -279,4 +279,4 @@ ENV DEBIAN_FRONTEND=noninteractive
 If you need to align versions for `torch`, `torchaudio`, etc, then you can
 use the following table which has the corresponding versions listed:
 
-https://github.com/pytorch/pytorch/wiki/PyTorch-Versions
+[github.com/pytorch/pytorch/wiki/PyTorch-Versions](https://github.com/pytorch/pytorch/wiki/PyTorch-Versions)
