@@ -9,14 +9,14 @@ incompatible with all the others (*Yeah, I'm looking at you, numpy*!).
 
 So instead of:
 
-```bash
+```dockerfile
 RUN python3 -m pip install --no-cache-dir numpy && \
     ... 
 ```
 
 You should do something like this:
 
-```bash
+```dockerfile
 RUN python3 -m pip install --no-cache-dir numpy==1.17.4 && \
     ... 
 ```
@@ -25,7 +25,7 @@ Of course, when you are cloning directly from a github repository, because you r
 a specific bugfix or the library does not offer any releases (or only very infrequent),
 then you should use a specific commit hash in your command:  
 
-```bash
+```dockerfile
 RUN git clone https://github.com/ACCOUNT/REPO.git && \
     cd REPO && \
     git reset --hard 11223344556677889900AABBCCDDEEFF11223344 && \
@@ -69,7 +69,7 @@ the container as `root`).
 
 This custom file can then be added to your docker image using the following command:
 
-```bash
+```dockerfile
 COPY bash.bashrc /etc/bash.bashrc
 ```
 
