@@ -9,14 +9,14 @@ incompatible with all the others (*Yeah, I'm looking at you, numpy*!).
 
 So instead of:
 
-```commandline
+```bash
 RUN python3 -m pip install --no-cache-dir numpy && \
     ... 
 ```
 
 You should do something like this:
 
-```commandline
+```bash
 RUN python3 -m pip install --no-cache-dir numpy==1.17.4 && \
     ... 
 ```
@@ -25,7 +25,7 @@ Of course, when you are cloning directly from a github repository, because you r
 a specific bugfix or the library does not offer any releases (or only very infrequent),
 then you should use a specific commit hash in your command:  
 
-```commandline
+```bash
 RUN git clone https://github.com/ACCOUNT/REPO.git && \
     cd REPO && \
     git reset --hard 11223344556677889900AABBCCDDEEFF11223344 && \
@@ -49,7 +49,7 @@ avoids creating output files in volumes that can only be removed by `root`).
 Use the `-u` and `-e` command to specify the user/group IDs and the user name 
 as follows:
 
-```
+```bash
 docker run -u $(id -u):$(id -g) -e USER=$USER ...
 ```
 
@@ -69,7 +69,7 @@ the container as `root`).
 
 This custom file can then be added to your docker image using the following command:
 
-```commandline
+```bash
 COPY bash.bashrc /etc/bash.bashrc
 ```
 
@@ -86,13 +86,13 @@ image size unnecessarily.
 
 Remove the pip cache to reduce the size of your layer after you have installed all your packages:
 
-```
+```bash
 rm -Rf /root/.cache/pip
 ```
 
 Alternatively, do not cache downloads when installing a package:
 
-```
+```bash
 pip install --no-cache-dir ...
 ```
 
@@ -102,7 +102,7 @@ pip install --no-cache-dir ...
 After performing installs via `apt` or `apt-get`, clean up the cache to reduce the 
 size of your layer:
 
-```
+```bash
 apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 ```

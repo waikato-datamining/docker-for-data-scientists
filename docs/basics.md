@@ -30,7 +30,7 @@ If `:tag` is omitted, it defaults to `:latest`.
 
 The command copied from the above page looks like this:
 
-```commandline
+```bash
 docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 ```
 
@@ -40,7 +40,7 @@ When executing this command, all layers that have not been cached locally will b
 downloaded. It will look similar to this screen, with each layer having its own
 unique hash:
 
-```commandline
+```bash
 metal:[101]~>docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 1.6.0-cuda10.1-cudnn7-devel: Pulling from pytorch/pytorch
 7ddbc47eeb70: Pull complete 
@@ -60,7 +60,7 @@ b398e882f414: Waiting
 
 The output from the finished pull will look like this:
 
-```commandline
+```bash
 metal:[103]~>docker pull pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 1.6.0-cuda10.1-cudnn7-devel: Pulling from pytorch/pytorch
 7ddbc47eeb70: Pull complete 
@@ -102,7 +102,7 @@ with interactive mode. The non-interactive mode is explained briefly in
 Starting the just downloaded pytorch image in interactive mode is achieved with 
 this command:
 
-```commandline
+```bash
 docker run -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 ```
 
@@ -127,7 +127,7 @@ sub-command. If all containers, not just currently running ones, should be liste
 then you need to add the `-a` option. So, for listing all containers on your system, 
 run this:
 
-```commandline
+```bash
 docker container ls -a
 ```
 
@@ -191,7 +191,7 @@ volumes willy-nilly.
 The command below maps the `/some/where` directory of the host to the directory
 `/opt/local` within the container:
 
-```commandline
+```bash
 docker run \
     -v /some/where:/opt/local \ 
     -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
@@ -200,7 +200,7 @@ docker run \
 Please note that directories need to be absolute paths. If you want to map the current 
 directory into the container, then you can make use of the `pwd` command like this:
 
-```commandline
+```bash
 docker run \
     -v `pwd`:/opt/local \ 
     -it pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
@@ -217,25 +217,25 @@ that you can use to clean up your system:
 
 * stop all containers
 
-    ```
+    ```bash
     docker stop $(docker ps -a -q)
     ```
 
 * remove all containers
 
-    ```
+    ```bash
     docker rm $(docker ps -a -q)
     ```
 
 * purging all unused or dangling images, containers, volumes, and networks:
 
-    ```
+    ```bash
     docker system prune
     ```
 
 * you can be even more aggressive when adding the `-a` flag:
 
-    ```
+    ```bash
     docker system prune -a
     ```
 

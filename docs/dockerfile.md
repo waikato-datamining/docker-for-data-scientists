@@ -41,7 +41,7 @@ statement, which tells docker the particular base image on top of which you want
 Reusing the image from our `pull` command in the [Basics](basics.md) section, we get the
 following initial statement:
 
-```commandline
+```dockerfile
 FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 ```
 
@@ -54,7 +54,7 @@ the outside. For defining such a build parameter (with a default value), you can
 
 The `ARG` syntax is simple:
 
-```
+```dockerfile
 ARG key=value
 ```
 
@@ -66,7 +66,7 @@ put them in variables. Variables can be used in other statements via `${...}`.
 
 Here is the *human-readable* `FROM` statement:
 
-```
+```dockerfile
 ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"
@@ -85,7 +85,7 @@ consider using `ARG` instead.
 One such environment variable is `DEBIAN_FRONTEND`, which changes the behavior of
 `apt-get` (Debian tool to install packages):
 
-```
+```dockerfile
 ENV DEBIAN_FRONTEND=noninteractive
 ```
 
@@ -106,7 +106,7 @@ is achieved with the [RUN](https://docs.docker.com/engine/reference/builder/#run
 
 For installing matplotlib, which is not part of our base image, we can use:
 
-```
+```dockerfile
 RUN pip --no-cache install matplotlib
 ```
 
@@ -152,7 +152,7 @@ the `Dockerfile` that you are currently working on.
 
 In order to include this Python script, use the following command:
 
-```
+```dockerfile
 COPY test.py /opt/test/test.py
 ```
 
@@ -163,7 +163,7 @@ Not only Python scripts can be copied, you can also create executable bash scrip
 that call your actual Python scripts and place them in `/usr/bin`. For our `test.py`
 the bash script would look like this:
 
-```
+```bash
 #!/bin/bash
 
 python /opt/test/test.py
@@ -171,7 +171,7 @@ python /opt/test/test.py
 
 If your script supports command-line options, you can pass them through using `"$@"`:
 
-```
+```bash
 #!/bin/bash
 
 python /opt/test/test.py "$@"
@@ -187,7 +187,7 @@ to use `mkdir` commands. In our case, we can just use the command to make the
 docker container automatically start the prompt in the directory of our Python script
 (`/opt/test`) when used in interactive mode:
 
-```
+```dockerfile
 WORKDIR /opt/test
 ```
 
@@ -205,7 +205,7 @@ are ready to kick off a build. After changing into the directory containing
 the `Dockerfile`, you can use the `build` sub-command to perform the build.
 Rather than using a hash, we can give it a name via the `-t` option (*tagging* it):
 
-```commandline
+```bash
 docker build -t pytorchtest .
 ```
 
@@ -256,7 +256,7 @@ Successfully tagged pytorchtest:latest
 With the image successfully built, you can now use it. For this you need to employ the
 [RUN](https://docs.docker.com/engine/reference/builder/#run) command.
 
-```commandline
+```bash
 docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
 ```
 
@@ -326,13 +326,13 @@ development of your docker image and code, you can then use it in your productio
 For running it in non-interactive mode, simply remove the `-it` flags and
 append the command that you want to run. In our case, this is:
 
-```commandline
+```bash
 python3 /opt/test/test.py
 ```
 
 The full command-line therefore looks like:
 
-```commandline
+```bash
 docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
 ```
 
@@ -374,7 +374,7 @@ version of your image.
 In order to push the image `pytorchtest` out to docker hub, you first need to give it
 the proper tag:
 
-```commandline
+```bash
 docker tag \
     pytorchtest \
     user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
@@ -382,7 +382,7 @@ docker tag \
 
 And for pushing it out, use this command:
 
-```
+```bash
 docker push user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
 ```
 

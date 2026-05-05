@@ -8,7 +8,7 @@ system does not even have a GPU.
 Therefore, an alternative is to skip the CUDA device check by inserting the
 `FORCE_CUDA` environment variable in your docker build as follows: 
 
-```
+```dockerfile
 ENV FORCE_CUDA="1"
 ```
 
@@ -19,7 +19,7 @@ then you can supply the list of [NVIDIA architectures](https://docs.nvidia.com/d
 via the `TORCH_CUDA_ARCH_LIST` environment variable. By using `ARG`, you can define a 
 default value and still override it at build time via the `--build-arg` option:
 
-```
+```dockerfile
 ARG TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
 ENV TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST}"
 ```
@@ -48,20 +48,20 @@ Then you can precede your command with `DEBIAN_FRONTEND=noninteractive`.
 
 In case of `apt-get`, use something like this:
 
-```commandline
+```dockerfile
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ...
 ```
 
 Or like this:
 
-```commandline
+```dockerfile
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y ...
 ```
 
 Finally, the brute force method is to define it globally via the `ENV` command:
 
-```commandline
+```dockerfile
 ENV DEBIAN_FRONTEND noninteractive
 ```
 
@@ -106,7 +106,7 @@ Instructions for fixing this error can be found on their developer blog:
 
 This error occurs when numba has no access to a writable cache directory ([source](https://stackoverflow.com/a/63367171/4698227)). To fix this, make sure that you point the `NUMBA_CACHE_DIR` at a directory with write access, e.g.:
 
-```
+```dockerfile
 ENV NUMBA_CACHE_DIR /tmp
 ```
 

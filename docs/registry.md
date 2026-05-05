@@ -22,7 +22,7 @@ new machine.
 Assuming your registry `myregistry.example.com` is available via https (port 443),
 then you can change the `FROM` directive in your `Dockerfile` from:
 
-```
+```dockerfile
 ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"
@@ -31,7 +31,7 @@ FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
 
 To this:
 
-```
+```dockerfile
 ARG PYTORCH="1.6.0"
 ARG CUDA="10.1"
 ARG CUDNN="7"

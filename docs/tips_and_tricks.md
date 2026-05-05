@@ -9,13 +9,13 @@ revert to using docker to remove them again:
 
 * the following docker command will map the current directory to `/workspace`:
 
-```
+```bash
 docker run --rm -v `pwd`:/workspace -it bash:5.2.32
 ```
   
 * change into `/workspace` and remove all files/dirs (or just the files that need removing):
 
-```
+```bash
 cd /workspace
 rm -Rf *
 ```
@@ -38,7 +38,7 @@ apt-get update
 * Consider installed `python3.x-full` and `libpython3.x` to also get the `venv` and `distutils` packages installed.
 * For installing `pip`, use this:
 
-```
+```bash
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && \
 python3.7 /tmp/get-pip.py && \
 rm /tmp/get-pip.py
@@ -54,7 +54,7 @@ on Debian systems to change the default.
 The following commands switch from Python 3.5 to Python 3.6 for the `python3` executable
 and also use Python 3.6 as the default for the `python` executable:
 
-```commandline
+```bash
 update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1 && \
 update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2 && \
 update-alternatives --set python /usr/bin/python3.6 && \
@@ -68,7 +68,7 @@ update-alternatives --set python3 /usr/bin/python3.6 && \
 An installation with `pip` will fail if a dependency is not available, even if that dependency should not be required.
 The following command-line install each dependency separately, therefore continuing, even if errors are encountered ([source](https://stackoverflow.com/a/54053100)):
 
-```
+```bash
 cat requirements.txt | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 pip install
 ```
 
@@ -152,7 +152,7 @@ Since docker hashes the layer instructions rather than the content, it will not 
 
 Assuming the following `Dockerfile` snippet, where `file1` changed:
 
-```
+```dockerfile
 RUN ...<layer X>...
 COPY file1 ...<layer X+1>...
 COPY file2 ...<layer X+2>...
@@ -160,7 +160,7 @@ COPY file2 ...<layer X+2>...
 
 You can **inject** a dummy **ARG** variable as follows to rebuild the layers from `layer X+1` onwards:
 
-```
+```dockerfile
 RUN ...<layer X>...
 ARG blah=1
 COPY file1 ...<layer X+1>...
@@ -193,7 +193,7 @@ docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker system 
 
 If you need to remove dangling volumes, use this:
 
-```commandline
+```bash
 docker volume prune
 ```
 
@@ -221,7 +221,7 @@ can be used to quickly test whether Docker containers can access the GPU properl
 The following command, based on CUDA 12.2.2, should simply run `nvidia-smi` within
 the container and output some information on the available GPUs (RAM, load, etc):
 
-```
+```bash
 docker run --rm \
   --gpus=all \
   -it waikatodatamining/gpu-test:cuda12.2.2

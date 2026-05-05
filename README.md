@@ -20,7 +20,7 @@ Best approach is to install mkdocs in a virtual environment (`venv` directory):
 * Install mkdocs and dependencies
 
   ```
-  ./venv/bin/pip install mkdocs==1.4.2 jinja2==3.1.2 "Markdown<3.4.0" mkdocs-material==8.5.10
+  ./venv/bin/pip install mkdocs==1.6.1 jinja2==3.1.6 Markdown==3.10.2 MarkupSafe==3.0.3 mkdocs-material==9.7.6 mkdocs-material-extensions==1.3.1 Pygments==2.20.0 pymdown-extensions==10.21.2 click==8.2.1
   ```
 
 
