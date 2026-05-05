@@ -12,8 +12,18 @@
       
         <link rel="canonical" href="https://www.data-mining.co.nz/docker-for-data-scientists/tips_and_tricks/">
       
+      
+        <link rel="prev" href="../best_practices/">
+      
+      
+        <link rel="next" href="../troubleshooting/">
+      
+      
+        
+      
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -21,15 +31,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.472b142f.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.08040f6c.min.css">
-        
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
+
     
+    
+      
     
     
       
@@ -41,24 +50,17 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-    
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr">
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -78,16 +80,19 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Docker for Data Scientists" class="md-header__button md-logo" aria-label="Docker for Data Scientists" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -107,46 +112,56 @@
     </div>
     
     
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/waikato-datamining/docker-for-data-scientists" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -176,12 +191,13 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Docker for Data Scientists" class="md-nav__button md-logo" aria-label="Docker for Data Scientists" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     Docker for Data Scientists
@@ -191,7 +207,7 @@
       <a href="https://github.com/waikato-datamining/docker-for-data-scientists" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -203,14 +219,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Home
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -218,14 +246,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../basics/" class="md-nav__link">
-        Basics
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -233,14 +273,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../repos/" class="md-nav__link">
-        Repositories
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repositories
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -248,14 +300,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../dockerfile/" class="md-nav__link">
-        Dockerfile
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dockerfile
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -263,14 +327,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../best_practices/" class="md-nav__link">
-        Best practices
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Best practices
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -278,26 +354,51 @@
     
       
       
-      
-
   
   
     
   
   
+  
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Tips & Tricks
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tips & Tricks
+  
+
+    
+  </span>
+  
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Tips & Tricks
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tips & Tricks
+  
+
+    
+  </span>
+  
+  
+
       </a>
       
         
@@ -315,14 +416,22 @@
       
         <li class="md-nav__item">
   <a href="#remove-unwanted-files" class="md-nav__link">
-    Remove unwanted files
+    <span class="md-ellipsis">
+      
+        Remove unwanted files
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#python" class="md-nav__link">
-    Python
+    <span class="md-ellipsis">
+      
+        Python
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Python">
@@ -330,21 +439,33 @@
         
           <li class="md-nav__item">
   <a href="#alternative-python-version" class="md-nav__link">
-    Alternative Python version
+    <span class="md-ellipsis">
+      
+        Alternative Python version
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#switch-default-python-version" class="md-nav__link">
-    Switch default Python version
+    <span class="md-ellipsis">
+      
+        Switch default Python version
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#install-packages-with-pip-ignoring-errors" class="md-nav__link">
-    Install packages with pip ignoring errors
+    <span class="md-ellipsis">
+      
+        Install packages with pip ignoring errors
+      
+    </span>
   </a>
   
 </li>
@@ -356,21 +477,33 @@
       
         <li class="md-nav__item">
   <a href="#screen" class="md-nav__link">
-    Screen
+    <span class="md-ellipsis">
+      
+        Screen
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#default-runtime" class="md-nav__link">
-    Default runtime
+    <span class="md-ellipsis">
+      
+        Default runtime
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#rebuild" class="md-nav__link">
-    Rebuild
+    <span class="md-ellipsis">
+      
+        Rebuild
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Rebuild">
@@ -378,14 +511,22 @@
         
           <li class="md-nav__item">
   <a href="#rebuilding-some-layers" class="md-nav__link">
-    Rebuilding some layers
+    <span class="md-ellipsis">
+      
+        Rebuilding some layers
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#complete-rebuild" class="md-nav__link">
-    Complete rebuild
+    <span class="md-ellipsis">
+      
+        Complete rebuild
+      
+    </span>
   </a>
   
 </li>
@@ -397,42 +538,66 @@
       
         <li class="md-nav__item">
   <a href="#thorough-clean-up" class="md-nav__link">
-    Thorough clean up
+    <span class="md-ellipsis">
+      
+        Thorough clean up
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#excluding-filesdirs-from-docker-context" class="md-nav__link">
-    Excluding files/dirs from docker context
+    <span class="md-ellipsis">
+      
+        Excluding files/dirs from docker context
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-gpu" class="md-nav__link">
-    Testing the GPU
+    <span class="md-ellipsis">
+      
+        Testing the GPU
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#environment-variables" class="md-nav__link">
-    Environment variables
+    <span class="md-ellipsis">
+      
+        Environment variables
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#interactive-installation-of-tzdata" class="md-nav__link">
-    Interactive installation of tzdata
+    <span class="md-ellipsis">
+      
+        Interactive installation of tzdata
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#pytorch-version-compatibilities" class="md-nav__link">
-    PyTorch version compatibilities
+    <span class="md-ellipsis">
+      
+        PyTorch version compatibilities
+      
+    </span>
   </a>
   
 </li>
@@ -447,14 +612,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../troubleshooting/" class="md-nav__link">
-        Troubleshooting
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -462,14 +639,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../automation/" class="md-nav__link">
-        Automation
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -477,14 +666,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../registry/" class="md-nav__link">
-        Registry
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registry
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -516,14 +717,22 @@
       
         <li class="md-nav__item">
   <a href="#remove-unwanted-files" class="md-nav__link">
-    Remove unwanted files
+    <span class="md-ellipsis">
+      
+        Remove unwanted files
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#python" class="md-nav__link">
-    Python
+    <span class="md-ellipsis">
+      
+        Python
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Python">
@@ -531,21 +740,33 @@
         
           <li class="md-nav__item">
   <a href="#alternative-python-version" class="md-nav__link">
-    Alternative Python version
+    <span class="md-ellipsis">
+      
+        Alternative Python version
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#switch-default-python-version" class="md-nav__link">
-    Switch default Python version
+    <span class="md-ellipsis">
+      
+        Switch default Python version
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#install-packages-with-pip-ignoring-errors" class="md-nav__link">
-    Install packages with pip ignoring errors
+    <span class="md-ellipsis">
+      
+        Install packages with pip ignoring errors
+      
+    </span>
   </a>
   
 </li>
@@ -557,21 +778,33 @@
       
         <li class="md-nav__item">
   <a href="#screen" class="md-nav__link">
-    Screen
+    <span class="md-ellipsis">
+      
+        Screen
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#default-runtime" class="md-nav__link">
-    Default runtime
+    <span class="md-ellipsis">
+      
+        Default runtime
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#rebuild" class="md-nav__link">
-    Rebuild
+    <span class="md-ellipsis">
+      
+        Rebuild
+      
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="Rebuild">
@@ -579,14 +812,22 @@
         
           <li class="md-nav__item">
   <a href="#rebuilding-some-layers" class="md-nav__link">
-    Rebuilding some layers
+    <span class="md-ellipsis">
+      
+        Rebuilding some layers
+      
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#complete-rebuild" class="md-nav__link">
-    Complete rebuild
+    <span class="md-ellipsis">
+      
+        Complete rebuild
+      
+    </span>
   </a>
   
 </li>
@@ -598,42 +839,66 @@
       
         <li class="md-nav__item">
   <a href="#thorough-clean-up" class="md-nav__link">
-    Thorough clean up
+    <span class="md-ellipsis">
+      
+        Thorough clean up
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#excluding-filesdirs-from-docker-context" class="md-nav__link">
-    Excluding files/dirs from docker context
+    <span class="md-ellipsis">
+      
+        Excluding files/dirs from docker context
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-gpu" class="md-nav__link">
-    Testing the GPU
+    <span class="md-ellipsis">
+      
+        Testing the GPU
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#environment-variables" class="md-nav__link">
-    Environment variables
+    <span class="md-ellipsis">
+      
+        Environment variables
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#interactive-installation-of-tzdata" class="md-nav__link">
-    Interactive installation of tzdata
+    <span class="md-ellipsis">
+      
+        Interactive installation of tzdata
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#pytorch-version-compatibilities" class="md-nav__link">
-    PyTorch version compatibilities
+    <span class="md-ellipsis">
+      
+        PyTorch version compatibilities
+      
+    </span>
   </a>
   
 </li>
@@ -648,14 +913,14 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
-  <a href="https://github.com/waikato-datamining/docker-for-data-scientists/edit/main/docs/tips_and_tricks.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+
+  
+  
 
 
   <h1>Tips & Tricks</h1>
@@ -673,49 +938,49 @@ revert to using docker to remove them again:</p>
 <p>the following docker command will map the current directory to <code>/workspace</code>:</p>
 </li>
 </ul>
-<pre><code>docker run --rm -v `pwd`:/workspace -it bash:5.2.32
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workspace<span class="w"> </span>-it<span class="w"> </span>bash:5.2.32
+</span></code></pre></div>
 <ul>
 <li>change into <code>/workspace</code> and remove all files/dirs (or just the files that need removing):</li>
 </ul>
-<pre><code>cd /workspace
-rm -Rf *
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/workspace
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>rm<span class="w"> </span>-Rf<span class="w"> </span>*
+</span></code></pre></div>
 <h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">#</a></h2>
 <h3 id="alternative-python-version">Alternative Python version<a class="headerlink" href="#alternative-python-version" title="Permanent link">#</a></h3>
 <p>In case your base Debian/Ubuntu distribution does not have the right Python version 
 available, you can get additional versions by adding the <a href="https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa">deadsnakes ppa</a>:</p>
-<pre><code class="language-bash">add-apt-repository -y ppa:deadsnakes/ppa &amp;&amp; \
-apt-get update
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>add-apt-repository<span class="w"> </span>-y<span class="w"> </span>ppa:deadsnakes/ppa<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>apt-get<span class="w"> </span>update
+</span></code></pre></div>
 <p><strong>Notes:</strong> </p>
 <ul>
 <li>You may need to install package <code>software-properties-common</code> before you have <code>add-apt-repository</code> available.</li>
 <li>Consider installed <code>python3.x-full</code> and <code>libpython3.x</code> to also get the <code>venv</code> and <code>distutils</code> packages installed.</li>
 <li>For installing <code>pip</code>, use this:</li>
 </ul>
-<pre><code>wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py &amp;&amp; \
-python3.7 /tmp/get-pip.py &amp;&amp; \
-rm /tmp/get-pip.py
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>wget<span class="w"> </span>https://bootstrap.pypa.io/get-pip.py<span class="w"> </span>-O<span class="w"> </span>/tmp/get-pip.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>python3.7<span class="w"> </span>/tmp/get-pip.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>rm<span class="w"> </span>/tmp/get-pip.py
+</span></code></pre></div>
 <h3 id="switch-default-python-version">Switch default Python version<a class="headerlink" href="#switch-default-python-version" title="Permanent link">#</a></h3>
 <p>If your base distro has an older version of Python and you do not want to sprinkle the
 specific newer version throughout your <code>Dockerfile</code>, then you can use <code>update-alternatives</code>
 on Debian systems to change the default.</p>
 <p>The following commands switch from Python 3.5 to Python 3.6 for the <code>python3</code> executable
 and also use Python 3.6 as the default for the <code>python</code> executable:</p>
-<pre><code class="language-commandline">update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1 &amp;&amp; \
-update-alternatives --install /usr/bin/python python /usr/bin/python3.6 2 &amp;&amp; \
-update-alternatives --set python /usr/bin/python3.6 &amp;&amp; \
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1 &amp;&amp; \
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2 &amp;&amp; \
-update-alternatives --set python3 /usr/bin/python3.6 &amp;&amp; \
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>update-alternatives<span class="w"> </span>--install<span class="w"> </span>/usr/bin/python<span class="w"> </span>python<span class="w"> </span>/usr/bin/python3.5<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>update-alternatives<span class="w"> </span>--install<span class="w"> </span>/usr/bin/python<span class="w"> </span>python<span class="w"> </span>/usr/bin/python3.6<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>update-alternatives<span class="w"> </span>--set<span class="w"> </span>python<span class="w"> </span>/usr/bin/python3.6<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>update-alternatives<span class="w"> </span>--install<span class="w"> </span>/usr/bin/python3<span class="w"> </span>python3<span class="w"> </span>/usr/bin/python3.5<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>update-alternatives<span class="w"> </span>--install<span class="w"> </span>/usr/bin/python3<span class="w"> </span>python3<span class="w"> </span>/usr/bin/python3.6<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>update-alternatives<span class="w"> </span>--set<span class="w"> </span>python3<span class="w"> </span>/usr/bin/python3.6<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span></code></pre></div>
 <h3 id="install-packages-with-pip-ignoring-errors">Install packages with pip ignoring errors<a class="headerlink" href="#install-packages-with-pip-ignoring-errors" title="Permanent link">#</a></h3>
 <p>An installation with <code>pip</code> will fail if a dependency is not available, even if that dependency should not be required.
 The following command-line install each dependency separately, therefore continuing, even if errors are encountered (<a href="https://stackoverflow.com/a/54053100">source</a>):</p>
-<pre><code>cat requirements.txt | sed -e '/^\s*#.*$/d' -e '/^\s*$/d' | xargs -n 1 pip install
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cat<span class="w"> </span>requirements.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/^\s*#.*$/d&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/^\s*$/d&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>pip<span class="w"> </span>install
+</span></code></pre></div>
 <h2 id="screen">Screen<a class="headerlink" href="#screen" title="Permanent link">#</a></h2>
 <p>The <a href="https://linux.die.net/man/1/screen">screen</a> command-line utility allows you to 
 pick up remote sessions after detaching from them. This is especially helpful when 
@@ -744,14 +1009,14 @@ with a <code>bash</code> shell).</p>
 <ul>
 <li>in the current session as follows:</li>
 </ul>
-<pre><code>CTRL A : &lt;Enter&gt;
-scrollback 100000&lt;Enter&gt;
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>CTRL A : &lt;Enter&gt;
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>scrollback 100000&lt;Enter&gt;
+</span></code></pre></div>
 <ul>
 <li>for all new sessions by adding the following line in your <code>$HOME/.screenrc</code> config file:</li>
 </ul>
-<pre><code>defscrollback 100000
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>defscrollback 100000
+</span></code></pre></div>
 <h2 id="default-runtime">Default runtime<a class="headerlink" href="#default-runtime" title="Permanent link">#</a></h2>
 <p>Instead of always having to type <code>--runtime=nvidia</code> or <code>--gpus=all</code>, you can simply define
 the <em>default runtime</em> to use with your docker commands (<a href="https://docs.nvidia.com/dgx/nvidia-container-runtime-upgrade/index.html">source</a>):</p>
@@ -759,16 +1024,16 @@ the <em>default runtime</em> to use with your docker commands (<a href="https://
 <li>edit the <code>/etc/docker/daemon.json</code> file as <code>root</code> user</li>
 <li>insert the key <code>default-runtime</code> with value <code>nvidia</code> so that it looks something like this:</li>
 </ul>
-<pre><code class="language-json">{
-    &quot;default-runtime&quot;: &quot;nvidia&quot;,
-    &quot;runtimes&quot;: {
-        &quot;nvidia&quot;: {
-            &quot;path&quot;: &quot;nvidia-container-runtime&quot;,
-            &quot;runtimeArgs&quot;: []
-        }
-    }
-}
-</code></pre>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nt">&quot;default-runtime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvidia&quot;</span><span class="p">,</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;runtimes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="nt">&quot;nvidia&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">            </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nvidia-container-runtime&quot;</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">            </span><span class="nt">&quot;runtimeArgs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">}</span>
+</span></code></pre></div>
 <ul>
 <li>save the file</li>
 <li>restart the docker daemon (e.g., <code>sudo systemctl restart docker</code>)</li>
@@ -778,54 +1043,54 @@ the <em>default runtime</em> to use with your docker commands (<a href="https://
 <p>Since docker hashes the layer instructions rather than the content, it will not detect changes to a file 
 (e.g., modifications in a script) since the last build and will keep using the cached version of that layer.</p>
 <p>Assuming the following <code>Dockerfile</code> snippet, where <code>file1</code> changed:</p>
-<pre><code>RUN ...&lt;layer X&gt;...
-COPY file1 ...&lt;layer X+1&gt;...
-COPY file2 ...&lt;layer X+2&gt;...
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">RUN</span><span class="w"> </span>...&lt;layer<span class="w"> </span>X&gt;...
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">COPY</span><span class="w"> </span>file1<span class="w"> </span>...&lt;layer<span class="w"> </span>X+1&gt;...
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">COPY</span><span class="w"> </span>file2<span class="w"> </span>...&lt;layer<span class="w"> </span>X+2&gt;...
+</span></code></pre></div>
 <p>You can <strong>inject</strong> a dummy <strong>ARG</strong> variable as follows to rebuild the layers from <code>layer X+1</code> onwards:</p>
-<pre><code>RUN ...&lt;layer X&gt;...
-ARG blah=1
-COPY file1 ...&lt;layer X+1&gt;...
-COPY file2 ...&lt;layer X+2&gt;...
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">RUN</span><span class="w"> </span>...&lt;layer<span class="w"> </span>X&gt;...
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">blah</span><span class="o">=</span><span class="m">1</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">COPY</span><span class="w"> </span>file1<span class="w"> </span>...&lt;layer<span class="w"> </span>X+1&gt;...
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">COPY</span><span class="w"> </span>file2<span class="w"> </span>...&lt;layer<span class="w"> </span>X+2&gt;...
+</span></code></pre></div>
 <p>Every time you need rebuild from there on, simply change the value that you are assigning to the variable, 
 to change the hash value.</p>
 <p>Of course, once your <code>Dockerfile</code> has been finalized, you can remove all these unnecessary operations and
 build your image properly.</p>
 <h3 id="complete-rebuild">Complete rebuild<a class="headerlink" href="#complete-rebuild" title="Permanent link">#</a></h3>
 <p>Especially during development of a docker image, it can happen that library versions have not been added to the <code>Dockerfile</code> just yet. Since docker hashes the command-lines, it will not rebuild a layer (and subsequent ones) if the hash does not change. If you do not want to clear your complete system (due to time constraints or capped internet usage), then you can force docker to build the image without using the hashed layers by adding the following flag to your <a href="https://docs.docker.com/engine/reference/commandline/build/">build</a> command:</p>
-<pre><code>--no-cache
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>--no-cache
+</span></code></pre></div>
 <h2 id="thorough-clean-up">Thorough clean up<a class="headerlink" href="#thorough-clean-up" title="Permanent link">#</a></h2>
 <p>You can stop/remove all containers and images with this one-liner:</p>
-<pre><code class="language-bash">docker stop $(docker ps -a -q) &amp;&amp; docker rm $(docker ps -a -q) &amp;&amp; docker system prune -a
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>stop<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>-q<span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>rm<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>-q<span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span>system<span class="w"> </span>prune<span class="w"> </span>-a
+</span></code></pre></div>
 <p>If you need to remove dangling volumes, use this:</p>
-<pre><code class="language-commandline">docker volume prune
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>prune
+</span></code></pre></div>
 <h2 id="excluding-filesdirs-from-docker-context">Excluding files/dirs from docker context<a class="headerlink" href="#excluding-filesdirs-from-docker-context" title="Permanent link">#</a></h2>
 <p>By default, docker will use all files and directories within the directory that contains the <code>Dockerfile</code> to
 the daemon to use as <em>context</em>. From this context, the image gets built. Should you have test data/models
 in the same directory then this could mean sending quite a lot of unnecessary data to the daemon. To avoid this,
 you can take advantage of the <code>.dockerignore</code> file, which lists files and directories to ignore. The following
 example ignores the <code>test</code> directory and all vim backup files:</p>
-<pre><code>test/
-*~
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>test/
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>*~
+</span></code></pre></div>
 <p>For more information, see the official documentation on the <a href="https://docs.docker.com/engine/reference/builder/#dockerignore-file">dockerignore file</a>.</p>
 <h2 id="testing-the-gpu">Testing the GPU<a class="headerlink" href="#testing-the-gpu" title="Permanent link">#</a></h2>
 <p>Images from the <a href="https://github.com/waikato-datamining/gpu-test">gpu-test</a> repository
 can be used to quickly test whether Docker containers can access the GPU properly.</p>
 <p>The following command, based on CUDA 12.2.2, should simply run <code>nvidia-smi</code> within
 the container and output some information on the available GPUs (RAM, load, etc):</p>
-<pre><code>docker run --rm \
-  --gpus=all \
-  -it waikatodatamining/gpu-test:cuda12.2.2
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>--gpus<span class="o">=</span>all<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span>-it<span class="w"> </span>waikatodatamining/gpu-test:cuda12.2.2
+</span></code></pre></div>
 <p>If the GPU is not passed through correctly (e.g., due to mismatching drivers, etc), 
 an error message will get output instead. Here is an example of such an error:</p>
-<pre><code>docker: Error response from daemon: could not select device driver &quot;&quot; with capabilities: [[gpu]].
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker: Error response from daemon: could not select device driver &quot;&quot; with capabilities: [[gpu]].
+</span></code></pre></div>
 <h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">#</a></h2>
 <p>You can provide environment variables via a <a href="https://hexdocs.pm/dotenvy/0.2.0/dotenv-file-format.html">.env file</a>
 to your Docker container without having to provide them as parameters. That approach
@@ -836,25 +1101,32 @@ sensitive information.</p>
 value of the variable.</p>
 <p>If you have such a <code>.env</code> in the directory that you are starting the container from,
 you can make them available with the following option of the <code>docker run</code> command:</p>
-<pre><code>--env-file=`pwd`/.env
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>--env-file=`pwd`/.env
+</span></code></pre></div>
 <h2 id="interactive-installation-of-tzdata">Interactive installation of tzdata<a class="headerlink" href="#interactive-installation-of-tzdata" title="Permanent link">#</a></h2>
 <p>It can happen that your docker build stops when installing packages, prompting
 you enter the geographic area for your timezone. This can be caused by installing
 the <code>tzdata</code> package. To avoid this, prefix your <code>apt install</code> or <code>apt-get install</code> 
 command with <code>DEBIAN_FRONTEND=noninteractive</code>, e.g.:</p>
-<pre><code class="language-bash">RUN    apt-get -y update \
-    &amp;&amp; DEBIAN_FRONTEND=noninteractive apt-get -y install wget bash \
-    &amp;&amp; rm -rf /var/lib/apt/lists/*
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>RUN<span class="w">    </span>apt-get<span class="w"> </span>-y<span class="w"> </span>update<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive<span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>wget<span class="w"> </span>bash<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
+</span></code></pre></div>
 <p>Globally setting the environment variable as per below is 
 <a href="https://github.com/docker/docker/issues/4032#issuecomment-34597177">discouraged</a>:</p>
-<pre><code class="language-bash">ENV DEBIAN_FRONTEND=noninteractive
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ENV<span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+</span></code></pre></div>
 <h2 id="pytorch-version-compatibilities">PyTorch version compatibilities<a class="headerlink" href="#pytorch-version-compatibilities" title="Permanent link">#</a></h2>
 <p>If you need to align versions for <code>torch</code>, <code>torchaudio</code>, etc, then you can
 use the following table which has the corresponding versions listed:</p>
 <p><a href="https://github.com/pytorch/pytorch/wiki/PyTorch-Versions">github.com/pytorch/pytorch/wiki/PyTorch-Versions</a></p>
+
+
+
+
+
+
+
 
 
 
@@ -865,47 +1137,12 @@ use the following table which has the corresponding versions listed:</p>
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../best_practices/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Best practices" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Best practices
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../troubleshooting/" class="md-footer__link md-footer__link--next" aria-label="Next: Troubleshooting" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Troubleshooting
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -928,10 +1165,14 @@ use the following table which has the corresponding versions listed:</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

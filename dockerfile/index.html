@@ -12,8 +12,18 @@
       
         <link rel="canonical" href="https://www.data-mining.co.nz/docker-for-data-scientists/dockerfile/">
       
+      
+        <link rel="prev" href="../repos/">
+      
+      
+        <link rel="next" href="../best_practices/">
+      
+      
+        
+      
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -21,15 +31,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.472b142f.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.08040f6c.min.css">
-        
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
       
 
+
     
+    
+      
     
     
       
@@ -41,24 +50,17 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
     
     
-    
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr">
   
-    
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -78,16 +80,19 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Docker for Data Scientists" class="md-header__button md-logo" aria-label="Docker for Data Scientists" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -107,46 +112,56 @@
     </div>
     
     
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
-      <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/waikato-datamining/docker-for-data-scientists" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -176,12 +191,13 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Docker for Data Scientists" class="md-nav__button md-logo" aria-label="Docker for Data Scientists" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
     Docker for Data Scientists
@@ -191,7 +207,7 @@
       <a href="https://github.com/waikato-datamining/docker-for-data-scientists" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -203,14 +219,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Home
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -218,14 +246,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../basics/" class="md-nav__link">
-        Basics
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -233,14 +273,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../repos/" class="md-nav__link">
-        Repositories
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repositories
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -248,26 +300,51 @@
     
       
       
-      
-
   
   
     
   
   
+  
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Dockerfile
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dockerfile
+  
+
+    
+  </span>
+  
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Dockerfile
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dockerfile
+  
+
+    
+  </span>
+  
+  
+
       </a>
       
         
@@ -285,91 +362,143 @@
       
         <li class="md-nav__item">
   <a href="#comments" class="md-nav__link">
-    Comments
+    <span class="md-ellipsis">
+      
+        Comments
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#from" class="md-nav__link">
-    FROM
+    <span class="md-ellipsis">
+      
+        FROM
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#arg" class="md-nav__link">
-    ARG
+    <span class="md-ellipsis">
+      
+        ARG
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#env" class="md-nav__link">
-    ENV
+    <span class="md-ellipsis">
+      
+        ENV
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#run" class="md-nav__link">
-    RUN
+    <span class="md-ellipsis">
+      
+        RUN
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#copy" class="md-nav__link">
-    COPY
+    <span class="md-ellipsis">
+      
+        COPY
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#workdir" class="md-nav__link">
-    WORKDIR
+    <span class="md-ellipsis">
+      
+        WORKDIR
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#other-useful-commands" class="md-nav__link">
-    Other useful commands
+    <span class="md-ellipsis">
+      
+        Other useful commands
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#building-the-image" class="md-nav__link">
-    Building the image
+    <span class="md-ellipsis">
+      
+        Building the image
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#running-the-image-interactive" class="md-nav__link">
-    Running the image (interactive)
+    <span class="md-ellipsis">
+      
+        Running the image (interactive)
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#running-the-image-non-interactive" class="md-nav__link">
-    Running the image (non-interactive)
+    <span class="md-ellipsis">
+      
+        Running the image (non-interactive)
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#optimizing-an-image" class="md-nav__link">
-    Optimizing an image
+    <span class="md-ellipsis">
+      
+        Optimizing an image
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#pushing-the-image" class="md-nav__link">
-    Pushing the image
+    <span class="md-ellipsis">
+      
+        Pushing the image
+      
+    </span>
   </a>
   
 </li>
@@ -384,14 +513,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../best_practices/" class="md-nav__link">
-        Best practices
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Best practices
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -399,14 +540,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../tips_and_tricks/" class="md-nav__link">
-        Tips & Tricks
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tips & Tricks
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -414,14 +567,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../troubleshooting/" class="md-nav__link">
-        Troubleshooting
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -429,14 +594,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../automation/" class="md-nav__link">
-        Automation
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automation
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -444,14 +621,26 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../registry/" class="md-nav__link">
-        Registry
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registry
+  
+
+    
+  </span>
+  
+  
+
       </a>
     </li>
   
@@ -483,91 +672,143 @@
       
         <li class="md-nav__item">
   <a href="#comments" class="md-nav__link">
-    Comments
+    <span class="md-ellipsis">
+      
+        Comments
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#from" class="md-nav__link">
-    FROM
+    <span class="md-ellipsis">
+      
+        FROM
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#arg" class="md-nav__link">
-    ARG
+    <span class="md-ellipsis">
+      
+        ARG
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#env" class="md-nav__link">
-    ENV
+    <span class="md-ellipsis">
+      
+        ENV
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#run" class="md-nav__link">
-    RUN
+    <span class="md-ellipsis">
+      
+        RUN
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#copy" class="md-nav__link">
-    COPY
+    <span class="md-ellipsis">
+      
+        COPY
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#workdir" class="md-nav__link">
-    WORKDIR
+    <span class="md-ellipsis">
+      
+        WORKDIR
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#other-useful-commands" class="md-nav__link">
-    Other useful commands
+    <span class="md-ellipsis">
+      
+        Other useful commands
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#building-the-image" class="md-nav__link">
-    Building the image
+    <span class="md-ellipsis">
+      
+        Building the image
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#running-the-image-interactive" class="md-nav__link">
-    Running the image (interactive)
+    <span class="md-ellipsis">
+      
+        Running the image (interactive)
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#running-the-image-non-interactive" class="md-nav__link">
-    Running the image (non-interactive)
+    <span class="md-ellipsis">
+      
+        Running the image (non-interactive)
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#optimizing-an-image" class="md-nav__link">
-    Optimizing an image
+    <span class="md-ellipsis">
+      
+        Optimizing an image
+      
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#pushing-the-image" class="md-nav__link">
-    Pushing the image
+    <span class="md-ellipsis">
+      
+        Pushing the image
+      
+    </span>
   </a>
   
 </li>
@@ -582,14 +823,14 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
-  <a href="https://github.com/waikato-datamining/docker-for-data-scientists/edit/main/docs/dockerfile.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+
+  
+  
 
 
   <h1>Dockerfile</h1>
@@ -625,26 +866,26 @@ This approach also preserves a lot of space.</p>
 statement, which tells docker the particular base image on top of which you want to build.</p>
 <p>Reusing the image from our <code>pull</code> command in the <a href="../basics/">Basics</a> section, we get the
 following initial statement:</p>
-<pre><code class="language-commandline">FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel</span>
+</span></code></pre></div>
 <h2 id="arg">ARG<a class="headerlink" href="#arg" title="Permanent link">#</a></h2>
 <p>In some cases, your <code>Dockerfile</code> script might need to be parametrized for the build from 
 the outside. For defining such a build parameter (with a default value), you can use the 
 <a href="https://docs.docker.com/engine/reference/builder/#arg">ARG</a> instruction. Using the 
 <code>--build-arg</code> command-line you can override the default value. </p>
 <p>The <code>ARG</code> syntax is simple:</p>
-<pre><code>ARG key=value
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">key</span><span class="o">=</span>value
+</span></code></pre></div>
 <p>You can also use <code>ARG</code> to make your <code>FROM</code> statement easier to read, but be aware of the 
 <a href="https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact">interaction between FROM and ARG</a>.</p>
 <p>Using <code>ARG</code>, we can pull out the version numbers from our original <code>FROM</code> statement and 
 put them in variables. Variables can be used in other statements via <code>${...}</code>.</p>
 <p>Here is the <em>human-readable</em> <code>FROM</code> statement:</p>
-<pre><code>ARG PYTORCH=&quot;1.6.0&quot;
-ARG CUDA=&quot;10.1&quot;
-ARG CUDNN=&quot;7&quot;
-FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">PYTORCH</span><span class="o">=</span><span class="s2">&quot;1.6.0&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">CUDA</span><span class="o">=</span><span class="s2">&quot;10.1&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">CUDNN</span><span class="o">=</span><span class="s2">&quot;7&quot;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">FROM</span><span class="w"> </span><span class="s">pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel</span>
+</span></code></pre></div>
 <h2 id="env">ENV<a class="headerlink" href="#env" title="Permanent link">#</a></h2>
 <p>In contrast to <code>ARG</code>, the <a href="https://docs.docker.com/engine/reference/builder/#env">ENV</a> 
 instruction is persistent within the docker image and can be used to set environment 
@@ -653,8 +894,8 @@ the final image, as it might interfere with subsequent layers, then you should
 consider using <code>ARG</code> instead.</p>
 <p>One such environment variable is <code>DEBIAN_FRONTEND</code>, which changes the behavior of
 <code>apt-get</code> (Debian tool to install packages):</p>
-<pre><code>ENV DEBIAN_FRONTEND=noninteractive
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+</span></code></pre></div>
 <p>The docker documentation on the <a href="https://docs.docker.com/engine/reference/builder/#env">ENV</a>
 command lists alternative ways of specifying such an environment variable, for limiting
 the scope.</p>
@@ -666,8 +907,8 @@ the required software packages. For Debian/Ubuntu based systems, this usually in
 invoking the <code>apt-get</code> package manager and for Python <code>pip/pip3</code>. Executing commands
 is achieved with the <a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
 <p>For installing matplotlib, which is not part of our base image, we can use:</p>
-<pre><code>RUN pip --no-cache install matplotlib
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>--no-cache<span class="w"> </span>install<span class="w"> </span>matplotlib
+</span></code></pre></div>
 <p>You will notice the <code>--no-cache</code> flag, which is not something you would normally use.
 In order to avoid downloading the same library over and over again, pip caches them 
 by default. This is not necessary for a docker image and just takes up more space. 
@@ -701,22 +942,22 @@ to exclude them.</p>
 Download the <a href="../files/pytorch-cifar10/test.py">test.py</a> script and place it next to 
 the <code>Dockerfile</code> that you are currently working on.</p>
 <p>In order to include this Python script, use the following command:</p>
-<pre><code>COPY test.py /opt/test/test.py
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">COPY</span><span class="w"> </span>test.py<span class="w"> </span>/opt/test/test.py
+</span></code></pre></div>
 <p>The <code>COPY</code> command will automatically create directories if they are not present,
 which is <code>/opt/test</code> in our case. Any existing file will get overwritten as well.</p>
 <p>Not only Python scripts can be copied, you can also create executable bash scripts
 that call your actual Python scripts and place them in <code>/usr/bin</code>. For our <code>test.py</code>
 the bash script would look like this:</p>
-<pre><code>#!/bin/bash
-
-python /opt/test/test.py
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>python<span class="w"> </span>/opt/test/test.py
+</span></code></pre></div>
 <p>If your script supports command-line options, you can pass them through using <code>"$@"</code>:</p>
-<pre><code>#!/bin/bash
-
-python /opt/test/test.py &quot;$@&quot;
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/bash</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>python<span class="w"> </span>/opt/test/test.py<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</span></code></pre></div>
 <h2 id="workdir">WORKDIR<a class="headerlink" href="#workdir" title="Permanent link">#</a></h2>
 <p>With the <a href="https://docs.docker.com/engine/reference/builder/#workdir">WOKRDIR</a> command,
 you can change the current working directory within your docker script. If the directory
@@ -724,8 +965,8 @@ does not exist yet, it will get created automatically. This eliminates the need
 to use <code>mkdir</code> commands. In our case, we can just use the command to make the
 docker container automatically start the prompt in the directory of our Python script
 (<code>/opt/test</code>) when used in interactive mode:</p>
-<pre><code>WORKDIR /opt/test
-</code></pre>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/opt/test</span>
+</span></code></pre></div>
 <h2 id="other-useful-commands">Other useful commands<a class="headerlink" href="#other-useful-commands" title="Permanent link">#</a></h2>
 <ul>
 <li><a href="https://docs.docker.com/engine/reference/builder/#add">ADD</a></li>
@@ -736,88 +977,88 @@ docker container automatically start the prompt in the directory of our Python s
 are ready to kick off a build. After changing into the directory containing
 the <code>Dockerfile</code>, you can use the <code>build</code> sub-command to perform the build.
 Rather than using a hash, we can give it a name via the <code>-t</code> option (<em>tagging</em> it):</p>
-<pre><code class="language-commandline">docker build -t pytorchtest .
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>pytorchtest<span class="w"> </span>.
+</span></code></pre></div>
 <p>You should see similar output like the one below:</p>
-<pre><code>Sending build context to Docker daemon  260.6kB
-Step 1/8 : ARG PYTORCH=&quot;1.6.0&quot;
-Step 2/8 : ARG CUDA=&quot;10.1&quot;
-Step 3/8 : ARG CUDNN=&quot;7&quot;
-Step 4/8 : FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
- ---&gt; bb833e4d631f
-Step 5/8 : ENV DEBIAN_FRONTEND noninteractive
- ---&gt; Running in 71812ab36f5a
-Removing intermediate container 71812ab36f5a
- ---&gt; 77a27d586581
-Step 6/8 : RUN pip --no-cache install matplotlib
- ---&gt; Running in 10d85cc41a73
-Collecting matplotlib
-  Downloading matplotlib-3.4.2-cp37-cp37m-manylinux1_x86_64.whl (10.3 MB)
-Collecting kiwisolver&gt;=1.0.1
-  Downloading kiwisolver-1.3.1-cp37-cp37m-manylinux1_x86_64.whl (1.1 MB)
-Collecting cycler&gt;=0.10
-  Downloading cycler-0.10.0-py2.py3-none-any.whl (6.5 kB)
-Requirement already satisfied: pillow&gt;=6.2.0 in /opt/conda/lib/python3.7/site-packages (from matplotlib) (7.2.0)
-Requirement already satisfied: numpy&gt;=1.16 in /opt/conda/lib/python3.7/site-packages (from matplotlib) (1.18.5)
-Collecting python-dateutil&gt;=2.7
-  Downloading python_dateutil-2.8.1-py2.py3-none-any.whl (227 kB)
-Collecting pyparsing&gt;=2.2.1
-  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
-Requirement already satisfied: six in /opt/conda/lib/python3.7/site-packages (from cycler&gt;=0.10-&gt;matplotlib) (1.14.0)
-Installing collected packages: kiwisolver, cycler, python-dateutil, pyparsing, matplotlib
-Successfully installed cycler-0.10.0 kiwisolver-1.3.1 matplotlib-3.4.2 pyparsing-2.4.7 python-dateutil-2.8.1
-Removing intermediate container 10d85cc41a73
- ---&gt; 0361d66c3c44
-Step 7/8 : WORKDIR /opt/test
- ---&gt; Running in 14568b3fead5
-Removing intermediate container 14568b3fead5
- ---&gt; 7c1a8b7229d0
-Step 8/8 : COPY test.py /opt/test/test.py
- ---&gt; ed55c4fb8e62
-Successfully built ed55c4fb8e62
-Successfully tagged pytorchtest:latest
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Sending build context to Docker daemon  260.6kB
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Step 1/8 : ARG PYTORCH=&quot;1.6.0&quot;
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Step 2/8 : ARG CUDA=&quot;10.1&quot;
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Step 3/8 : ARG CUDNN=&quot;7&quot;
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>Step 4/8 : FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a> ---&gt; bb833e4d631f
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>Step 5/8 : ENV DEBIAN_FRONTEND noninteractive
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a> ---&gt; Running in 71812ab36f5a
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>Removing intermediate container 71812ab36f5a
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a> ---&gt; 77a27d586581
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>Step 6/8 : RUN pip --no-cache install matplotlib
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a> ---&gt; Running in 10d85cc41a73
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>Collecting matplotlib
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>  Downloading matplotlib-3.4.2-cp37-cp37m-manylinux1_x86_64.whl (10.3 MB)
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>Collecting kiwisolver&gt;=1.0.1
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>  Downloading kiwisolver-1.3.1-cp37-cp37m-manylinux1_x86_64.whl (1.1 MB)
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>Collecting cycler&gt;=0.10
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>  Downloading cycler-0.10.0-py2.py3-none-any.whl (6.5 kB)
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>Requirement already satisfied: pillow&gt;=6.2.0 in /opt/conda/lib/python3.7/site-packages (from matplotlib) (7.2.0)
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>Requirement already satisfied: numpy&gt;=1.16 in /opt/conda/lib/python3.7/site-packages (from matplotlib) (1.18.5)
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>Collecting python-dateutil&gt;=2.7
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>  Downloading python_dateutil-2.8.1-py2.py3-none-any.whl (227 kB)
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>Collecting pyparsing&gt;=2.2.1
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>Requirement already satisfied: six in /opt/conda/lib/python3.7/site-packages (from cycler&gt;=0.10-&gt;matplotlib) (1.14.0)
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>Installing collected packages: kiwisolver, cycler, python-dateutil, pyparsing, matplotlib
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>Successfully installed cycler-0.10.0 kiwisolver-1.3.1 matplotlib-3.4.2 pyparsing-2.4.7 python-dateutil-2.8.1
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>Removing intermediate container 10d85cc41a73
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a> ---&gt; 0361d66c3c44
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>Step 7/8 : WORKDIR /opt/test
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a> ---&gt; Running in 14568b3fead5
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>Removing intermediate container 14568b3fead5
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a> ---&gt; 7c1a8b7229d0
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>Step 8/8 : COPY test.py /opt/test/test.py
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a> ---&gt; ed55c4fb8e62
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>Successfully built ed55c4fb8e62
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>Successfully tagged pytorchtest:latest
+</span></code></pre></div>
 <h2 id="running-the-image-interactive">Running the image (interactive)<a class="headerlink" href="#running-the-image-interactive" title="Permanent link">#</a></h2>
 <p>With the image successfully built, you can now use it. For this you need to employ the
 <a href="https://docs.docker.com/engine/reference/builder/#run">RUN</a> command.</p>
-<pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local -it pytorchtest
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="o">=</span>all<span class="w"> </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/opt/local<span class="w"> </span>-it<span class="w"> </span>pytorchtest
+</span></code></pre></div>
 <p>Once the prompt appears, you can execute the <code>test.py</code> script:</p>
-<pre><code>root@5e2245aa020a:/opt/test# python test.py 
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>root@5e2245aa020a:/opt/test# python test.py 
+</span></code></pre></div>
 <p>While the script is executing, you should see output like this:</p>
-<pre><code>cuda:0
-Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data/cifar-10-python.tar.gz
-100%|██████████████████████████████████████████████████████████████▉| 170369024/170498071 [00:13&lt;00:00, 13670749.69it/s]Extracting ./data/cifar-10-python.tar.gz to ./data
-Files already downloaded and verified
-[1,  2000] loss: 2.173
-[1,  4000] loss: 1.815
-[1,  6000] loss: 1.659
-170500096it [00:30, 13670749.69it/s]                                                                                    [1,  8000] loss: 1.557
-[1, 10000] loss: 1.499
-[1, 12000] loss: 1.449
-[2,  2000] loss: 1.377
-[2,  4000] loss: 1.356
-[2,  6000] loss: 1.329
-[2,  8000] loss: 1.315
-[2, 10000] loss: 1.293
-[2, 12000] loss: 1.264
-Finished Training
-GroundTruth:    cat  ship  ship plane
-Predicted:    cat  ship   car plane
-Accuracy of the network on the 10000 test images: 55 %
-Accuracy of plane : 60 %
-Accuracy of   car : 65 %
-Accuracy of  bird : 29 %
-Accuracy of   cat : 44 %
-Accuracy of  deer : 54 %
-Accuracy of   dog : 41 %
-Accuracy of  frog : 52 %
-Accuracy of horse : 68 %
-Accuracy of  ship : 78 %
-Accuracy of truck : 63 %
-170500096it [01:16, 2240182.93it/s] 
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>cuda:0
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data/cifar-10-python.tar.gz
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>100%|██████████████████████████████████████████████████████████████▉| 170369024/170498071 [00:13&lt;00:00, 13670749.69it/s]Extracting ./data/cifar-10-python.tar.gz to ./data
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Files already downloaded and verified
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>[1,  2000] loss: 2.173
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>[1,  4000] loss: 1.815
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>[1,  6000] loss: 1.659
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>170500096it [00:30, 13670749.69it/s]                                                                                    [1,  8000] loss: 1.557
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>[1, 10000] loss: 1.499
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>[1, 12000] loss: 1.449
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>[2,  2000] loss: 1.377
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>[2,  4000] loss: 1.356
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>[2,  6000] loss: 1.329
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>[2,  8000] loss: 1.315
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>[2, 10000] loss: 1.293
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>[2, 12000] loss: 1.264
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>Finished Training
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>GroundTruth:    cat  ship  ship plane
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>Predicted:    cat  ship   car plane
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>Accuracy of the network on the 10000 test images: 55 %
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>Accuracy of plane : 60 %
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>Accuracy of   car : 65 %
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>Accuracy of  bird : 29 %
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>Accuracy of   cat : 44 %
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>Accuracy of  deer : 54 %
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>Accuracy of   dog : 41 %
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>Accuracy of  frog : 52 %
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>Accuracy of horse : 68 %
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>Accuracy of  ship : 78 %
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>Accuracy of truck : 63 %
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>170500096it [01:16, 2240182.93it/s] 
+</span></code></pre></div>
 <p>At the end, the script will generate a bar chart plot and save it as <code>/opt/local/figure.png</code>:</p>
 <p><img alt="Generated figure" src="../files/pytorch-cifar10/figure.png" /></p>
 <p>If you look at the permissions of the generated image, you will notice that the owner 
@@ -834,11 +1075,11 @@ remove it from outside the container. One approach is to change the owner using 
 development of your docker image and code, you can then use it in your production system.</p>
 <p>For running it in non-interactive mode, simply remove the <code>-it</code> flags and
 append the command that you want to run. In our case, this is:</p>
-<pre><code class="language-commandline">python3 /opt/test/test.py
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>python3<span class="w"> </span>/opt/test/test.py
+</span></code></pre></div>
 <p>The full command-line therefore looks like:</p>
-<pre><code class="language-commandline">docker run --gpus=all -v `pwd`:/opt/local pytorchtest python3 /opt/test/test.py
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="o">=</span>all<span class="w"> </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/opt/local<span class="w"> </span>pytorchtest<span class="w"> </span>python3<span class="w"> </span>/opt/test/test.py
+</span></code></pre></div>
 <h2 id="optimizing-an-image">Optimizing an image<a class="headerlink" href="#optimizing-an-image" title="Permanent link">#</a></h2>
 <p>As a final note, you should consider revisiting your <code>Dockerfile</code> once you have
 verified that everything is working and optimize it. Optimizing entails: </p>
@@ -860,25 +1101,32 @@ images).</p>
 However, when pushing an image to a registry (docker hub or <a href="../registry/">your own</a>), then
 naming (aka <em>tagging</em>) an image requires a bit more thought. Assuming that you have
 a user account on docker hub called <code>user1234</code>, then you could name your image like this:</p>
-<pre><code>user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+</span></code></pre></div>
 <p>That way, you still keep using your local image name <code>pytorchtest</code>, but you also
 include the version of PyTorch, CUDA and cuDNN. The <code>0.0.1</code> at the end, is the actual
 version of your image.</p>
 <p>In order to push the image <code>pytorchtest</code> out to docker hub, you first need to give it
 the proper tag:</p>
-<pre><code class="language-commandline">docker tag \
-    pytorchtest \
-    user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>tag<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span>pytorchtest<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span>user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+</span></code></pre></div>
 <p>And for pushing it out, use this command:</p>
-<pre><code>docker push user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>push<span class="w"> </span>user1234/pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1
+</span></code></pre></div>
 <p>Once the push is complete, you will find this image at the following URL:</p>
-<pre><code>https://hub.docker.com/u/user1234
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>https://hub.docker.com/u/user1234
+</span></code></pre></div>
 <p>Depending on the number of images you have, you may have to search for the
 <code>pytorchtest:pytorch1.6.0-cuda10.1-cudnn7-devel-0.0.1</code> tag.</p>
+
+
+
+
+
+
+
 
 
 
@@ -889,47 +1137,12 @@ the proper tag:</p>
             </div>
           
           
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../repos/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Repositories" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Repositories
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../best_practices/" class="md-footer__link md-footer__link--next" aria-label="Next: Best practices" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Best practices
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -952,10 +1165,14 @@ the proper tag:</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
