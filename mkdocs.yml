@@ -5,6 +5,8 @@ repo_url: https://github.com/waikato-datamining/docker-for-data-scientists
 edit_uri: edit/main/docs/
 theme:
     name: material
+    logo: logo.png
+    favicon: favicon.ico
     features:
         - content.code.copy
 markdown_extensions:
